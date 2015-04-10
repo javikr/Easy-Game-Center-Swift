@@ -1,7 +1,5 @@
 # Easy Game Center  [![](https://img.shields.io/badge/Lang-Swift-52C435.svg)]()  [![](https://img.shields.io/badge/version-2.0-D8B13C.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()  [![](http://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg)]() 
 
-
-
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
@@ -11,8 +9,6 @@
 <p align="center">
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
 </p>
-
-# New Version 1.5 new doc on GitHub is coming
 
 # Project Features
 Easy Game Center is a great way to use Game Center in your iOS app.
@@ -28,7 +24,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Frequent updates to the project based on user issues and requests  
 * Example project
 * Easily contribute to the project :)
-* More is coming ... (Challenges etc..)
+* More is coming ... (Multiplayer etc..)
 
 ## Requirements
 * Requires a minimum of iOS 7.0+ / iOS 8+
