@@ -4,7 +4,7 @@
 //  Created by Yannick Stephan DaRk-_-D0G on 19/12/2014.
 //  YannickStephan.com
 //
-//	iOS 8.0+
+//	iOS 7.0+ & iOS 8.0+
 //
 //  The MIT License (MIT)
 //  Copyright (c) 2015 Red Wolf Studio & Yannick Stephan
