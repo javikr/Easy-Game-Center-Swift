@@ -165,7 +165,7 @@ class AchievementsActions: UIViewController {
     }
     
     @IBAction func ShowAchievementCompletedAndNotShowing(sender: AnyObject) {
-        EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing(nil)
+        EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing(completion: nil)
         
     }
     @IBAction func GetAllChievementsDescription(sender: AnyObject) {

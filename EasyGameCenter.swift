@@ -128,7 +128,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     
     */
     class private func sharedInstance() -> EasyGameCenter? {
-        return EasyGameCenter.Static.instance?
+        return EasyGameCenter.Static.instance
     }
     /*####################################################################################################*/
     /*                                             Start                                                  */
@@ -619,7 +619,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
             } else {
                 if EasyGameCenter.isPlayerIdentifiedToGameCenter()  {
                     
-                    if let achievementFind = instanceEGC!.achievementsCache[identifierAchievement]? {
+                    if let achievementFind = instanceEGC!.achievementsCache[identifierAchievement as String] {
                         return achievementFind
                     } else {
                         if instanceEGC!.achievementsCache.count == 0 {
