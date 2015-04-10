@@ -47,9 +47,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     :param: uiViewController UIViewController
     */
     class func simpleMessage(#title:String, message:String, uiViewController:UIViewController) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        uiViewController.presentViewController(alert, animated: true, completion: nil)
+        if ( objc_getClass("UIAlertController") != nil ) {
+            var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            uiViewController.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            var alert: UIAlertView = UIAlertView()
+            
+            alert.delegate = self                                   // will redirect the code to your alertView() function
+            alert.title = title
+            alert.message = message
+            alert.addButtonWithTitle("Ok")                      // will return 0
+            //alert.addButtonWithTitle(buttonOpenGameCenterLogin)     // will return 1
+            
+            alert.show()
+        }
+
     }
 
 }

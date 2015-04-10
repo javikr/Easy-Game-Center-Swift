@@ -107,20 +107,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
             }
             
         }
-    }
-    
-    
-    /* pdpfkdp */
-    
-    @IBAction func ShowAuthetificationGameCenter(sender: AnyObject) {
         
-        EasyGameCenter.showGameCenterAuthentication {
-            (result) -> Void in
-            if result {
-                println("Is open Game Center Authentication :)")
-            }
-        }
     }
+
     @IBAction func ShowCustomBanner(sender: AnyObject) {
         
         EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { () -> Void in
@@ -133,6 +122,16 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
     
     
+    @IBAction func ActionOpenDialog(sender: AnyObject) {
+        EasyGameCenter.openDialogGameCenterAuthentication(title: "Open Game Center", message: "Open Game Center authentification ?", buttonOpenGameCenterLogin: "Yes", buttonOK: "No") {
+            (openGameCenterAuthentification) -> Void in
+            if openGameCenterAuthentification {
+                println("Open Game Center Authentification")
+            } else {
+                println("Not open Game Center Authentification")
+            }
+        }
+    }
     
     
 }
