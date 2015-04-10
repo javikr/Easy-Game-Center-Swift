@@ -59,7 +59,7 @@ class LeaderboardsActions: UIViewController {
     @IBAction func ActionReportScoreLeaderboard(sender: AnyObject) {
         
         EasyGameCenter.reportScoreLeaderboard(leaderboardIdentifier: "International_Classement", score: 100)
-        println("Score send to Game Center")
+        println("Score send to Game Center \(EasyGameCenter.isPlayerIdentifiedToGameCenter())")
         
     }
     

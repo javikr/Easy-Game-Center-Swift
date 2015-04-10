@@ -127,14 +127,18 @@ class AchievementsActions: UIViewController {
     
     @IBAction func ReportAchievementTwo(sender: AnyObject) {
         
-        
-        if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Achievement_Two") {
-            AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Achievement is already report", uiViewController: self)
+        if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
+            if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Achievement_Two") {
+                AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Achievement is already report", uiViewController: self)
+            } else {
+                EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_Two", showBannnerIfCompleted: false)
+                
+                AppDelegate.simpleMessage(title: "report Achievements", message: "Yes i'am ! but i'm not show", uiViewController: self)
+            }
         } else {
-            EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_Two", showBannnerIfCompleted: false)
-            
-            AppDelegate.simpleMessage(title: "report Achievements", message: "Yes i'am ! but i'm not show", uiViewController: self)
+            AppDelegate.simpleMessage(title: "report Achievements fail", message: "Player not login", uiViewController: self)
         }
+
         
         
     }
@@ -188,7 +192,6 @@ class AchievementsActions: UIViewController {
     
     @IBAction func ResetAllAchievements(sender: AnyObject) {
         EasyGameCenter.resetAllAchievements()
-            
     }
 }
 

@@ -46,6 +46,11 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         Set New view controller delegate, when you change UIViewController
         */
         EasyGameCenter.delegate = self
+        
+        /* Recall if you change page and activate network for refresh text*/
+        if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
+            easyGameCenterAuthentified()
+        }
     }
     /*####################################################################################################*/
     /*                               Delegate Func Easy Game Center                                       */
