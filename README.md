@@ -29,7 +29,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * More is coming ... (Challenges etc..)
 
 ## Requirements
-* iOS7+ & iOS8+
+* Requires a minimum of iOS 7.0+ / iOS 8+
 
 ## Contributions & Share
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
