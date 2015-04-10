@@ -1,4 +1,6 @@
-# Easy Game Center  [![](https://img.shields.io/badge/version-1.5-D8B13C.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()  [![](http://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg)]() 
+# Easy Game Center  [![](https://img.shields.io/badge/Lang-Swift-52C435.svg)]()  [![](https://img.shields.io/badge/version-1.5-D8B13C.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()  [![](http://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg)]() 
+
+
 
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
@@ -18,7 +20,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Swift
 * Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.
 * GKachievements & GKachievementsDescription are save in cache and automatically refreshed
-* (New delegate function) When player is connected or not etc...
+* Delegate fucntion when player is connected or not etc...
 * Most of the functions callBack (Handler, completion)
 * Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction)
 * Just drag and drop the files into your project (EasyGameCenter.swift)
@@ -29,12 +31,11 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * More is coming ... (Challenges etc..)
 
 ## Requirements
-* iOS7+ & iOS8+
+* Requires a minimum of iOS 7.0+ / iOS 8+
 
 ## Contributions & Share
-Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
-
-Send me your application's link, if you use Easy Game center, I will add on the cover pagee [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
+* Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
+* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
 
 # Documentation
 All methods, properties, types, and delegate methods available on the GameCenterManager class are documented below. If you're using [GameKit](https://developer.apple.com/library/ios/documentation/GameKit/Reference/GameKit_Collection/index.html)
@@ -92,7 +93,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 * **Description :** You should add **EasyGameCenterDelegate** protocol if you want use delegate functions (**easyGameCenterAuthentified,easyGameCenterNotAuthentified,easyGameCenterInCache**)
 * **Option :** It is optional (if you do not use the functions, do not add)
 ```swift
-class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
+    class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
 ```
 ###Initialize Easy Game Center
 * **Description :** You should setup Easy Game Center when your app is launched. I advise you to **viewDidLoad()** method
@@ -143,55 +144,76 @@ class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
 #Show Methods
 ##Show Achievements
 * **Show Game Center Achievements with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterAchievements(completion: nil)```
+* **Option :** Without completion 
+```swift 
+    EasyGameCenter.showGameCenterAchievements()
+```
+* **Option :** With completion
 ```swift
-        EasyGameCenter.showGameCenterAchievements { 
-                (isShow) -> Void in
-                if isShow {
-                        println("Game Center Achievements is shown")
-                }
+    EasyGameCenter.showGameCenterAchievements { 
+        (isShow) -> Void in
+        if isShow {
+                println("Game Center Achievements is shown")
         }
+    }
 ```
 ##Show Leaderboard
 * **Show Game Center Leaderboard  with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard")```
+* **Option :** Without completion 
 ```swift
-        EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard") { 
-                (isShow) -> Void in
-                if isShow {
-                        println("Game Center Leaderboards is shown")
-                }
+    EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard")
+```
+* **Option :** With completion
+```swift
+    EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard") { 
+        (isShow) -> Void in
+        if isShow {
+            println("Game Center Leaderboards is shown")
         }
+    }
 ```
 ##Show Challenges
 * **Show Game Center Challenges  with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterChallenges()```
+* **Option :** Without completion 
+```swift 
+    EasyGameCenter.showGameCenterChallenges()
+```
+* **Option :** With completion 
 ```swift
-        EasyGameCenter.showGameCenterChallenges {
-            () -> Void in
-            
+    EasyGameCenter.showGameCenterChallenges {
+        (isShow) -> Void in
+        if isShow {
             println("Game Center Challenges Is shown")
         }
+    }
 ```
 ##Show authentification page Game Center
 * **Show Game Center authentification page with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterAuthentication()```
+* **Option :** Without completion 
 ```swift
-        EasyGameCenter.showGameCenterAuthentication { 
-                (result) -> Void in
-                if result {
-                        println("Game Center Authentication is open")
-                }
+    EasyGameCenter.showGameCenterAuthentication()
+```
+* **Option :** With completion 
+```swift
+    EasyGameCenter.showGameCenterAuthentication { 
+        (result) -> Void in
+        if result {
+            println("Game Center Authentication is open")
         }
+    }
 ```
 ##Show custom banner
 * **Show custom banner Game Center with completion**
-* **Option :** Without completion ```EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...")```
+* **Option :** Without completion 
 ```swift
-       EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { 
-                () -> Void in
-                println("Custom Banner is finish to Show")
-        }
+    EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...")
+```
+* **Option :** With completion 
+```swift
+    EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { 
+        () -> Void in
+        println("Custom Banner is finish to Show")
+    }
 ```
 ##Show custom dialog
 * **Show custom dialog Game Center Authentication with completion**
@@ -385,7 +407,7 @@ if EasyGameCenter.isConnectedToNetwork() { /* You have network */ }
 ```
 
 ### Legacy support
-For support of iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+For support of iOS 7+ & iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
 
 Yannick Stephan works hard to have as high feature parity with **Easy Game Center** as possible. 
 
