@@ -51,6 +51,15 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     /// Save for report late when network working
     private var achievementsCacheShowAfter = [String:String]()
     
+    /// When is load
+    private var loginIsLoading: Bool = false
+    
+    /// When is caching
+    private var inCacheIsLoading: Bool = false
+    
+    /// Checkup net and login to GameCenter when have Network
+    private var timerNetAndPlayer:NSTimer?
+    
     /// Delegate UIViewController repect protocol EasyGameCenterDelegate
     private var delegateGetSetVC:EasyGameCenterDelegate?
     class var delegate: EasyGameCenterDelegate? {
@@ -128,7 +137,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     class private func sharedInstance() -> EasyGameCenter? {
         return EasyGameCenter.Static.instance?
     }
-    private var inCacheIsLoading: Bool = false
     /**
     Load achievements in cache
     (Is call when you init EasyGameCenter, but if is fail example for cut connection, you can recall)
@@ -195,9 +203,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                         })
                 } else {
                     self.inCacheIsLoading = false
-                    
-                        self.checkupNetAndPlayer()
-                    
+                    self.checkupNetAndPlayer()
                 }
             }
         }
@@ -212,10 +218,8 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
         :param: completion (Bool) if player login to Game Center
     
     */
-    var loginIsLoading: Bool = false
     private func loginPlayerToGameCenter()  {
         if !loginIsLoading {
-            
             self.loginIsLoading = true
             
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -287,8 +291,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     /*####################################################################################################*/
     /*                              Private Timer checkup                                                 */
     /*####################################################################################################*/
-    /// Checkup net and login to GameCenter when have Network
-    private var timerNetAndPlayer:NSTimer?
     /**
     Function checkup when he have net work login Game Center
     */
