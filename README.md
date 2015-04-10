@@ -92,7 +92,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 * **Description :** You should add **EasyGameCenterDelegate** protocol if you want use delegate functions (**easyGameCenterAuthentified,easyGameCenterNotAuthentified,easyGameCenterInCache**)
 * **Option :** It is optional (if you do not use the functions, do not add)
 ```swift
-class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
+    class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
 ```
 ###Initialize Easy Game Center
 * **Description :** You should setup Easy Game Center when your app is launched. I advise you to **viewDidLoad()** method
@@ -145,73 +145,74 @@ class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
 * **Show Game Center Achievements with completion**
 * **Option :** Without completion 
 ```swift 
-EasyGameCenter.showGameCenterAchievements()
+    EasyGameCenter.showGameCenterAchievements()
 ```
 * **Option :** With completion
 ```swift
-        EasyGameCenter.showGameCenterAchievements { 
-                (isShow) -> Void in
-                if isShow {
-                        println("Game Center Achievements is shown")
-                }
+    EasyGameCenter.showGameCenterAchievements { 
+        (isShow) -> Void in
+        if isShow {
+                println("Game Center Achievements is shown")
         }
+    }
 ```
 ##Show Leaderboard
 * **Show Game Center Leaderboard  with completion**
 * **Option :** Without completion 
 ```swift
-EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard")
+    EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard")
 ```
 * **Option :** With completion
 ```swift
-        EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard") { 
-                (isShow) -> Void in
-                if isShow {
-                        println("Game Center Leaderboards is shown")
-                }
+    EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard") { 
+        (isShow) -> Void in
+        if isShow {
+            println("Game Center Leaderboards is shown")
         }
+    }
 ```
 ##Show Challenges
 * **Show Game Center Challenges  with completion**
 * **Option :** Without completion 
 ```swift 
-EasyGameCenter.showGameCenterChallenges()
+    EasyGameCenter.showGameCenterChallenges()
 ```
 * **Option :** With completion 
 ```swift
-        EasyGameCenter.showGameCenterChallenges {
-            () -> Void in
-            
+    EasyGameCenter.showGameCenterChallenges {
+        (isShow) -> Void in
+        if isShow {
             println("Game Center Challenges Is shown")
         }
+    }
 ```
 ##Show authentification page Game Center
 * **Show Game Center authentification page with completion**
 * **Option :** Without completion 
 ```swift
-EasyGameCenter.showGameCenterAuthentication()
+    EasyGameCenter.showGameCenterAuthentication()
 ```
 * **Option :** With completion 
 ```swift
-        EasyGameCenter.showGameCenterAuthentication { 
-                (result) -> Void in
-                if result {
-                        println("Game Center Authentication is open")
-                }
+    EasyGameCenter.showGameCenterAuthentication { 
+        (result) -> Void in
+        if result {
+            println("Game Center Authentication is open")
         }
+    }
 ```
 ##Show custom banner
 * **Show custom banner Game Center with completion**
 * **Option :** Without completion 
 ```swift
-EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...")
+    EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...")
 ```
 * **Option :** With completion 
 ```swift
-       EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { 
-                () -> Void in
-                println("Custom Banner is finish to Show")
-        }
+    EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { 
+        () -> Void in
+        println("Custom Banner is finish to Show")
+    }
 ```
 ##Show custom dialog
 * **Show custom dialog Game Center Authentication with completion**
