@@ -923,7 +923,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     :param: completion                Completion if player open Game Center Authentification
     
     */
-    class func openDialogGameCenterAuthentication(#title:String, message:String,buttonOpenGameCenterLogin:String,buttonOK:String, completion: ((openGameCenterAuthentification:Bool) -> Void)?) {
+    class func openDialogGameCenterAuthentication(#title:String, message:String,buttonOK:String,buttonOpenGameCenterLogin:String, completion: ((openGameCenterAuthentification:Bool) -> Void)?) {
         
         let delegateUIVC = EasyGameCenter.delegate as? UIViewController
         let instance = Static.instance
@@ -937,6 +937,12 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                 
                 delegateUIVC!.presentViewController(alert, animated: true, completion: nil)
                 
+                alert.addAction(UIAlertAction(title: buttonOK, style: .Default, handler: {
+                    action in
+                    
+                    if completion != nil { completion!(openGameCenterAuthentification: false) }
+                    
+                }))
                 alert.addAction(UIAlertAction(title: buttonOpenGameCenterLogin, style: .Default, handler: {
                     action in
                     
@@ -946,12 +952,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                         if completion != nil { completion!(openGameCenterAuthentification: resultOpenGameCenter) }
                     })
                     
-                    alert.addAction(UIAlertAction(title: buttonOK, style: .Default, handler: {
-                        action in
-                        
-                        if completion != nil { completion!(openGameCenterAuthentification: false) }
-                        
-                    }))
                 }))
             /* iOS 7 */
             } else {
@@ -959,8 +959,8 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                 alert.delegate = self
                 alert.title = title
                 alert.message = message
-                alert.addButtonWithTitle(buttonOpenGameCenterLogin)
                 alert.addButtonWithTitle(buttonOK)
+                alert.addButtonWithTitle(buttonOpenGameCenterLogin)
                 alert.show()
             }
         }
@@ -972,14 +972,24 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     :param: buttonIndex ButtonIndex
 
     */
-    class private func alertView(View: UIAlertView!, buttonIndex: Int) {
-        var bResult: Bool = false
+    class func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         
-        if buttonIndex == 0 {
+        switch buttonIndex{
+            
+        case 1:
             EasyGameCenter.showGameCenterAuthentication(completion: {
                 (resultOpenGameCenter) -> Void in
-                if EasyGameCenter.debugMode { println("\n[Easy Game Center] showGameCenterAuthentication() has been opened\n") }
+                if EasyGameCenter.debugMode {
+                    println("\n[Easy Game Center] showGameCenterAuthentication() has been opened\n")
+                }
             })
+            break;
+        case 0:
+            if EasyGameCenter.debugMode { println("Dismiss") }
+            break;
+        default:
+            break;
+            
         }
     }
     /*####################################################################################################*/

@@ -123,7 +123,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     
     
     @IBAction func ActionOpenDialog(sender: AnyObject) {
-        EasyGameCenter.openDialogGameCenterAuthentication(title: "Open Game Center", message: "Open Game Center authentification ?", buttonOpenGameCenterLogin: "Yes", buttonOK: "No") {
+        EasyGameCenter.openDialogGameCenterAuthentication(title: "Open Game Center", message: "Open Game Center authentification ?", buttonOK: "No", buttonOpenGameCenterLogin: "Yes") {
             (openGameCenterAuthentification) -> Void in
             if openGameCenterAuthentification {
                 println("Open Game Center Authentification")
