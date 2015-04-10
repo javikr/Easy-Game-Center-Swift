@@ -34,9 +34,9 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Requires a minimum of iOS 7.0+ / iOS 8+
 
 ## Contributions & Share
-Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
-
-Send me your application's link, if you use Easy Game center, I will add on the cover pagee [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
+* Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
+* Send me your application's link, if you use Easy Game center, I will add on the cover pagee [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
+* For support of iOS 7+ & iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
 
 # Documentation
 All methods, properties, types, and delegate methods available on the GameCenterManager class are documented below. If you're using [GameKit](https://developer.apple.com/library/ios/documentation/GameKit/Reference/GameKit_Collection/index.html)
