@@ -1,4 +1,4 @@
-# Easy Game Center  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg)]()
+# Easy Game Center  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-lightgrey.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-lightgrey.svg)]() 
 
 
 <p align="center">
@@ -30,7 +30,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * More is coming ... (Challenges etc..)
 
 ## Requirements
-* Requires a minimum of iOS or 8.0+
+* Requires a minimum of iOS 7.0+ & 8.0+
 
 ## Contributions & Share
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
