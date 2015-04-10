@@ -953,6 +953,55 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
         return (isReachable && !needsConnection) ? true : false
     }
     /*####################################################################################################*/
+    /*                                      Public Func Message                                           */
+    /*####################################################################################################*/
+    /**
+    Open Dialog for player see he wasn't authentifate to Game Center and can go to login
+    
+    :param: titre                     Title
+    :param: message                   Message
+    :param: buttonOK                  Title of button OK
+    :param: buttonOpenGameCenterLogin Title of button open Game Center
+    :param: completion                Completion if player open Game Center Authentification
+    */
+    class func openDialogGameCenterAuthentication(#title:String, message:String,buttonOK:String,buttonOpenGameCenterLogin:String, completion: ((openGameCenterAuthentification:Bool) -> Void)?) {
+        
+        let delegateUIVC = EasyGameCenter.delegate as? UIViewController
+        let instance = EasyGameCenter.sharedInstance()
+        if (delegate == nil || instance == nil) {
+            if EasyGameCenter.debugMode {
+                println("\nEasyGameCenter : Delegate UIViewController not set\n")
+            }
+        } else {
+            // Only iOS8 is supporting UIAlertController
+            if ( objc_getClass("UIAlertController") != nil ) {
+                
+                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                
+                delegateUIVC!.presentViewController(alert, animated: true, completion: nil)
+                
+                alert.addAction(UIAlertAction(title: buttonOK, style: .Default, handler: {
+                    action in
+                    
+                    if completion != nil { completion!(openGameCenterAuthentification: false) }
+                    
+                }))
+                
+                alert.addAction(UIAlertAction(title: buttonOpenGameCenterLogin, style: .Default, handler: {
+                    action in
+                    
+                    EasyGameCenter.showGameCenterAuthentication(completion: {
+                        (resultOpenGameCenter) -> Void in
+                        
+                        if completion != nil { completion!(openGameCenterAuthentification: resultOpenGameCenter) }
+                    })
+                    
+                }))
+            }
+        }
+    }
+
+    /*####################################################################################################*/
     /*                             Internal Delagate Game Center                                          */
     /*####################################################################################################*/
     /**
