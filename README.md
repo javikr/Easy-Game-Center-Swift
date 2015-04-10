@@ -143,7 +143,11 @@ class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
 #Show Methods
 ##Show Achievements
 * **Show Game Center Achievements with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterAchievements(completion: nil)```
+* **Option :** Without completion 
+```swift 
+EasyGameCenter.showGameCenterAchievements()
+```
+* **Option :** With completion
 ```swift
         EasyGameCenter.showGameCenterAchievements { 
                 (isShow) -> Void in
