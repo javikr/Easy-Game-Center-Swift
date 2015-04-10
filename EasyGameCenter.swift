@@ -43,11 +43,7 @@ extension UIViewController : EasyGameCenterDelegate {}
 class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     
     /// Achievements GKAchievement Cache
-    private var achievementsCache:[String:GKAchievement] = [String:GKAchievement]() {
-        didSet {
-         //   println(achievementsCache.count)
-        }
-    }
+    private var achievementsCache:[String:GKAchievement] = [String:GKAchievement]()
     
     /// Achievements GKAchievementDescription Cache
     private var achievementsDescriptionCache = [String:GKAchievementDescription]()
@@ -175,13 +171,13 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                                 }
                                 
                                 if let achievementsIsArrayGKAchievementDescription = achievementsDescription as? [GKAchievementDescription] {
-                                    
                                     for gkAchievementDes in achievementsIsArrayGKAchievementDescription {
                                         
                                         /* Not ecrase Achievements with value pourcent */
                                         if self.achievementsCache[gkAchievementDes.identifier] == nil {
-                                            if let gkAchievement = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: gkAchievementDes.identifier) {
-                                                self.achievementsCache[gkAchievementDes.identifier] = gkAchievement
+                                            /* Get by GKAchievement for fixe bug boucle */
+                                            if let gkAchievement = GKAchievement(identifier: gkAchievementDes.identifier) {
+                                               self.achievementsCache[gkAchievement.identifier] = gkAchievement
                                             }
                                         }
                                         self.achievementsDescriptionCache[gkAchievementDes.identifier] = gkAchievementDes
@@ -596,20 +592,15 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                         if achievementGKScore != nil && achievementGKDes != nil {
                             completionTuple(tupleGKAchievementAndDescription: (achievementGKScore!,achievementGKDes!))
                         } else {
-                            
-                            if EasyGameCenter.isAchievementReal(identifierAchievement: achievementIdentifier) {
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    instanceEGC!.cachingAchievements()
-                                }
+                            if instanceEGC!.achievementsCache.count > 0 {
+                                if EasyGameCenter.debugMode { println("\n[EasyGameCenter] : Achievements ID not real\n") }
+                            } else {
+                                if EasyGameCenter.debugMode { println("\n[EasyGameCenter] : haven't load cache\n") }
                             }
-                            
-                            EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: achievementIdentifier, completion: {
-                                (tupleGKAchievementAndDescription) -> Void in
-                                completionTuple(tupleGKAchievementAndDescription: tupleGKAchievementAndDescription)
-                            })
+                            completionTuple(tupleGKAchievementAndDescription: nil)
                         }
                     } else {
-                        if EasyGameCenter.debugMode { println("\nnEasyGameCenter :Player not identified\n") }
+                        if EasyGameCenter.debugMode { println("\n[EasyGameCenter] :Player not identified\n") }
                         completionTuple(tupleGKAchievementAndDescription: nil)
                     }
                 }
@@ -632,22 +623,13 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
             if EasyGameCenter.isPlayerIdentifiedToGameCenter()  {
                 
                 if let achievementFind = instanceEGC!.achievementsCache[identifierAchievement]? {
-                    println(achievementFind.identifier)
                     return achievementFind
                 } else {
-                    /* For not reset Achievement load with pourcent in loading */
-                    /* ERROR */
-                    if  let achievementIsOk = GKAchievement(identifier: identifierAchievement) {
-                        println(achievementIsOk.identifier)
-                        instanceEGC!.achievementsCache[identifierAchievement] = achievementIsOk
-                        instanceEGC!.cachingAchievements()
-                        /* recursive recall this func now that the achievement exist */
-                        return EasyGameCenter.getAchievementForIndentifier(identifierAchievement: identifierAchievement)
-                        
+                    if instanceEGC!.achievementsCache.count == 0 {
+                        if EasyGameCenter.debugMode { println("\nEasyGameCenter : Not have cache\n") }
                     } else {
                         if EasyGameCenter.debugMode { println("\nEasyGameCenter : Achievement ID \(identifierAchievement) is not real \n") }
                     }
-                    
                 }
             } else {
                 if EasyGameCenter.debugMode { println("\nEasyGameCenter : Player not identified\n") }
@@ -716,23 +698,27 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     class func getGKAllAchievementDescription(#completion: ((arrayGKAD:[GKAchievementDescription]?) -> Void)){
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
-                if let gameCenterInstance = EasyGameCenter.sharedInstance() {
-                    if gameCenterInstance.achievementsDescriptionCache.count > 0 {
-                        var tempsEnvoi = [GKAchievementDescription]()
-                        for achievementDes in gameCenterInstance.achievementsDescriptionCache {
-                            tempsEnvoi.append(achievementDes.1)
-                        }
-                        completion(arrayGKAD: tempsEnvoi)
-                    } else {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            gameCenterInstance.cachingAchievements()
+            let instanceEGC = EasyGameCenter.sharedInstance()
+            if instanceEGC == nil {
+                if EasyGameCenter.debugMode { println("\nError : Instance Nil\n") }
+                completion(arrayGKAD: nil)
+            } else {
+                if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
+                    if let gameCenterInstance = EasyGameCenter.sharedInstance() {
+                        if gameCenterInstance.achievementsDescriptionCache.count > 0 {
+                            var tempsEnvoi = [GKAchievementDescription]()
+                            for achievementDes in gameCenterInstance.achievementsDescriptionCache {
+                                tempsEnvoi.append(achievementDes.1)
+                            }
+                            completion(arrayGKAD: tempsEnvoi)
+                        } else {
+                            if EasyGameCenter.debugMode { println("\nEasyGameCenter : Not have cache\n") }
                         }
                     }
+                } else {
+                    if EasyGameCenter.debugMode { println("\nEasyGameCenter : Player not identified or not network\n") }
+                    completion(arrayGKAD: nil)
                 }
-            } else {
-                if EasyGameCenter.debugMode { println("\nEasyGameCenter : Player not identified or not network\n") }
-                completion(arrayGKAD: nil)
             }
         }
     }
@@ -841,11 +827,10 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                 if let achievementInArrayInt = instanceEGC!.achievementsCache[achievementIdentifier]?.percentComplete {
                     return achievementInArrayInt
                 } else {
-                    instanceEGC!.cachingAchievements()
-                    return GKAchievement(identifier: achievementIdentifier).percentComplete
+                    if EasyGameCenter.debugMode { println("\n[EasyGameCenter] : Haven't cache\n") }
                 }
             } else {
-                if EasyGameCenter.debugMode { println("\nEasyGameCenter : Player not identified\n") }
+                if EasyGameCenter.debugMode { println("\n[EasyGameCenter] : Player not identified\n") }
             }
         }
         return nil
@@ -883,20 +868,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                 if completion != nil { completion!(achievementReset: nil) }
             }
         }
-    }
-    /**
-    If achievement is real
-    
-    :param: achievement Id
-    
-    */
-    class func isAchievementReal(#identifierAchievement:String) -> Bool {
-        if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
-            if  let achievementGet = GKAchievement(identifier: identifierAchievement) {
-                return true
-            }
-        }
-        return false
     }
     /*####################################################################################################*/
     /*                                      Private Func Achievements                                     */

@@ -77,12 +77,12 @@ class AchievementsActions: UIViewController {
     
     @IBAction func ReportAchievementOne(sender: AnyObject) {
         
-        //EasyGameCenter.reportAchievement(progress: 10.10, achievementIdentifier: "",addToExisting: true)
+        EasyGameCenter.reportAchievement(progress: 10.10, achievementIdentifier: "A",addToExisting: true)
         
         if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Achievement_One") {
             AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Achievement is already report", uiViewController: self)
         } else {
-            EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_One")
+         //   EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_One")
         }
         
         
