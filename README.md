@@ -158,7 +158,11 @@ EasyGameCenter.showGameCenterAchievements()
 ```
 ##Show Leaderboard
 * **Show Game Center Leaderboard  with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard")```
+* **Option :** Without completion 
+```swift
+EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard")
+```
+* **Option :** With completion
 ```swift
         EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "IdentifierLeaderboard") { 
                 (isShow) -> Void in
@@ -169,7 +173,11 @@ EasyGameCenter.showGameCenterAchievements()
 ```
 ##Show Challenges
 * **Show Game Center Challenges  with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterChallenges()```
+* **Option :** Without completion 
+```swift 
+EasyGameCenter.showGameCenterChallenges()
+```
+* **Option :** With completion 
 ```swift
         EasyGameCenter.showGameCenterChallenges {
             () -> Void in
@@ -179,7 +187,11 @@ EasyGameCenter.showGameCenterAchievements()
 ```
 ##Show authentification page Game Center
 * **Show Game Center authentification page with completion**
-* **Option :** Without completion ```EasyGameCenter.showGameCenterAuthentication()```
+* **Option :** Without completion 
+```swift
+EasyGameCenter.showGameCenterAuthentication()
+```
+* **Option :** With completion 
 ```swift
         EasyGameCenter.showGameCenterAuthentication { 
                 (result) -> Void in
@@ -190,7 +202,11 @@ EasyGameCenter.showGameCenterAchievements()
 ```
 ##Show custom banner
 * **Show custom banner Game Center with completion**
-* **Option :** Without completion ```EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...")```
+* **Option :** Without completion 
+```swift
+EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...")
+```
+* **Option :** With completion 
 ```swift
        EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { 
                 () -> Void in
