@@ -32,10 +32,8 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         
         /** If you want not message just delete this ligne **/
         EasyGameCenter.debugMode = true
-        
-        
     }
-    
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/
     /*    Set New view controller delegate, is when you change you change UIViewControlle                 */
     /*####################################################################################################*/
@@ -61,7 +59,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     func easyGameCenterAuthentified() {
         
         println("\n[MainViewController] Player Authentified\n")
-        
+
         let localPlayer = EasyGameCenter.getLocalPlayer()
         self.PlayerID.text = "Player ID : \(localPlayer.playerID)"
         self.Name.text = "Name : \(localPlayer.alias)"
@@ -88,7 +86,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     @IBAction func ShowGameCenterAchievements(sender: AnyObject) {
         EasyGameCenter.showGameCenterAchievements { (isShow) -> Void in
             if isShow {
-                println("Game Center Achievements Is show")
+                println("\n[MainViewController] Game Center Achievements Is show\n")
             }
         }
         
@@ -96,43 +94,34 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     @IBAction func ShowGameCenterLeaderboards(sender: AnyObject) {
         
         EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "International_Classement") { (isShow) -> Void in
-            println("Game Center Leaderboards Is show")
+            println("\n[MainViewController] Game Center Leaderboards Is show\n")
         }
     }
     @IBAction func ShowGameCenterChallenges(sender: AnyObject) {
         EasyGameCenter.showGameCenterChallenges {
             (result) -> Void in
             if result {
-               println("Game Center Challenges Is show")
+               println("\n[MainViewController] Game Center Challenges Is show\n")
             }
             
         }
         
     }
-
     @IBAction func ShowCustomBanner(sender: AnyObject) {
         
         EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { () -> Void in
-            println("Custom Banner is finish to Show")
+            println("\n[MainViewController] Custom Banner is finish to Show\n")
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     @IBAction func ActionOpenDialog(sender: AnyObject) {
         EasyGameCenter.openDialogGameCenterAuthentication(title: "Open Game Center", message: "Open Game Center authentification ?", buttonOK: "No", buttonOpenGameCenterLogin: "Yes") {
             (openGameCenterAuthentification) -> Void in
             if openGameCenterAuthentification {
-                println("Open Game Center Authentification")
+                println("\n[MainViewController] Open Game Center Authentification\n")
             } else {
-                println("Not open Game Center Authentification")
+                println("\n[MainViewController] Not open Game Center Authentification\n")
             }
         }
     }
-    
-    
 }
 

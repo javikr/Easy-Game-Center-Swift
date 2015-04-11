@@ -131,7 +131,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
         return EasyGameCenter.Static.instance
     }
     /*####################################################################################################*/
-    /*                                             Start                                                  */
+    /*                                            private Start                                           */
     /*####################################################################################################*/
     /**
     Load achievements in cache
@@ -139,7 +139,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     And when you get Achievement or all Achievement, it shall automatically cached
     
     */
-    func cachingAchievements() {
+    private func cachingAchievements() {
         if !self.inCacheIsLoading {
             self.inCacheIsLoading = true
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -553,7 +553,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                         
                     } else  {
                         completion(resultGKScore: leaderBoardRequest.localPlayerScore)
-                        
                     }
                 }
             } else {
@@ -649,45 +648,44 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 if !EasyGameCenter.isAchievementCompleted(achievementIdentifier: achievementIdentifier) {
-                let instanceEGC = EasyGameCenter.sharedInstance()
-                if instanceEGC == nil {
-                    EasyGameCenter.debug("\n[Easy Game Center] Instance nil\n")
-                } else {
-                    if let achievement = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: achievementIdentifier) {
-                        
-                        var currentValue = achievement.percentComplete
-                        var newProgress: Double = !addToExisting ? progress : progress + currentValue
-                        
-                        achievement.percentComplete = newProgress
-                        
-                        /* show banner only if achievement is fully granted (progress is 100%) */
-                        if achievement.completed && showBannnerIfCompleted {
-                            EasyGameCenter.debug("[Easy Game Center] Achievement \(achievementIdentifier) completed")
+                    let instanceEGC = EasyGameCenter.sharedInstance()
+                    if instanceEGC == nil {
+                        EasyGameCenter.debug("\n[Easy Game Center] Instance nil\n")
+                    } else {
+                        if let achievement = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: achievementIdentifier) {
                             
-                            if EasyGameCenter.isConnectedToNetwork() {
-                                achievement.showsCompletionBanner = true
-                            } else {
-                                //oneAchievement.showsCompletionBanner = true << Bug For not show two banner
-                                // Force show Banner when player not have network
-                                EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: achievementIdentifier, completion: {
-                                    (tupleGKAchievementAndDescription) -> Void in
-                                    
-                                    if let tupleIsOK = tupleGKAchievementAndDescription {
-                                        let title = tupleIsOK.gkAchievementDescription.title
-                                        let description = tupleIsOK.gkAchievementDescription.achievedDescription
+                            var currentValue = achievement.percentComplete
+                            var newProgress: Double = !addToExisting ? progress : progress + currentValue
+                            
+                            achievement.percentComplete = newProgress
+                            
+                            /* show banner only if achievement is fully granted (progress is 100%) */
+                            if achievement.completed && showBannnerIfCompleted {
+                                EasyGameCenter.debug("[Easy Game Center] Achievement \(achievementIdentifier) completed")
+                                
+                                if EasyGameCenter.isConnectedToNetwork() {
+                                    achievement.showsCompletionBanner = true
+                                } else {
+                                    //oneAchievement.showsCompletionBanner = true << Bug For not show two banner
+                                    // Force show Banner when player not have network
+                                    EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: achievementIdentifier, completion: {
+                                        (tupleGKAchievementAndDescription) -> Void in
                                         
-                                        EasyGameCenter.showCustomBanner(title: title, description: description)
-                                    }
-                                })
+                                        if let tupleIsOK = tupleGKAchievementAndDescription {
+                                            let title = tupleIsOK.gkAchievementDescription.title
+                                            let description = tupleIsOK.gkAchievementDescription.achievedDescription
+                                            
+                                            EasyGameCenter.showCustomBanner(title: title, description: description)
+                                        }
+                                    })
+                                }
                             }
+                            if  achievement.completed && !showBannnerIfCompleted {
+                                instanceEGC!.achievementsCacheShowAfter[achievementIdentifier] = achievementIdentifier
+                            }
+                            instanceEGC!.reportAchievementToGameCenter(achievement: achievement)
                         }
-                        
-                        if  achievement.completed && !showBannnerIfCompleted {
-                            instanceEGC!.achievementsCacheShowAfter[achievementIdentifier] = achievementIdentifier
-                        }
-                        instanceEGC!.reportAchievementToGameCenter(achievement: achievement)
                     }
-                }
                 } else {
                     EasyGameCenter.debug("[Easy Game Center] Achievement is already completed")
                 }
@@ -803,8 +801,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                                     EasyGameCenter.showCustomBanner(title: title, description: description, completion: { () -> Void in
                                         if completion != nil { completion!(achievementShow: achievement) }
                                     })
-                                    
-                                    
                                 } else {
                                     if completion != nil { completion!(achievementShow: nil) }
                                 }
@@ -855,10 +851,8 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
             if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
                 GKAchievement.resetAchievementsWithCompletionHandler({
                     (var error:NSError!) -> Void in
-                    
                     if error != nil {
                         EasyGameCenter.debug("\n[Easy Game Center] Couldn't Reset achievement (Send data error) \n")
-                        
                     } else {
                         let gameCenter = EasyGameCenter.Static.instance!
                         for lookupAchievement in gameCenter.achievementsCache {
