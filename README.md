@@ -411,7 +411,7 @@ if EasyGameCenter.isPlayerIdentifiedToGameCenter() { /* Player identified */ }
 ```swift
 let localPlayer = EasyGameCenter.getLocalPlayer()
 ```
-#Other
+#NetWork
 **Is Connected to NetWork**
 ```swift
 if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
