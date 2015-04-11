@@ -59,14 +59,19 @@ Setting up Easy Game Center it's really easy. Read the instructions after.
 class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Init Easy Game Center
         EasyGameCenter.sharedInstance(self)
+        
         // If you doesn't want see message Easy Game Center, delete this ligne
         EasyGameCenter.debugMode = true
     }
-
+    /**
+        Notifies the view controller that its view was added
+    */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         //Set New view controller delegate, that's when you change UIViewController
         EasyGameCenter.delegate = self
     }
