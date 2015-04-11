@@ -221,12 +221,11 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ##Show custom dialog
 * **Show custom dialog Game Center Authentication with completion**
 ```swift
-        EasyGameCenter.openDialogGameCenterAuthentication(
+    EasyGameCenter.openDialogGameCenterAuthentication(
         titre: "Title", 
         message: "Please login you Game Center", 
         buttonOK: "Ok", 
-        buttonOpenGameCenterLogin: "Open Game Center") 
-        {
+        buttonOpenGameCenterLogin: "Open Game Center") {
             (openGameCenterAuthentification) -> Void in
             if openGameCenterAuthentification {
                 println("Player open Game Center authentification")
@@ -237,7 +236,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```
 * **Option :** Without completion
 ```swift
-EasyGameCenter.openDialogGameCenterAuthentication(
+    EasyGameCenter.openDialogGameCenterAuthentication(
         titre: Title", 
         message: "Please login you Game Center", 
         buttonOK: "Cancel", 
@@ -246,21 +245,30 @@ EasyGameCenter.openDialogGameCenterAuthentication(
 #Achievements Methods
 ##Progress Achievements
 * **Add progress to an Achievement with show banner**
-* **Option :** Without show banner ```EasyGameCenter.reportAchievements(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false)```
-* **Option :** Add progress to existing ```EasyGameCenter.reportAchievements(progress: 42.00, achievementIdentifier: "Identifier", addToExisting: true)```
-* 
+* **Option :** Report achievement 
 ```swift
 EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier")
+```
+* **Option :** Without show banner 
+```swift 
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false)
+```
+* **Option :** Add progress to existing (addition to the old)
+```swift
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", addToExisting: true)
+```
+* **Option :** Add progress to existing & without show banner  (addition to the old)
+```swift
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false ,addToExisting: true)
 ```
 ##If Achievement completed 
 * **Is completed Achievement**
 ```swift
-let achievementCompleted = EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Identifier")
-if achievementOneCompleted {
+    if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Identifier") {
         println("Yes")
-} else {
+    } else {
         println("No")
-}
+    }
 ```
 ##All Achievements completed & Banner not show
 * **Get All Achievements completed and banner not show**
