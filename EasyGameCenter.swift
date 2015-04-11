@@ -648,6 +648,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
         if achievementIdentifier != "" {
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                if !EasyGameCenter.isAchievementCompleted(achievementIdentifier: achievementIdentifier) {
                 let instanceEGC = EasyGameCenter.sharedInstance()
                 if instanceEGC == nil {
                     if EasyGameCenter.debugMode { println("\n[Easy Game Center] Instance nil\n") }
@@ -661,7 +662,9 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                         
                         /* show banner only if achievement is fully granted (progress is 100%) */
                         if achievement.completed && showBannnerIfCompleted {
-                            
+                            if EasyGameCenter.debugMode {
+                                println("[Easy Game Center] Achievement \(achievementIdentifier) completed")
+                            }
                             if EasyGameCenter.isConnectedToNetwork() {
                                 achievement.showsCompletionBanner = true
                             } else {
@@ -684,6 +687,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
                             instanceEGC!.achievementsCacheShowAfter[achievementIdentifier] = achievementIdentifier
                         }
                         instanceEGC!.reportAchievementToGameCenter(achievement: achievement)
+                    }
+                }
+                } else {
+                    if EasyGameCenter.debugMode {
+                        println("[Easy Game Center] Achievement is already completed")
                     }
                 }
             }
