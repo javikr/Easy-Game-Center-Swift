@@ -998,9 +998,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
     /*####################################################################################################*/
     /*                                      Private Other Func                                            */
     /*####################################################################################################*/
-    class func debug(object: Any) {
+    private class func debug(object: Any) {
         if EasyGameCenter.debugMode {
-             Swift.println(object)
+            dispatch_async(dispatch_get_main_queue()) {
+                Swift.println(object)
+            }
         }
     }
     /*####################################################################################################*/
