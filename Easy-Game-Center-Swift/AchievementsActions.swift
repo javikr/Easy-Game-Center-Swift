@@ -144,23 +144,16 @@ class AchievementsActions: UIViewController {
     
     
     @IBAction func AchievementCompletedAndNotShowing(sender: AnyObject) {
-
         if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
-            
             for oneAchievement in achievements  {
-                if oneAchievement.completed && oneAchievement.showsCompletionBanner == false {
+                println("\n/***** Achievement Description *****/\n")
+                println("\(oneAchievement.identifier)")
+                println("\n/**********/\n")
                     
-                    println("\n/***** Achievement Description *****/\n")
-                    println("\(oneAchievement.identifier)")
-                    println("\n/**********/\n")
-                    
-                }
             }
         } else {
             println("\n/***** NO Achievement with not showing  *****/\n")
         }
-        
-        
     }
     
     @IBAction func ShowAchievementCompletedAndNotShowing(sender: AnyObject) {

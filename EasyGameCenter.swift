@@ -759,8 +759,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate {
             if achievements.count > 0 {
                 
                 for achievement in achievements  {
-                    let achievementExtract = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: achievement.1)
-                    achievementsTemps.append(achievementExtract!)
+                    if let achievementExtract = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: achievement.1) {
+                        if achievementExtract.completed && achievementExtract.showsCompletionBanner == false {
+                            achievementsTemps.append(achievementExtract)
+                        }
+                    }
                 }
                 return achievementsTemps
             }
