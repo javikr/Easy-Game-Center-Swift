@@ -271,7 +271,7 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
         println("No")
     }
 ```
-##All Achievements completed & Banner not show
+##All Achievements completed for banner not show
 * **Get All Achievements completed and banner not show**
 ```swift
     if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
@@ -281,59 +281,63 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
             }
         }
     } else {
-            println("\n[Easy Game Center]No Achievements with not showing\n")
+            println("\n[Easy Game Center] No Achievements with banner not showing\n")
     }
 ```
-##Show all Achievements completed & Banner not show
+##Show all Achievements completed for banner not show
 * **Show All Achievements completed and banner not show with completion**
-* **Option :** Without completion ```EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing(nil)```
+* **Option :** Without completion 
 ```swift
-        EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing { 
+EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
+```
+* **Option :** With completion 
+```swift
+    EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing { 
         (achievementShow) -> Void in
-            if let achievementIsOK = achievementShow {
-                println("\(achievementIsOK.identifier)")
-            }
+        if let achievementIsOK = achievementShow {
+            println("\n[Easy Game Center] Achievement show is \(achievementIsOK.identifier)\n")
+        } else {
+            println("\n[Easy Game Center] No Achievements with banner not showing\n")
         }
+    }
 ```
 ##Achievements GKAchievementDescription
 * **Get all achievements descriptions (GKAchievementDescription) with completion**
 ```swift
-        EasyGameCenter.getGKAllAchievementDescription {
-            (arrayGKAD) -> Void in
-            
-            if let arrayAchievementDescription = arrayGKAD {
-                for achievement in arrayAchievementDescription  {
-                    println("ID : \(achievement.identifier)")
-                    println("Title : \(achievement.title)")
-                    println("Achieved Description : \(achievement.achievedDescription)")
-                }
+    EasyGameCenter.getGKAllAchievementDescription {
+        (arrayGKAD) -> Void in
+        if let arrayAchievementDescription = arrayGKAD {
+            for achievement in arrayAchievementDescription  {
+                println("\n[Easy Game Center] ID : \(achievement.identifier)\n")
+                println("\n[Easy Game Center] Title : \(achievement.title)\n")
+                println("\n[Easy Game Center] Achieved Description : \(achievement.achievedDescription)\n")
+                println("\n[Easy Game Center] Unachieved Description : \(achievement.unachievedDescription)\n")
             }
         }
+    }
 ```
 ##Achievements GKAchievement
 * **Get One Achievement (GKAchievement)**
 ```swift
-        if let achievement = EasyGameCenter.achievementForIndentifier(identifierAchievement: "achievementIdentifier") {
-            /* object GKAchievement */
-        }
+    if let achievement = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: "AchievementIdentifier") {
+        println("\n[Easy Game Center] ID : \(achievement.identifier)\n")
+    }
 ```
 ##Tuple Achievements GKAchievement GKAchievementDescription
 * **Get Tuple ( GKAchievement , GKAchievementDescription) for identifier Achievement**
 ```swift
-        EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: "Achievement_One") {            
+    EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: "Achievement_One") {            
         (tupleGKAchievementAndDescription) -> Void in
-            
-            if let tupleInfoAchievement = tupleGKAchievementAndDescription {
-                // Extract tuple
-                let gkAchievementDescription = tupleInfoAchievement.gkAchievementDescription
-                let gkAchievement = tupleInfoAchievement.gkAchievement
-                
-                // The title of the achievement.
-                println("Title : \(gkAchievementDescription.title)")
-                // The description for an unachieved achievement.
-                println("Achieved Description : \(gkAchievementDescription.achievedDescription)")
-            }
+        if let tupleInfoAchievement = tupleGKAchievementAndDescription {
+            // Extract tuple
+            let gkAchievementDescription = tupleInfoAchievement.gkAchievementDescription
+            let gkAchievement = tupleInfoAchievement.gkAchievement
+            // The title of the achievement.
+            println("\n[Easy Game Center] Title : \(gkAchievementDescription.title)\n")
+            // The description for an unachieved achievement.
+            println("\n[Easy Game Center]Achieved Description : \(gkAchievementDescription.achievedDescription)\n")
         }
+    }
 ```
 ##Achievement progress
 * **Get Progress to an achievement**
@@ -342,12 +346,15 @@ let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementId
 ```
 ##Reset all Achievements
 * **Reset all Achievement**
-* **Option :** Without completion ```EasyGameCenter.resetAllAchievements(nil)```
+* **Option :** Without completion 
 ```swift
-        EasyGameCenter.resetAllAchievements { 
-                (achievementReset) -> Void in
-                /* achievementReset = GKAchievement */
-        }
+    EasyGameCenter.resetAllAchievements()
+```
+```swift
+    EasyGameCenter.resetAllAchievements { 
+        (achievementReset) -> Void in
+        println("\n[Easy Game Center] ID : \(achievementReset.identifier)\n")
+    }
 ```
 #Leaderboards
 ##Report
