@@ -40,7 +40,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
 
 # Documentation
-All methods, properties, types, and delegate methods available on the GameCenterManager class are documented below. If you're using [GameKit](https://developer.apple.com/library/ios/documentation/GameKit/Reference/GameKit_Collection/index.html)
+All methods, properties, types, and delegate methods available on the Easy Game Center class are documented below. If you're using [GameKit](https://developer.apple.com/library/ios/documentation/GameKit/Reference/GameKit_Collection/index.html)
 
 ## Setup
 Setting up Easy Game Center it's really easy. Read the instructions after.
