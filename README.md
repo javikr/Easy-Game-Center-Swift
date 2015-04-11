@@ -276,8 +276,8 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
         println("No")
     }
 ```
-##All Achievements completed for banner not show
-* **Get All Achievements completed and banner not show**
+##Get All Achievements completed for banner not show
+* **Get All Achievements completed and banner not show with completion**
 ```swift
     if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
         for oneAchievement in achievements  {
@@ -304,7 +304,7 @@ EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
         }
     }
 ```
-##Achievements GKAchievementDescription
+## Get all Achievements GKAchievementDescription
 * **Get all achievements descriptions (GKAchievementDescription) with completion**
 ```swift
     EasyGameCenter.getGKAllAchievementDescription {
@@ -319,14 +319,14 @@ EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
         }
     }
 ```
-##Achievements GKAchievement
+##Get Achievements GKAchievement
 * **Get One Achievement (GKAchievement)**
 ```swift
     if let achievement = EasyGameCenter.getAchievementForIndentifier(identifierAchievement: "AchievementIdentifier") {
         println("\n[Easy Game Center] ID : \(achievement.identifier)\n")
     }
 ```
-##Tuple Achievements GKAchievement GKAchievementDescription
+##Get Achievements GKAchievement GKAchievementDescription (Tuple)
 * **Get Tuple ( GKAchievement , GKAchievementDescription) for identifier Achievement**
 ```swift
     EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: "AchievementIdentifier") {            
@@ -411,7 +411,7 @@ let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementId
 ```swift
 if EasyGameCenter.isPlayerIdentifiedToGameCenter() { /* Player identified */ } 
 ```
-##Local Player
+##Get Local Player
 **Get local Player (GKLocalPlayer)**
 ```swift
 let localPlayer = EasyGameCenter.getLocalPlayer()
