@@ -276,12 +276,10 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
 ```swift
     if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
         for oneAchievement in achievements  {
-            if oneAchievement.completed && oneAchievement.showsCompletionBanner == false {
-                    println("\n[Easy Game Center] Achievement where banner not show \(oneAchievement.identifier)\n")
-            }
+            println("\n[Easy Game Center] Achievement where banner not show \(oneAchievement.identifier)\n")
         }
     } else {
-            println("\n[Easy Game Center] No Achievements with banner not showing\n")
+        println("\n[Easy Game Center] No Achievements with banner not showing\n")
     }
 ```
 ##Show all Achievements completed for banner not show
@@ -326,7 +324,7 @@ EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
 ##Tuple Achievements GKAchievement GKAchievementDescription
 * **Get Tuple ( GKAchievement , GKAchievementDescription) for identifier Achievement**
 ```swift
-    EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: "Achievement_One") {            
+    EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: "AchievementIdentifier") {            
         (tupleGKAchievementAndDescription) -> Void in
         if let tupleInfoAchievement = tupleGKAchievementAndDescription {
             // Extract tuple
@@ -335,7 +333,7 @@ EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
             // The title of the achievement.
             println("\n[Easy Game Center] Title : \(gkAchievementDescription.title)\n")
             // The description for an unachieved achievement.
-            println("\n[Easy Game Center]Achieved Description : \(gkAchievementDescription.achievedDescription)\n")
+            println("\n[Easy Game Center] Achieved Description : \(gkAchievementDescription.achievedDescription)\n")
         }
     }
 ```
@@ -360,50 +358,47 @@ let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementId
 ##Report
 * **Report Score Leaderboard**
 ```swift
-EasyGameCenter.reportScoreLeaderboard(leaderboardIdentifier: "LeaderboardIdentifier", score: 100)
+    EasyGameCenter.reportScoreLeaderboard(leaderboardIdentifier: "LeaderboardIdentifier", score: 100)
 ```
 ##Get GKLeaderboard
 * **Get GKLeaderboard with completion**
 ```swift
-        EasyGameCenter.getGKLeaderboard { 
-            (resultArrayGKLeaderboard) -> Void in
-            if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard as [GKLeaderboard]? {
-                for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
-                
-                    println("ID : \(oneGKLeaderboard.identifier)")
-                    println("Title :\(oneGKLeaderboard.title)")
-                    println("Loading ? : \(oneGKLeaderboard.loading)")
-                }
+    EasyGameCenter.getGKLeaderboard { 
+        (resultArrayGKLeaderboard) -> Void in
+        if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard as [GKLeaderboard]? {
+            for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
+                println("\n[Easy Game Center] ID : \(oneGKLeaderboard.identifier)\n")
+                println("\n[Easy Game Center] Title :\(oneGKLeaderboard.title)\n")
+                println("\n[Easy Game Center] Loading ? : \(oneGKLeaderboard.loading)\n")
             }
         }
+    }
 ```
 ##Get GKScore
 * **Get GKScore Leaderboard with completion**
 ```swift
-        EasyGameCenter.getGKScoreLeaderboard(leaderboardIdentifier: "International_Classement") {
-            (resultGKScore) -> Void in
-            if let resultGKScoreIsOK = resultGKScore as GKScore? {
-
-                println("Leaderboard Identifier : \(resultGKScoreIsOK.leaderboardIdentifier)")
-                println("Date : \(resultGKScoreIsOK.date)")
-                println("Rank :\(resultGKScoreIsOK.rank)")
-                println("Hight Score : \(resultGKScoreIsOK.value)")
-            }
+    EasyGameCenter.getGKScoreLeaderboard(leaderboardIdentifier: "LeaderboardIdentifier") {
+        (resultGKScore) -> Void in
+        if let resultGKScoreIsOK = resultGKScore as GKScore? {
+            println("\n[Easy Game Center] Leaderboard Identifier : \(resultGKScoreIsOK.leaderboardIdentifier)\n")
+            println("\n[Easy Game Center] Date : \(resultGKScoreIsOK.date)\n")
+            println("\n[Easy Game Center] Rank :\(resultGKScoreIsOK.rank)\n")
+            println("\n[Easy Game Center] Hight Score : \(resultGKScoreIsOK.value)\n")
         }
+    }
 ```
 ##Get Hight Score (Tuple)
 * **Get Hight Score Leaderboard with completion, (Tuple of name,score,rank)**
 ```swift
-        EasyGameCenter.getHighScore(leaderboardIdentifier: "International_Classement") {
-            (tupleHighScore) -> Void in
-            //(playerName:String, score:Int,rank:Int)
-            
-            if  tupleHighScore != nil {
-                println("Leaderboard Identifier : \(tupleHighScore!.playerName)")
-                println("Date : \(tupleHighScore!.score)")
-                println("Rank :\(tupleHighScore!.rank)")
-            }
+    EasyGameCenter.getHighScore(leaderboardIdentifier: "LeaderboardIdentifier") {
+        (tupleHighScore) -> Void in
+        //(playerName:String, score:Int,rank:Int)?
+        if let tupleIsOk = tupleHighScore {
+            println("\n[Easy Game Center] Leaderboard Identifier : \(tupleIsOk.playerName)\n")
+            println("\n[Easy Game Center] Date : \(tupleIsOk.score)\n")
+            println("\n[Easy Game Center] Rank :\(tupleIsOk.rank)\n")
         }
+    }
 ```
 #Other methods Game Center
 ##Player identified to Game Center
@@ -434,4 +429,4 @@ Copyright (c) 2015 Red Wolf Studio, Yannick Stephan
 
 [Red Wolf Studio](http://www.redwolfstudio.fr)
 
-[Yannick Stephan](https://yannickstephan.com)
+[Yannick Stephan](http://yannickstephan.com)
