@@ -30,18 +30,19 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * More is coming ... (Multiplayer etc..)
 
 ## Requirements
-* [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
-* [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() 
-* [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
-* [![](https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg)]()
+[![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
+
+[![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() 
+
+[![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
+
+[![](https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
 * Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
 
 # Documentation
-All methods, properties, types, and delegate methods available on the Easy Game Center class are documented below. If you're using [GameKit](https://developer.apple.com/library/ios/documentation/GameKit/Reference/GameKit_Collection/index.html)
-
 ## Setup
 Setting up Easy Game Center it's really easy. Read the instructions after.
 
