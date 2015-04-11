@@ -1,12 +1,15 @@
-# Easy Game Center [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]() [![](https://img.shields.io/badge/version-2.0-D8B13C.svg)]()
+# Easy Game Center [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
-**Easy Game Center** helps to manage Game Center in iOS. Report and track high scores, achievements. Easy Game Center falicite management of Game Center.
-**(version 2.0)**
+<p align="center">
+        <img src="https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg" />
+</p>
+**Easy Game Center** helps to manage Game Center in iOS. Report and track high scores, achievements. Easy Game Center falicite management of Game Center.  
 
 <p align="center">
+        
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
 </p>
 
@@ -27,15 +30,19 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * More is coming ... (Multiplayer etc..)
 
 ## Requirements
-* Requires a minimum of iOS 7.0+ / iOS 8+
+[![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
+
+[![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() 
+
+[![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
+
+[![](https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
 * Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
 
 # Documentation
-All methods, properties, types, and delegate methods available on the GameCenterManager class are documented below. If you're using [GameKit](https://developer.apple.com/library/ios/documentation/GameKit/Reference/GameKit_Collection/index.html)
-
 ## Setup
 Setting up Easy Game Center it's really easy. Read the instructions after.
 
@@ -213,13 +220,21 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```
 ##Show custom dialog
 * **Show custom dialog Game Center Authentication with completion**
+* **Option :** Without completion
 ```swift
-        EasyGameCenter.openDialogGameCenterAuthentication(
+    EasyGameCenter.openDialogGameCenterAuthentication(
+        titre: Title", 
+        message: "Please login you Game Center", 
+        buttonOK: "Cancel", 
+        buttonOpenGameCenterLogin: "Open Game Center")
+```
+* **Option :** With completion
+```swift
+    EasyGameCenter.openDialogGameCenterAuthentication(
         titre: "Title", 
         message: "Please login you Game Center", 
         buttonOK: "Ok", 
-        buttonOpenGameCenterLogin: "Open Game Center") 
-        {
+        buttonOpenGameCenterLogin: "Open Game Center") {
             (openGameCenterAuthentification) -> Void in
             if openGameCenterAuthentification {
                 println("Player open Game Center authentification")
@@ -228,48 +243,46 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
             }
         }
 ```
-* **Option :** Without completion
-```swift
-EasyGameCenter.openDialogGameCenterAuthentication(
-        titre: Title", 
-        message: "Please login you Game Center", 
-        buttonOK: "Cancel", 
-        buttonOpenGameCenterLogin: "Open Game Center")
-```
 #Achievements Methods
 ##Progress Achievements
 * **Add progress to an Achievement with show banner**
-* **Option :** Without show banner ```EasyGameCenter.reportAchievements(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false)```
-* **Option :** Add progress to existing ```EasyGameCenter.reportAchievements(progress: 42.00, achievementIdentifier: "Identifier", addToExisting: true)```
-* 
+* **Option :** Report achievement 
 ```swift
 EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier")
+```
+* **Option :** Without show banner 
+```swift 
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false)
+```
+* **Option :** Add progress to existing (addition to the old)
+```swift
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", addToExisting: true)
+```
+* **Option :** Without show banner & add progress to existing (addition to the old)
+```swift
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false ,addToExisting: true)
 ```
 ##If Achievement completed 
 * **Is completed Achievement**
 ```swift
-let achievementCompleted = EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Identifier")
-if achievementOneCompleted {
+    if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Identifier") {
         println("Yes")
-} else {
+    } else {
         println("No")
-}
+    }
 ```
 ##All Achievements completed & Banner not show
 * **Get All Achievements completed and banner not show**
 ```swift
-        if let achievements : [String:GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
-            for achievement in achievements  {
-                var oneAchievement : GKAchievement = achievement.1
-                if oneAchievement.completed && oneAchievement.showsCompletionBanner == false {
-                
-                    println("\n/***** Achievement Description *****/\n")
-                    println("\(oneAchievement.identifier)")
-                    println("\n/**********/\n")
-                    
-                }
+    if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
+        for oneAchievement in achievements  {
+            if oneAchievement.completed && oneAchievement.showsCompletionBanner == false {
+                    println("\n[Easy Game Center] Achievement where banner not show \(oneAchievement.identifier)\n")
             }
         }
+    } else {
+            println("\n[Easy Game Center]No Achievements with not showing\n")
+    }
 ```
 ##Show all Achievements completed & Banner not show
 * **Show All Achievements completed and banner not show with completion**
