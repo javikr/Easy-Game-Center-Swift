@@ -220,6 +220,15 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```
 ##Show custom dialog
 * **Show custom dialog Game Center Authentication with completion**
+* **Option :** Without completion
+```swift
+    EasyGameCenter.openDialogGameCenterAuthentication(
+        titre: Title", 
+        message: "Please login you Game Center", 
+        buttonOK: "Cancel", 
+        buttonOpenGameCenterLogin: "Open Game Center")
+```
+* **Option :** With completion
 ```swift
     EasyGameCenter.openDialogGameCenterAuthentication(
         titre: "Title", 
@@ -233,14 +242,6 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
                 println("Player cancel Open Game Center authentification")
             }
         }
-```
-* **Option :** Without completion
-```swift
-    EasyGameCenter.openDialogGameCenterAuthentication(
-        titre: Title", 
-        message: "Please login you Game Center", 
-        buttonOK: "Cancel", 
-        buttonOpenGameCenterLogin: "Open Game Center")
 ```
 #Achievements Methods
 ##Progress Achievements
@@ -257,7 +258,7 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
 ```swift
     EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", addToExisting: true)
 ```
-* **Option :** Add progress to existing & without show banner  (addition to the old)
+* **Option :** Without show banner & add progress to existing (addition to the old)
 ```swift
     EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false ,addToExisting: true)
 ```
@@ -273,18 +274,15 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
 ##All Achievements completed & Banner not show
 * **Get All Achievements completed and banner not show**
 ```swift
-        if let achievements : [String:GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
-            for achievement in achievements  {
-                var oneAchievement : GKAchievement = achievement.1
-                if oneAchievement.completed && oneAchievement.showsCompletionBanner == false {
-                
-                    println("\n/***** Achievement Description *****/\n")
-                    println("\(oneAchievement.identifier)")
-                    println("\n/**********/\n")
-                    
-                }
+    if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
+        for oneAchievement in achievements  {
+            if oneAchievement.completed && oneAchievement.showsCompletionBanner == false {
+                    println("\n[Easy Game Center] Achievement where banner not show \(oneAchievement.identifier)\n")
             }
         }
+    } else {
+            println("\n[Easy Game Center]No Achievements with not showing\n")
+    }
 ```
 ##Show all Achievements completed & Banner not show
 * **Show All Achievements completed and banner not show with completion**
