@@ -409,12 +409,12 @@ let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementId
 ##Player identified to Game Center
 **Is player identified to gameCenter**
 ```swift
-if EasyGameCenter.isPlayerIdentifiedToGameCenter() { /* Player identified */ } 
+    if EasyGameCenter.isPlayerIdentifiedToGameCenter() { /* Player identified */ } 
 ```
 ##Get Local Player
 **Get local Player (GKLocalPlayer)**
 ```swift
-let localPlayer = EasyGameCenter.getLocalPlayer()
+    let localPlayer = EasyGameCenter.getLocalPlayer()
 ```
 #NetWork
 **Is Connected to NetWork**
@@ -424,8 +424,8 @@ if EasyGameCenter.isConnectedToNetwork() { /* You have network */ }
 #Debug Mode
 **If you doesn't want see message of Easy Game Center**
 ```swift
-// If you doesn't want see message Easy Game Center, delete this ligne
-// EasyGameCenter.debugMode = true
+    // If you doesn't want see message Easy Game Center, delete this ligne
+    // EasyGameCenter.debugMode = true
 ```
 ### Legacy support
 For support of iOS 7+ & iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
