@@ -59,14 +59,14 @@ Setting up Easy Game Center it's really easy. Read the instructions after.
 class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Init Easy Game Center
         EasyGameCenter.sharedInstance(self)
+        // If you doesn't want see message Easy Game Center, delete this ligne
+        EasyGameCenter.debugMode = true
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         //Set New view controller delegate, that's when you change UIViewController
         EasyGameCenter.delegate = self
     }
@@ -416,7 +416,12 @@ let localPlayer = EasyGameCenter.getLocalPlayer()
 ```swift
 if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
 ```
-
+#Debug Mode
+**If you doesn't want see message of Easy Game Center**
+```swift
+// If you doesn't want see message Easy Game Center, delete this ligne
+// EasyGameCenter.debugMode = true
+```
 ### Legacy support
 For support of iOS 7+ & iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
 
