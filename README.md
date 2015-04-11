@@ -235,25 +235,21 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```
 * **Option :** With completion
 ```swift
-    EasyGameCenter.openDialogGameCenterAuthentication(
-        titre: "Title", 
-        message: "Please login you Game Center", 
-        buttonOK: "Ok", 
-        buttonOpenGameCenterLogin: "Open Game Center") {
-            (openGameCenterAuthentification) -> Void in
-            if openGameCenterAuthentification {
-                println("Player open Game Center authentification")
-            } else {
-                println("Player cancel Open Game Center authentification")
-            }
+    EasyGameCenter.openDialogGameCenterAuthentication(title: "Game Center", message: "Open ?", buttonOK: "No", buttonOpenGameCenterLogin: "Yes") {
+        (openGameCenterAuthentification) -> Void in
+        if openGameCenterAuthentification {
+            println("\n[Easy Game Center] Open Game Center Authentification\n")
+        } else {
+            println("\n[Easy Game Center] Not open Game Center Authentification\n")
         }
+    }
 ```
 #Achievements Methods
 ##Progress Achievements
 * **Add progress to an Achievement with show banner**
 * **Option :** Report achievement 
 ```swift
-EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier")
+    EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier")
 ```
 * **Option :** Without show banner 
 ```swift 
@@ -271,9 +267,9 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
 * **Is completed Achievement**
 ```swift
     if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Identifier") {
-        println("Yes")
+        println("\n[Easy Game Center]Yes\n")
     } else {
-        println("No")
+        println("\n[Easy Game Center] No\n")
     }
 ```
 ##Get All Achievements completed for banner not show
@@ -291,7 +287,7 @@ EasyGameCenter.reportAchievement(progress: 42.00, achievementIdentifier: "Identi
 * **Show All Achievements completed and banner not show with completion**
 * **Option :** Without completion 
 ```swift
-EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
+    EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
 ```
 * **Option :** With completion 
 ```swift
@@ -345,7 +341,7 @@ EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
 ##Achievement progress
 * **Get Progress to an achievement**
 ```swift
-let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementIdentifier: "AchievementIdentifier")
+    let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementIdentifier: "AchievementIdentifier")
 ```
 ##Reset all Achievements
 * **Reset all Achievement**
@@ -419,7 +415,7 @@ let progressAchievement = EasyGameCenter.getProgressForAchievement(achievementId
 #NetWork
 **Is Connected to NetWork**
 ```swift
-if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
+    if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
 ```
 #Debug Mode
 **If you doesn't want see message of Easy Game Center**
