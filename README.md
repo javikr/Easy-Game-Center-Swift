@@ -16,18 +16,18 @@
 # Project Features
 Easy Game Center is a great way to use Game Center in your iOS app.
 
-* Swift
-* Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.
-* GKachievements & GKachievementsDescription are save in cache and automatically refreshed
-* Delegate fucntion when player is connected or not etc...
-* Most of the functions callBack (Handler, completion)
-* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction)
-* Just drag and drop the files into your project (EasyGameCenter.swift)
-* Easy Game Center is asynchronous
-* Frequent updates to the project based on user issues and requests  
-* Example project
+* **Swift**
+* **Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.**
+* **GKachievements & GKachievementsDescription are save in cache and automatically refreshed.**
+* **Delegate fucntion when player is connected or not.**
+* **Most of the functions callBack (Handler, completion).**
+* Useful methods and properties by use **Singleton** (EasyGameCenter.exampleFunction).
+* Just **drag and drop the files into your project** (EasyGameCenter.swift).
+* Easy Game Center is **asynchronous.**
+* **Frequent updates** to the project based on user issues and requests.
+* Example project.
 * Easily contribute to the project :)
-* More is coming ... (Multiplayer etc..)
+* **Is coming Multiplayer !**
 
 ## Requirements
 [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
