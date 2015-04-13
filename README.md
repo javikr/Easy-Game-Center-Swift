@@ -6,7 +6,7 @@
 <p align="center">
         <img src="https://img.shields.io/badge/Easy Game Center-2.1-D8B13C.svg" />
 </p>
-**Easy Game Center** helps to manage Game Center in iOS. Report and track high scores, achievements. Easy Game Center falicite management of Game Center.  
+**Easy Game Center** helps to manage Game Center in iOS. Report and track high scores, achievements and Multiplayer. Easy Game Center falicite management of Game Center.  
 
 <p align="center">
         
@@ -17,6 +17,7 @@
 Easy Game Center is a great way to use Game Center in your iOS app.
 
 * Swift
+* **Multiplayer**
 * Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.
 * GKachievements & GKachievementsDescription are save in cache and automatically refreshed.
 * Delegate fucntion when player is connected or not.
@@ -27,7 +28,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Frequent updates to the project based on user issues and requests.
 * Example project.
 * Easily contribute to the project :)
-* **Is coming Multiplayer !**
+
 
 ## Requirements
 [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
@@ -366,7 +367,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```swift
     EasyGameCenter.getGKLeaderboard { 
         (resultArrayGKLeaderboard) -> Void in
-        if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard as [GKLeaderboard]? {
+        if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard {
             for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
                 println("\n[Easy Game Center] ID : \(oneGKLeaderboard.identifier)\n")
                 println("\n[Easy Game Center] Title :\(oneGKLeaderboard.title)\n")
