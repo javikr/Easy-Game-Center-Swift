@@ -410,14 +410,43 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
 ```
 ##Delegate function for listen MultiPlayer
-###Listener Player is authentified
-* **Description :** This function is call when player is authentified to Game Center
+###Listener When Match Started 
+* **Description :** This function is call when the match Started
 * **Option :** It is optional 
 ```swift
     func easyGameCenterMatchStarted() {
-        println("\nPlayer Authentified\n")
+        println("\n[MultiPlayerActions] MatchStarted")
     }
 ```
+###Listener When Match Recept Data
+* **Description :** This function is call when player send data to all player
+* **Option :** It is optional 
+```swift
+    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+        // See Packet 
+        let autre =  Packet.unarchive(data)
+        println("\n[MultiPlayerActions] Recept From player = \(playerID)")
+        println("\n[MultiPlayerActions] Recept Packet.name = \(autre.name)")
+        println("\n[MultiPlayerActions] Recept Packet.index = \(autre.index)")
+    }
+```
+###Listener When Match End
+* **Description :** This function is call when the match is Ended
+* **Option :** It is optional 
+```swift
+    func easyGameCenterMatchEnded() {
+        println("\n[MultiPlayerActions] MatchEnded")
+    }
+```
+###Listener When Match End
+* **Description :** This function is call when the match is cancel by the local Player
+* **Option :** It is optional 
+```swift
+    func easyGameCenterMatchCancel() {
+        println("\n[MultiPlayerActions] Match cancel")
+    }
+```
+#MultiPlayer method
 ##Find player By number of player
 **Find Player By min and max player**
 ```swift
@@ -431,6 +460,21 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     
     //Send Data
     EasyGameCenter.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable): 4)
+```
+##Get Player in match
+**Get Player in match return Set**
+```swift
+    if let players = EasyGameCenter.getPlayerInMatch() {
+        for player in players{
+            println(player.alias)
+        }
+    }
+    
+```
+##Disconnect Match / Stop
+**Disconnect Match or Stop for send data to all player in match**
+```swift
+    EasyGameCenter.disconnectMatch()
 ```
 #Other methods Game Center
 ##Player identified to Game Center
