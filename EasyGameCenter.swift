@@ -33,10 +33,10 @@ import SystemConfiguration
     */
     optional func easyGameCenterInCache()
     
-    optional func matchStarted()
-    optional func matchRecept(match: GKMatch, didReceiveData: NSData, fromPlayer: String)
-    optional func matchEnded()
-    optional func matchCancel()
+    optional func easyGameCenterMatchStarted()
+    optional func easyGameCenterMatchRecept(match: GKMatch, didReceiveData: NSData, fromPlayer: String)
+    optional func easyGameCenterMatchEnded()
+    optional func easyGameCenterMatchCancel()
 }
 /**
 *    Extension of UIViewController, UIVC respect protocol
@@ -1091,7 +1091,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                 EasyGameCenter.debug("\n[Easy Game Center] Disconnect from match \n")
                 instanceEGC!.match.disconnect()
                 instanceEGC!.match = nil
-                EasyGameCenter.delegate!.matchEnded?()
+                EasyGameCenter.delegate!.easyGameCenterMatchEnded?()
             }
         }
     }
@@ -1114,7 +1114,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     self.playersInMatch = Set(arrayPlayers)
                 }
                 GKMatchmaker.sharedMatchmaker().finishMatchmakingForMatch(self.match)
-                EasyGameCenter.delegate!.matchStarted?()
+                EasyGameCenter.delegate!.easyGameCenterMatchStarted?()
             }
         }
     }
@@ -1137,7 +1137,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             let success = instanceEGC!.match.sendDataToAllPlayers(data, withDataMode: modeSend, error: &error)
             if error != nil || !success {
                 EasyGameCenter.debug("\n[Easy Game Center] Fail sending data all Player\n")
-                EasyGameCenter.delegate!.matchCancel?()
+                EasyGameCenter.delegate!.easyGameCenterMatchCancel?()
             } else {
                 EasyGameCenter.debug("\n[Easy Game Center] Succes sending data all Player \n")
             }
@@ -1159,7 +1159,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         }
         let delegate = EasyGameCenter.sharedInstance()!.delegateGetSetVC
         
-        delegate!.matchRecept?(theMatch, didReceiveData: data, fromPlayer: playerID)
+        delegate!.easyGameCenterMatchRecept?(theMatch, didReceiveData: data, fromPlayer: playerID)
         
         
     }
@@ -1277,7 +1277,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     internal func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController!) {
         viewController.dismissViewControllerAnimated(true, completion: nil)
         EasyGameCenter.debug("\n[Easy Game Center] Player cancels the matchmaking request \n")
-        EasyGameCenter.delegate!.matchCancel?()
+        EasyGameCenter.delegate!.easyGameCenterMatchCancel?()
     }
     /**
     Called when the view controller encounters an unrecoverable error.
@@ -1288,6 +1288,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     internal func matchmakerViewController(viewController: GKMatchmakerViewController!, didFailWithError error: NSError!) {
         viewController.dismissViewControllerAnimated(true, completion: nil)
         EasyGameCenter.debug("\n[Easy Game Center] Error finding match: \(error.localizedDescription)\n")
-        EasyGameCenter.delegate!.matchCancel?()
+        EasyGameCenter.delegate!.easyGameCenterMatchCancel?()
     }
 }

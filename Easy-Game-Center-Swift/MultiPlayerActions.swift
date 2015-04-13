@@ -51,7 +51,7 @@ class MultiPlayerActions: UIViewController {
     /**
     Match Start, Delegate Func of Easy Game Center
     */
-    func matchStarted() {
+    func easyGameCenterMatchStarted() {
         println("\n[MultiPlayerActions] MatchStarted")
         if let players = EasyGameCenter.getPlayerInMatch() {
             for player in players{
@@ -63,19 +63,19 @@ class MultiPlayerActions: UIViewController {
     /**
     Match End / Error (No NetWork example), Delegate Func of Easy Game Center
     */
-    func matchEnded() {
+    func easyGameCenterMatchEnded() {
         println("\n[MultiPlayerActions] MatchEnded")
     }
     /**
     Match Cancel, Delegate Func of Easy Game Center
     */
-    func matchCancel() {
+    func easyGameCenterMatchCancel() {
         println("\n[MultiPlayerActions] Match cancel")
     }
     /**
     Match Recept Data (When you send Data this function is call in the same time), Delegate Func of Easy Game Center
     */
-    func matchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
         
         // See Packet 
         let autre =  Packet.unarchive(data)
