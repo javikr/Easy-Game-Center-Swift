@@ -4,7 +4,7 @@
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-2.1-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-3.0-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
@@ -37,7 +37,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
 
-[![](https://img.shields.io/badge/Easy Game Center-2.1-D8B13C.svg)]()
+[![](https://img.shields.io/badge/Easy Game Center-3.0-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
@@ -401,6 +401,36 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
             println("\n[Easy Game Center] Rank :\(tupleIsOk.rank)\n")
         }
     }
+```
+#MultiPlayer
+###Protocol Easy Game Center
+* **Description :** You should add **EasyGameCenterDelegate** protocol if you want use delegate functions (**easyGameCenterMatchStarted,easyGameCenterMatchRecept,easyGameCenterMatchEnded,easyGameCenterMatchCancel**)
+* **Option :** It is optional (if you do not use the functions, do not add)
+```swift
+    class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
+```
+##Delegate function for listen MultiPlayer
+###Listener Player is authentified
+* **Description :** This function is call when player is authentified to Game Center
+* **Option :** It is optional 
+```swift
+    func easyGameCenterMatchStarted() {
+        println("\nPlayer Authentified\n")
+    }
+```
+##Find player By number of player
+**Find Player By min and max player**
+```swift
+    EasyGameCenter.findMatchWithMinPlayers(2, maxPlayers: 4)
+```
+##Send Data to all Player
+**Send Data to all Player (NSData)**
+```swift
+    // Example Struc
+    var myStruct = Packet(name: "My Data to Send !", index: 1234567890, numberOfPackets: 1)
+    
+    //Send Data
+    EasyGameCenter.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable): 4)
 ```
 #Other methods Game Center
 ##Player identified to Game Center
