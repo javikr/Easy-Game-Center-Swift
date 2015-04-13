@@ -366,7 +366,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```swift
     EasyGameCenter.getGKLeaderboard { 
         (resultArrayGKLeaderboard) -> Void in
-        if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard as [GKLeaderboard]? {
+        if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard {
             for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
                 println("\n[Easy Game Center] ID : \(oneGKLeaderboard.identifier)\n")
                 println("\n[Easy Game Center] Title :\(oneGKLeaderboard.title)\n")
