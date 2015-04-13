@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		88043F5C1ADAD36000156144 /* MutliPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88043F5B1ADAD36000156144 /* MutliPlayerActions.swift */; };
+		88043F5C1ADAD36000156144 /* MultiPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88043F5B1ADAD36000156144 /* MultiPlayerActions.swift */; };
 		8807C7221ABB8B5900D86D3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7211ABB8B5900D86D3B /* AppDelegate.swift */; };
 		8807C7241ABB8B5900D86D3B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7231ABB8B5900D86D3B /* MainViewController.swift */; };
 		8807C7271ABB8B5900D86D3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8807C7251ABB8B5900D86D3B /* Main.storyboard */; };
@@ -17,8 +17,9 @@
 		8807C7441ABB8B7500D86D3B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8807C7431ABB8B7500D86D3B /* LaunchScreen.xib */; };
 		8807C7461ABB8B9200D86D3B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */; };
 		8807C7481ABB8B9900D86D3B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7471ABB8B9900D86D3B /* GameKit.framework */; };
-		8807C74A1ABC2D6200D86D3B /* AchievementsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7491ABC2D6200D86D3B /* AchievementsActions.swift */; };
 		8815C1FD1ABC7F020054A2CF /* LeaderboardsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */; };
+		88FECF3C1ADC653E00664F9E /* AchievementsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF3B1ADC653E00664F9E /* AchievementsActions.swift */; };
+		88FECF411ADC65A200664F9E /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF401ADC65A200664F9E /* Packet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		88043F5B1ADAD36000156144 /* MutliPlayerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutliPlayerActions.swift; sourceTree = "<group>"; };
+		88043F5B1ADAD36000156144 /* MultiPlayerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPlayerActions.swift; sourceTree = "<group>"; };
 		8807C71C1ABB8B5900D86D3B /* Easy-Game-Center-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy-Game-Center-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8807C7201ABB8B5900D86D3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8807C7211ABB8B5900D86D3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,8 +47,9 @@
 		8807C7431ABB8B7500D86D3B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8807C7471ABB8B9900D86D3B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		8807C7491ABC2D6200D86D3B /* AchievementsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsActions.swift; sourceTree = "<group>"; };
 		8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardsActions.swift; sourceTree = "<group>"; };
+		88FECF3B1ADC653E00664F9E /* AchievementsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsActions.swift; sourceTree = "<group>"; };
+		88FECF401ADC65A200664F9E /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,15 +96,15 @@
 		8807C71E1ABB8B5900D86D3B /* Easy-Game-Center-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				8807C7211ABB8B5900D86D3B /* AppDelegate.swift */,
-				8807C7231ABB8B5900D86D3B /* MainViewController.swift */,
-				8807C7491ABC2D6200D86D3B /* AchievementsActions.swift */,
-				8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */,
+				88FECF3D1ADC654700664F9E /* AppDelegate */,
+				88FECF3E1ADC655300664F9E /* MainViewController */,
+				88FECF3A1ADC650500664F9E /* Achievements */,
+				88FECF3F1ADC657A00664F9E /* Leaderboards */,
+				88FECF391ADC64F100664F9E /* MultiPlayer */,
 				8807C7251ABB8B5900D86D3B /* Main.storyboard */,
 				8807C7281ABB8B5900D86D3B /* Images.xcassets */,
 				8807C7431ABB8B7500D86D3B /* LaunchScreen.xib */,
 				8807C71F1ABB8B5900D86D3B /* Supporting Files */,
-				88043F5B1ADAD36000156144 /* MutliPlayerActions.swift */,
 			);
 			path = "Easy-Game-Center-Swift";
 			sourceTree = "<group>";
@@ -130,6 +132,47 @@
 				8807C7361ABB8B5900D86D3B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		88FECF391ADC64F100664F9E /* MultiPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				88043F5B1ADAD36000156144 /* MultiPlayerActions.swift */,
+				88FECF401ADC65A200664F9E /* Packet.swift */,
+			);
+			name = MultiPlayer;
+			sourceTree = "<group>";
+		};
+		88FECF3A1ADC650500664F9E /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				88FECF3B1ADC653E00664F9E /* AchievementsActions.swift */,
+			);
+			name = Achievements;
+			sourceTree = "<group>";
+		};
+		88FECF3D1ADC654700664F9E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				8807C7211ABB8B5900D86D3B /* AppDelegate.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		88FECF3E1ADC655300664F9E /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8807C7231ABB8B5900D86D3B /* MainViewController.swift */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
+		88FECF3F1ADC657A00664F9E /* Leaderboards */ = {
+			isa = PBXGroup;
+			children = (
+				8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */,
+			);
+			name = Leaderboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,11 +277,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8807C7241ABB8B5900D86D3B /* MainViewController.swift in Sources */,
-				8807C74A1ABC2D6200D86D3B /* AchievementsActions.swift in Sources */,
 				8807C7221ABB8B5900D86D3B /* AppDelegate.swift in Sources */,
 				8815C1FD1ABC7F020054A2CF /* LeaderboardsActions.swift in Sources */,
+				88FECF3C1ADC653E00664F9E /* AchievementsActions.swift in Sources */,
+				88FECF411ADC65A200664F9E /* Packet.swift in Sources */,
 				8807C7421ABB8B7000D86D3B /* EasyGameCenter.swift in Sources */,
-				88043F5C1ADAD36000156144 /* MutliPlayerActions.swift in Sources */,
+				88043F5C1ADAD36000156144 /* MultiPlayerActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
