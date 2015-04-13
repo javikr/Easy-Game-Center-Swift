@@ -4,7 +4,7 @@
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-2.1-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track high scores, achievements. Easy Game Center falicite management of Game Center.  
 
@@ -18,16 +18,16 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 * Swift
 * Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.
-* GKachievements & GKachievementsDescription are save in cache and automatically refreshed
-* Delegate fucntion when player is connected or not etc...
-* Most of the functions callBack (Handler, completion)
-* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction)
-* Just drag and drop the files into your project (EasyGameCenter.swift)
-* Easy Game Center is asynchronous
-* Frequent updates to the project based on user issues and requests  
-* Example project
+* GKachievements & GKachievementsDescription are save in cache and automatically refreshed.
+* Delegate fucntion when player is connected or not.
+* Most of the functions callBack (Handler, completion).
+* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction).
+* Just drag and drop the files into your project (EasyGameCenter.swift).
+* Easy Game Center is asynchronous.
+* Frequent updates to the project based on user issues and requests.
+* Example project.
 * Easily contribute to the project :)
-* More is coming ... (Multiplayer etc..)
+* **Is coming Multiplayer !**
 
 ## Requirements
 [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
@@ -36,7 +36,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
 
-[![](https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg)]()
+[![](https://img.shields.io/badge/Easy Game Center-2.1-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
