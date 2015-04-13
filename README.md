@@ -438,7 +438,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         println("\n[MultiPlayerActions] MatchEnded")
     }
 ```
-###Listener When Match End
+###Listener When Match Cancel
 * **Description :** This function is call when the match is cancel by the local Player
 * **Option :** It is optional 
 ```swift
