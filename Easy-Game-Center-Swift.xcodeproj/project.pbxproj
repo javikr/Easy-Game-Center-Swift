@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88043F5C1ADAD36000156144 /* MutliPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88043F5B1ADAD36000156144 /* MutliPlayerActions.swift */; };
 		8807C7221ABB8B5900D86D3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7211ABB8B5900D86D3B /* AppDelegate.swift */; };
 		8807C7241ABB8B5900D86D3B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7231ABB8B5900D86D3B /* MainViewController.swift */; };
 		8807C7271ABB8B5900D86D3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8807C7251ABB8B5900D86D3B /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		88043F5B1ADAD36000156144 /* MutliPlayerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutliPlayerActions.swift; sourceTree = "<group>"; };
 		8807C71C1ABB8B5900D86D3B /* Easy-Game-Center-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy-Game-Center-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8807C7201ABB8B5900D86D3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8807C7211ABB8B5900D86D3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				8807C7281ABB8B5900D86D3B /* Images.xcassets */,
 				8807C7431ABB8B7500D86D3B /* LaunchScreen.xib */,
 				8807C71F1ABB8B5900D86D3B /* Supporting Files */,
+				88043F5B1ADAD36000156144 /* MutliPlayerActions.swift */,
 			);
 			path = "Easy-Game-Center-Swift";
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				8807C7221ABB8B5900D86D3B /* AppDelegate.swift in Sources */,
 				8815C1FD1ABC7F020054A2CF /* LeaderboardsActions.swift in Sources */,
 				8807C7421ABB8B7000D86D3B /* EasyGameCenter.swift in Sources */,
+				88043F5C1ADAD36000156144 /* MutliPlayerActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

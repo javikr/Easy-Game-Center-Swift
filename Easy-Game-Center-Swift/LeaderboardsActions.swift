@@ -56,7 +56,7 @@ class LeaderboardsActions: UIViewController {
         
         EasyGameCenter.getGKLeaderboard {
             (resultArrayGKLeaderboard) -> Void in
-            if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard as [GKLeaderboard]? {
+            if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard {
                 for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
                     
                     println("\n[LeaderboardsActions] Get Leaderboards (getGKLeaderboard)\n")
@@ -96,5 +96,10 @@ class LeaderboardsActions: UIViewController {
             }
         }
     }   
+    @IBAction func Test(sender: AnyObject) {
+        /*let instance = EasyGameCenter.sharedInstance(self)
+        
+        instance.findMatchWithMinPlayers(2, maxPlayers: 4)*/
+    }
 }
 
