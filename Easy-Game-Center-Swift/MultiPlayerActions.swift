@@ -58,7 +58,17 @@ class MultiPlayerActions: UIViewController {
                 println(player.alias)
             }
         }
-
+    }
+    /**
+    Match Recept Data (When you send Data this function is call in the same time), Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+        
+        // See Packet
+        let autre =  Packet.unarchive(data)
+        println("\n[MultiPlayerActions] Recept From player = \(playerID)")
+        println("\n[MultiPlayerActions] Recept Packet.name = \(autre.name)")
+        println("\n[MultiPlayerActions] Recept Packet.index = \(autre.index)")
     }
     /**
     Match End / Error (No NetWork example), Delegate Func of Easy Game Center
@@ -72,16 +82,6 @@ class MultiPlayerActions: UIViewController {
     func easyGameCenterMatchCancel() {
         println("\n[MultiPlayerActions] Match cancel")
     }
-    /**
-    Match Recept Data (When you send Data this function is call in the same time), Delegate Func of Easy Game Center
-    */
-    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
-        
-        // See Packet 
-        let autre =  Packet.unarchive(data)
-        println("\n[MultiPlayerActions] Recept From player = \(playerID)")
-        println("\n[MultiPlayerActions] Recept Packet.name = \(autre.name)")
-        println("\n[MultiPlayerActions] Recept Packet.index = \(autre.index)")
-    }
+
 }
 
