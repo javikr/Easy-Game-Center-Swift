@@ -17,9 +17,7 @@ class MultiPlayerActions: UIViewController {
     /*####################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let buttonBarOpenGameCenter :UIBarButtonItem =  UIBarButtonItem(title: "Game Center Leaderboards", style: .Bordered, target: self, action: "openGameCenterLeaderboard:")
-        self.navigationItem.rightBarButtonItem = buttonBarOpenGameCenter
+
         
     }
     
@@ -57,7 +55,6 @@ class MultiPlayerActions: UIViewController {
         if let match = EasyGameCenter.getMatch() {
             print(match)
         }
-        
     }
     @IBAction func ActionDisconnected(sender: AnyObject) {
         EasyGameCenter.disconnectMatch()
