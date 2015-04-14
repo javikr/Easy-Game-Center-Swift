@@ -76,6 +76,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         //Set New view controller delegate, that's when you change UIViewController
         EasyGameCenter.delegate = self
     }
+    /*####################################################################################################*/
+    /*                           Authentification Delegate Function                                       */
+    /*####################################################################################################*/
     /**
         Player conected to Game Center, Delegate Func of Easy Game Center
     */
@@ -94,6 +97,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     func easyGameCenterInCache() {
         println("\nGkAchievement & GKAchievementDescription in cache\n")
     }
+    /*####################################################################################################*/
+    /*                           MultiPlayer Delegate Function                                            */
+    /*####################################################################################################*/
     /**
         Match Start, Delegate Func of Easy Game Center
     */
