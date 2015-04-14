@@ -22,11 +22,11 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Manage **achievements**
 * Manages in **single line of code** most function of Game Center
 * GKachievements & GKachievementsDescription are save in cache and **automatically refreshed**
-* **Delegate function** when player is connected, not connected, multiplayer etc...
-* Most of the functions **callBack** (Handler, completion)
-* Useful methods and properties by use **Singleton** (EasyGameCenter.exampleFunction)
-* **Just drag and drop the files** into your project (EasyGameCenter.swift)
-* Easy Game Center is **asynchronous**
+* Delegate function when player is connected, not connected, multiplayer etc...
+* Most of the functions callBack (Handler, completion)
+* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction)
+* Just drag and drop the files into your project (EasyGameCenter.swift)
+* Easy Game Center is asynchronous
 * **Frequent updates** to the project based on user issues and requests.
 * **Example project**
 * Easily contribute to the project :)
