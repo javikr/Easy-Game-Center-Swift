@@ -448,12 +448,12 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```
 #MultiPlayer method
 ##Find player By number of player
-**Find Player By min and max player**
+* **Find Player By min and max player**
 ```swift
     EasyGameCenter.findMatchWithMinPlayers(2, maxPlayers: 4)
 ```
 ##Send Data to all Player
-**Send Data to all Player (NSData)**
+* **Send Data to all Player (NSData)**
 ```swift
     // Example Struc
     var myStruct = Packet(name: "My Data to Send !", index: 1234567890, numberOfPackets: 1)
@@ -462,7 +462,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     EasyGameCenter.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable): 4)
 ```
 ##Get Player in match
-**Get Player in match return Set**
+* **Get Player in match return Set**
 ```swift
     if let players = EasyGameCenter.getPlayerInMatch() {
         for player in players{
@@ -472,28 +472,28 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     
 ```
 ##Disconnect Match / Stop
-**Disconnect Match or Stop for send data to all player in match**
+* **Disconnect Match or Stop for send data to all player in match**
 ```swift
     EasyGameCenter.disconnectMatch()
 ```
 #Other methods Game Center
 ##Player identified to Game Center
-**Is player identified to gameCenter**
+* **Is player identified to gameCenter**
 ```swift
     if EasyGameCenter.isPlayerIdentifiedToGameCenter() { /* Player identified */ } 
 ```
 ##Get Local Player
-**Get local Player (GKLocalPlayer)**
+* **Get local Player (GKLocalPlayer)**
 ```swift
     let localPlayer = EasyGameCenter.getLocalPlayer()
 ```
 #NetWork
-**Is Connected to NetWork**
+* **Is Connected to NetWork**
 ```swift
     if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
 ```
 #Debug Mode
-**If you doesn't want see message of Easy Game Center**
+* **If you doesn't want see message of Easy Game Center**
 ```swift
     // If you doesn't want see message Easy Game Center, delete this ligne
     // EasyGameCenter.debugMode = true
