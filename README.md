@@ -469,7 +469,13 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
             println(player.alias)
         }
     }
-    
+```
+##Get match
+* **Get current match**
+```swift
+    if let match = EasyGameCenter.getMatch() {
+        print(match)
+    }
 ```
 ##Disconnect Match / Stop
 * **Disconnect Match or Stop for send data to all player in match**
