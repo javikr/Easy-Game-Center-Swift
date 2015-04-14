@@ -85,19 +85,19 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         Player conected to Game Center, Delegate Func of Easy Game Center
     */
     func easyGameCenterAuthentified() {
-        println("\nPlayer Authentified\n")
+        println("\n[AuthenticationActions] Player Authentified\n")
     }
     /**
         Player not connected to Game Center, Delegate Func of Easy Game Center
     */
     func easyGameCenterNotAuthentified() {
-        println("\nPlayer not authentified\n")
+        println("\n[AuthenticationActions] Player not authentified\n")
     }
     /**
         When GkAchievement & GKAchievementDescription in cache, Delegate Func of Easy Game Center
     */
     func easyGameCenterInCache() {
-        println("\nGkAchievement & GKAchievementDescription in cache\n")
+        println("\n[AuthenticationActions] GkAchievement & GKAchievementDescription in cache\n")
     }
     /*####################################################################################################*/
     /*                           MultiPlayer Delegate Function                                            */
