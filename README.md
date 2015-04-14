@@ -94,6 +94,30 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     func easyGameCenterInCache() {
         println("\nGkAchievement & GKAchievementDescription in cache\n")
     }
+    /**
+        Match Start, Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchStarted() {
+        println("\n[MultiPlayerActions] Match Started !")
+    }
+    /**
+        Match Recept Data, Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+        println("\n[MultiPlayerActions] Recept Data from Match !")
+    }
+    /**
+    Match End / Error (No NetWork example), Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchEnded() {
+        println("\n[MultiPlayerActions] Match Ended !")
+    }
+    /**
+    Match Cancel, Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchCancel() {
+        println("\n[MultiPlayerActions] Match cancel")
+    }
 }
 ```
 
