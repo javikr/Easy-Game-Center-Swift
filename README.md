@@ -17,16 +17,18 @@
 Easy Game Center is a great way to use Game Center in your iOS app.
 
 * Swift
-* **Multiplayer**
-* Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.
-* GKachievements & GKachievementsDescription are save in cache and automatically refreshed.
-* Delegate fucntion when player is connected or not.
-* Most of the functions callBack (Handler, completion).
-* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction).
-* Just drag and drop the files into your project (EasyGameCenter.swift).
-* Easy Game Center is asynchronous.
-* Frequent updates to the project based on user issues and requests.
-* Example project.
+* Manage **multiplayers**
+* Manage **leaderboards**
+* Manage **achievements**
+* Manages in **single line of code** most function of Game Center
+* GKachievements & GKachievementsDescription are save in cache and automatically refreshed
+* Delegate function when player is connected, not connected, multiplayer etc...
+* Most of the functions callBack (Handler, completion)
+* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction)
+* Just drag and drop the files into your project (EasyGameCenter.swift)
+* Easy Game Center is asynchronous
+* **Frequent updates** to the project based on user issues and requests.
+* **Example project**
 * Easily contribute to the project :)
 
 
@@ -76,23 +78,53 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         //Set New view controller delegate, that's when you change UIViewController
         EasyGameCenter.delegate = self
     }
+    /*####################################################################################################*/
+    /*                           Authentification Delegate Function                                       */
+    /*####################################################################################################*/
     /**
         Player conected to Game Center, Delegate Func of Easy Game Center
     */
     func easyGameCenterAuthentified() {
-        println("\nPlayer Authentified\n")
+        println("\n[AuthenticationActions] Player Authentified\n")
     }
     /**
         Player not connected to Game Center, Delegate Func of Easy Game Center
     */
     func easyGameCenterNotAuthentified() {
-        println("\nPlayer not authentified\n")
+        println("\n[AuthenticationActions] Player not authentified\n")
     }
     /**
         When GkAchievement & GKAchievementDescription in cache, Delegate Func of Easy Game Center
     */
     func easyGameCenterInCache() {
-        println("\nGkAchievement & GKAchievementDescription in cache\n")
+        println("\n[AuthenticationActions] GkAchievement & GKAchievementDescription in cache\n")
+    }
+    /*####################################################################################################*/
+    /*                           MultiPlayer Delegate Function                                            */
+    /*####################################################################################################*/
+    /**
+        Match Start, Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchStarted() {
+        println("\n[MultiPlayerActions] Match Started !")
+    }
+    /**
+        Match Recept Data, Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+        println("\n[MultiPlayerActions] Recept Data from Match !")
+    }
+    /**
+    Match End / Error (No NetWork example), Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchEnded() {
+        println("\n[MultiPlayerActions] Match Ended !")
+    }
+    /**
+    Match Cancel, Delegate Func of Easy Game Center
+    */
+    func easyGameCenterMatchCancel() {
+        println("\n[MultiPlayerActions] Match cancel")
     }
 }
 ```
@@ -469,7 +501,13 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
             println(player.alias)
         }
     }
-    
+```
+##Get match
+* **Get current match**
+```swift
+    if let match = EasyGameCenter.getMatch() {
+        print(match)
+    }
 ```
 ##Disconnect Match / Stop
 * **Disconnect Match or Stop for send data to all player in match**
