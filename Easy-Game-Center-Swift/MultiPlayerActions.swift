@@ -11,6 +11,7 @@ import GameKit
 
 class MultiPlayerActions: UIViewController {
     
+    @IBOutlet weak var TextLabel: UILabel!
     /*####################################################################################################*/
     /*                                          viewDidLoad                                               */
     /*####################################################################################################*/
@@ -45,6 +46,22 @@ class MultiPlayerActions: UIViewController {
         EasyGameCenter.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable)
 
     }
+    @IBAction func ActionGetPlayerInMatch(sender: AnyObject) {
+        if let setOfPlayer = EasyGameCenter.getPlayerInMatch() {
+            for player in setOfPlayer{
+                println(player.alias)
+            }
+        }
+    }
+    @IBAction func ActionGetMatch(sender: AnyObject) {
+        if let match = EasyGameCenter.getMatch() {
+            print(match)
+        }
+        
+    }
+    @IBAction func ActionDisconnected(sender: AnyObject) {
+        EasyGameCenter.disconnectMatch()
+    }
     /*####################################################################################################*/
     /*                         Delegate Mutliplayer Easy Game Center                                      */
     /*####################################################################################################*/
@@ -58,6 +75,7 @@ class MultiPlayerActions: UIViewController {
                 println(player.alias)
             }
         }
+        self.TextLabel.text = "Match Started !"
     }
     /**
     Match Recept Data (When you send Data this function is call in the same time), Delegate Func of Easy Game Center
@@ -69,12 +87,15 @@ class MultiPlayerActions: UIViewController {
         println("\n[MultiPlayerActions] Recept From player = \(playerID)")
         println("\n[MultiPlayerActions] Recept Packet.name = \(autre.name)")
         println("\n[MultiPlayerActions] Recept Packet.index = \(autre.index)")
+        
+        self.TextLabel.text = "Recept Date From \(playerID)"
     }
     /**
     Match End / Error (No NetWork example), Delegate Func of Easy Game Center
     */
     func easyGameCenterMatchEnded() {
         println("\n[MultiPlayerActions] MatchEnded")
+        self.TextLabel.text = "Match Ended !"
     }
     /**
     Match Cancel, Delegate Func of Easy Game Center
