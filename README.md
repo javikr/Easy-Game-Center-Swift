@@ -17,7 +17,7 @@
 Easy Game Center is a great way to use Game Center in your iOS app.
 
 * Swift
-* **Multiplayer**
+* Manage **Multiplayers**
 * Submit, Save, Retrieve any Game Center leaderboards, achievements in only one line of code.
 * GKachievements & GKachievementsDescription are save in cache and automatically refreshed.
 * Delegate fucntion when player is connected or not.
