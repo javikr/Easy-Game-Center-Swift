@@ -13,6 +13,9 @@
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
 </p>
 
+#Example Game with Easy Game Center
+Hipster Moustache : http://bit.ly/1zGJMNG
+
 # Project Features
 Easy Game Center is a great way to use Game Center in your iOS app.
 
