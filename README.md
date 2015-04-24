@@ -46,7 +46,8 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
-* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
+* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+[@YannickSteph](https://twitter.com/YannickSteph)
 
 # Documentation
 ## Setup
@@ -540,7 +541,11 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     // EasyGameCenter.debugMode = true
 ```
 ### Legacy support
-For support of iOS 7+ & iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+For support of iOS 7+ & iOS 8+ 
+
+[@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+
+[@YannickSteph](https://twitter.com/YannickSteph)
 
 Yannick Stephan works hard to have as high feature parity with **Easy Game Center** as possible. 
 
