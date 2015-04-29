@@ -436,8 +436,8 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         (tupleHighScore) -> Void in
         //(playerName:String, score:Int,rank:Int)?
         if let tupleIsOk = tupleHighScore {
-            println("\n[Easy Game Center] Leaderboard Identifier : \(tupleIsOk.playerName)\n")
-            println("\n[Easy Game Center] Date : \(tupleIsOk.score)\n")
+            println("\n[Easy Game Center] Player name : \(tupleIsOk.playerName)\n")
+            println("\n[Easy Game Center] Score : \(tupleIsOk.score)\n")
             println("\n[Easy Game Center] Rank :\(tupleIsOk.rank)\n")
         }
     }
