@@ -88,6 +88,8 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         static var GlobalBackgroundQueue: dispatch_queue_t {
             return dispatch_get_global_queue(Int(DISPATCH_QUEUE_PRIORITY_DEFAULT.value), 0)
         }
+        
+        static let DispathOut:dispatch_time_t = 10000000000
     }
     
     /// Delegate for Easy Game Center
@@ -148,19 +150,23 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         if Static.instance == nil {
             dispatch_once(&Static.onceToken) {
                 Static.instance = EasyGameCenter()
-                //Static.instance!.delegateGetSetVC = delegate
-                Static.instance!.loginPlayerToGameCenter()
             }
         }
         return Static.instance!
     }
+    
+
     /*####################################################################################################*/
     /*                                            private Start                                           */
     /*####################################################################################################*/
     /**
     Init
     */
-    override init() { super.init() }
+    override init() {
+        super.init()
+
+        self.loginPlayerToGameCenter()
+    }
     /**
     Load achievements in cache
     (Is call when you init EasyGameCenter, but if is fail example for cut connection, you can recall)
@@ -211,7 +217,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                     if  self.achievementsCache.count > 0 &&
                                         self.achievementsDescriptionCache.count > 0 &&
                                         self.achievementsCache.count == self.achievementsDescriptionCache.count {
-                                            EasyGameCenter.delegate!.easyGameCenterInCache?()
+                                            if let delegate = EasyGameCenter.delegate {
+                                                EasyGameCenter.delegate!.easyGameCenterInCache?()
+                                            } else {
+                                                EasyGameCenter.debug("\n[Easy Game Center] Delegate not set\n")
+                                            }
                                     } else {
                                         self.checkupNetAndPlayer()
                                     }
@@ -237,11 +247,12 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     
     */
     private func loginPlayerToGameCenter()  {
+        
+        
         if !loginIsLoading {
             self.loginIsLoading = true
             
             dispatch_async(DispatchHelper.GlobalBackgroundQueue) {
-                
                 
                 if self.delegateGetSetVC == nil {
                     DispatchHelper.GroupDispatch = dispatch_group_create()
@@ -254,12 +265,19 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     EasyGameCenter.sharedInstance().checkupNetAndPlayer()
                     
                     if let dispatchGroup = DispatchHelper.GroupDispatch {
-                        dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                        DispatchHelper.GroupDispatch = nil
+                        dispatch_group_wait(dispatchGroup, DispatchHelper.DispathOut)
+                        if EasyGameCenter.delegate == nil {
+                            EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                        } else {
+                            DispatchHelper.GroupDispatch = nil
+                        }
                     }
                     
-                    let delegate = EasyGameCenter.delegate
-                    delegate!.easyGameCenterNotAuthentified?()
+                    if let delegate = EasyGameCenter.delegate {
+                        delegate.easyGameCenterNotAuthentified?()
+                    } else {
+                        EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                    }
                     
                 } else {
                     if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
@@ -269,13 +287,19 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                         }
                         
                         if let dispatchGroup = DispatchHelper.GroupDispatch {
-                            dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                            DispatchHelper.GroupDispatch = nil
+                            dispatch_group_wait(dispatchGroup,DispatchHelper.DispathOut)
+                            if EasyGameCenter.delegate == nil {
+                                EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                            } else {
+                                DispatchHelper.GroupDispatch = nil
+                            }
                         }
-                        
-                        let delegate = EasyGameCenter.delegate
-                        delegate!.easyGameCenterAuthentified?()
-                        
+
+                        if let delegate = EasyGameCenter.delegate {
+                            delegate.easyGameCenterAuthentified?()
+                        } else {
+                            EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                        }
                     } else {
                         GKLocalPlayer.localPlayer().authenticateHandler = {
                             (var gameCenterVC:UIViewController!, var error:NSError!) -> Void in
@@ -284,33 +308,46 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                 EasyGameCenter.sharedInstance().checkupNetAndPlayer()
                                 
                                 if let dispatchGroup = DispatchHelper.GroupDispatch {
-                                    dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                    DispatchHelper.GroupDispatch = nil
+                                    dispatch_group_wait(dispatchGroup, DispatchHelper.DispathOut)
+                                    if EasyGameCenter.delegate == nil {
+                                        EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                    } else {
+                                        DispatchHelper.GroupDispatch = nil
+                                    }
                                 }
                                 
-                                let delegate = EasyGameCenter.delegate
-                                delegate!.easyGameCenterNotAuthentified?()
-                                
+                                if let delegate = EasyGameCenter.delegate {
+                                    delegate.easyGameCenterNotAuthentified?()
+                                } else {
+                                    EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                }
                                 /* Login to game center need Open page */
                             } else {
                                 if gameCenterVC != nil {
                                     
                                     if let dispatchGroup = DispatchHelper.GroupDispatch {
-                                        dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                        DispatchHelper.GroupDispatch = nil
+                                        dispatch_group_wait(dispatchGroup, DispatchHelper.DispathOut)
+                                        if EasyGameCenter.delegate == nil {
+                                            EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                        } else {
+                                            DispatchHelper.GroupDispatch = nil
+                                        }
                                     }
                                     
-                                    let delegate = EasyGameCenter.delegate
-                                    if let delegateController = delegate as? UIViewController {
+                                    if let delegateController = EasyGameCenter.delegate as? UIViewController {
                                         dispatch_async(dispatch_get_main_queue()) {
                                             delegateController.presentViewController(gameCenterVC!, animated: true, completion: nil)
                                         }
                                     } else {
                                         EasyGameCenter.sharedInstance().checkupNetAndPlayer()
                                         
-                                        let delegate = EasyGameCenter.delegate
-                                        delegate!.easyGameCenterNotAuthentified?()
-                                        EasyGameCenter.debug("\n[Easy Game Center] Delegate not set\n")
+                                        if let delegate = EasyGameCenter.delegate {
+                                            delegate.easyGameCenterNotAuthentified?()
+                                        } else {
+                                           EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                        }
+                                        
+                                        
                                     }
                                     
                                 } else if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
@@ -319,25 +356,38 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                     }
                                     
                                     if let dispatchGroup = DispatchHelper.GroupDispatch {
-                                        dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                        DispatchHelper.GroupDispatch = nil
+                                        dispatch_group_wait(dispatchGroup, DispatchHelper.DispathOut)
+                                        if EasyGameCenter.delegate == nil {
+                                            EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                        } else {
+                                            DispatchHelper.GroupDispatch = nil
+                                        }
+                                        
                                     }
                                     
-                                    let delegate = EasyGameCenter.delegate
-                                    delegate!.easyGameCenterAuthentified?()
-                                    
+                                    if let delegate = EasyGameCenter.delegate {
+                                        delegate.easyGameCenterAuthentified?()
+                                    } else {
+                                        EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                    }
                                     
                                 } else  {
                                     EasyGameCenter.sharedInstance().checkupNetAndPlayer()
                                     
                                     if let dispatchGroup = DispatchHelper.GroupDispatch {
-                                        dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                        DispatchHelper.GroupDispatch = nil
+                                        dispatch_group_wait(dispatchGroup, DispatchHelper.DispathOut)
+                                        if EasyGameCenter.delegate == nil {
+                                            EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                        } else {
+                                            DispatchHelper.GroupDispatch = nil
+                                        }
                                     }
                                     
-                                    let delegate = EasyGameCenter.delegate
-                                    delegate!.easyGameCenterNotAuthentified?()
-                                    
+                                    if let delegate = EasyGameCenter.delegate {
+                                        delegate.easyGameCenterNotAuthentified?()
+                                    } else {
+                                        EasyGameCenter.debug(DebugMessage.setTheDelegate)
+                                    }
                                 }
                             }
                         }
@@ -1329,6 +1379,9 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     /*####################################################################################################*/
     /*                                      Private Other Func                                            */
     /*####################################################################################################*/
+    private struct DebugMessage {
+        static let setTheDelegate = "\n[Easy Game Center] Delegate not set, please add in viewDidAppear 'EasyGameCenter.delegate = self)'\n"
+    }
     private class func debug(object: Any) {
         if EasyGameCenter.debugMode {
             dispatch_async(dispatch_get_main_queue()) {
