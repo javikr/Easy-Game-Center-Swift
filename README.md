@@ -1,5 +1,9 @@
 # Easy Game Center [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
+
+#### New version coming in one hour
+
+
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
@@ -12,6 +16,10 @@
         
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
 </p>
+
+####Example Game with Easy Game Center
+#####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
+#####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
 
 # Project Features
 Easy Game Center is a great way to use Game Center in your iOS app.
@@ -43,7 +51,12 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
-* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) :)
+* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+[@YannickSteph](https://twitter.com/YannickSteph)
+
+## Support
+* Contact for support [Issues](https://github.com/DaRkD0G/Easy-Game-Center-Swift/issues)
+* [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) // [@YannickSteph](https://twitter.com/YannickSteph)
 
 # Documentation
 ## Setup
@@ -428,8 +441,8 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         (tupleHighScore) -> Void in
         //(playerName:String, score:Int,rank:Int)?
         if let tupleIsOk = tupleHighScore {
-            println("\n[Easy Game Center] Leaderboard Identifier : \(tupleIsOk.playerName)\n")
-            println("\n[Easy Game Center] Date : \(tupleIsOk.score)\n")
+            println("\n[Easy Game Center] Player name : \(tupleIsOk.playerName)\n")
+            println("\n[Easy Game Center] Score : \(tupleIsOk.score)\n")
             println("\n[Easy Game Center] Rank :\(tupleIsOk.rank)\n")
         }
     }
@@ -537,7 +550,11 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     // EasyGameCenter.debugMode = true
 ```
 ### Legacy support
-For support of iOS 7+ & iOS 8+ [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+For support of iOS 7+ & iOS 8+ 
+
+[@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+
+[@YannickSteph](https://twitter.com/YannickSteph)
 
 Yannick Stephan works hard to have as high feature parity with **Easy Game Center** as possible. 
 
