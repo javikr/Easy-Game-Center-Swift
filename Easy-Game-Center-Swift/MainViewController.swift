@@ -17,6 +17,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var PlayerID: UILabel!
     @IBOutlet weak var PlayerAuthentified: UILabel!
+    @IBOutlet weak var PlayerProfil: UIImageView!
     
     /*####################################################################################################*/
     /*                       in ViewDidLoad, Set Delegate UIViewController                                */
@@ -25,13 +26,6 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         super.viewDidLoad()
         self.navigationItem.title = "Easy Game Center"
         
-        /**
-        Set Delegate UIViewController
-        */
-        EasyGameCenter.sharedInstance(self)
-        
-        /** If you want not message just delete this ligne **/
-        EasyGameCenter.debugMode = true
     }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/
@@ -59,12 +53,23 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     func easyGameCenterAuthentified() {
         
         println("\n[MainViewController] Player Authentified\n")
-
-        let localPlayer = EasyGameCenter.getLocalPlayer()
-        self.PlayerID.text = "Player ID : \(localPlayer.playerID)"
-        self.Name.text = "Name : \(localPlayer.alias)"
-        self.PlayerAuthentified.text = "Player Authentified : True"
         
+        EasyGameCenter.getlocalPlayerInformation {
+            (playerInformationTuple) -> () in
+            //playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)
+            
+            if let typleInformationPlayer = playerInformationTuple {
+                
+                self.PlayerID.text = "Player ID : \(typleInformationPlayer.playerID)"
+                self.Name.text = "Name : \(typleInformationPlayer.alias)"
+                self.PlayerAuthentified.text = "Player Authentified : True"
+                
+                if let haveProfilPhoto = typleInformationPlayer.profilPhoto {
+                    self.PlayerProfil.image = haveProfilPhoto
+                }
+                
+            }
+        }
     }
     /**
     Player not connected to Game Center, Delegate Func of Easy Game Center
@@ -78,7 +83,6 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     */
     func easyGameCenterInCache() {
         println("\n[MainViewController] GkAchievement & GKAchievementDescription in cache\n")
-        
     }
     /*####################################################################################################*/
     /*                                          Button                                                    */
@@ -101,7 +105,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         EasyGameCenter.showGameCenterChallenges {
             (result) -> Void in
             if result {
-               println("\n[MainViewController] Game Center Challenges Is show\n")
+                println("\n[MainViewController] Game Center Challenges Is show\n")
             }
             
         }
