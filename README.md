@@ -1,14 +1,13 @@
 # Easy Game Center [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 
-#### New version coming in one hour
-
+### PLEASE WAIT NEW Version is coming in one hour
 
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-3.1-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-3.5-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
