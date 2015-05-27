@@ -242,7 +242,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             
             dispatch_async(DispatchHelper.GlobalBackgroundQueue) {
                 
-                
                 if self.delegateGetSetVC == nil {
                     DispatchHelper.GroupDispatch = dispatch_group_create()
                 }
@@ -255,7 +254,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     
                     if let dispatchGroup = DispatchHelper.GroupDispatch {
                         dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                        DispatchHelper.GroupDispatch = nil
                     }
                     
                     let delegate = EasyGameCenter.delegate
@@ -270,7 +268,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                         
                         if let dispatchGroup = DispatchHelper.GroupDispatch {
                             dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                            DispatchHelper.GroupDispatch = nil
+
                         }
                         
                         let delegate = EasyGameCenter.delegate
@@ -285,7 +283,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                 
                                 if let dispatchGroup = DispatchHelper.GroupDispatch {
                                     dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                    DispatchHelper.GroupDispatch = nil
                                 }
                                 
                                 let delegate = EasyGameCenter.delegate
@@ -297,7 +294,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                     
                                     if let dispatchGroup = DispatchHelper.GroupDispatch {
                                         dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                        DispatchHelper.GroupDispatch = nil
                                     }
                                     
                                     let delegate = EasyGameCenter.delegate
@@ -320,7 +316,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                     
                                     if let dispatchGroup = DispatchHelper.GroupDispatch {
                                         dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                        DispatchHelper.GroupDispatch = nil
+                                       
                                     }
                                     
                                     let delegate = EasyGameCenter.delegate
@@ -332,7 +328,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                     
                                     if let dispatchGroup = DispatchHelper.GroupDispatch {
                                         dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER)
-                                        DispatchHelper.GroupDispatch = nil
+
                                     }
                                     
                                     let delegate = EasyGameCenter.delegate
