@@ -451,7 +451,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```
 #MultiPlayer
 <p align="center">
-        <img src="http://g.recordit.co/J4Uis8QV8h.gif" height="500" width="280" />
+        <img src="http://g.recordit.co/ApqB4QkOEv.gif" height="500" width="280" />
 </p>
 
 ###Protocol Easy Game Center
