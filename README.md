@@ -78,10 +78,10 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* Set Delegate UIViewController */
+        /*** Set Delegate UIViewController ***/
         EasyGameCenter.sharedInstance(self)
         
-        /** If you want not message just delete this ligne **/
+        /*** If you want not message just delete this ligne ***/
         EasyGameCenter.debugMode = true
     }
     /**
@@ -90,7 +90,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Set View Controller delegate, that's when you change UIViewController 
+        /*** Set View Controller delegate, that's when you change UIViewController ***/
         EasyGameCenter.delegate = self
     }
     /*####################################################################################################*/
@@ -539,6 +539,25 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 * **Get local Player (GKLocalPlayer)**
 ```swift
     let localPlayer = EasyGameCenter.getLocalPlayer()
+```
+##Get information on Local Player
+```swift
+    EasyGameCenter.getlocalPlayerInformation {
+        (playerInformationTuple) -> () in
+        //playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)
+            
+        if let typleInformationPlayer = playerInformationTuple {
+                
+            self.PlayerID.text = "Player ID : \(typleInformationPlayer.playerID)"
+            self.Name.text = "Name : \(typleInformationPlayer.alias)"
+            self.PlayerAuthentified.text = "Player Authentified : True"
+                
+            if let haveProfilPhoto = typleInformationPlayer.profilPhoto {
+                self.PlayerProfil.image = haveProfilPhoto
+            }
+                
+        }
+    }
 ```
 #NetWork
 * **Is Connected to NetWork**
