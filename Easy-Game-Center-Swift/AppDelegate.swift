@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
         Set Delegate UIViewController
         */
-       // EasyGameCenter.sharedInstance()
+        EasyGameCenter.sharedInstance()
         
         /** If you want not message just delete this ligne **/
         EasyGameCenter.debugMode = true
