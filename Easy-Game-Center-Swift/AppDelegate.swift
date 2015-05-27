@@ -14,6 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        /**
+        Set Delegate UIViewController
+        */
+       // EasyGameCenter.sharedInstance()
+        
+        /** If you want not message just delete this ligne **/
+        EasyGameCenter.debugMode = true
+        
         return true
     }
     
