@@ -10,6 +10,7 @@
 
 <p align="center">
         <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
+        
 </p>
 
 ####Example Game with Easy Game Center
@@ -449,6 +450,10 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
 ```
 #MultiPlayer
+<p align="center">
+        <img src="http://g.recordit.co/J4Uis8QV8h.gif" height="500" width="280" />
+</p>
+
 ###Protocol Easy Game Center
 * **Description :** You should add **EasyGameCenterDelegate** protocol if you want use delegate functions (**easyGameCenterMatchStarted,easyGameCenterMatchRecept,easyGameCenterMatchEnded,easyGameCenterMatchCancel**)
 * **Option :** It is optional (if you do not use the functions, do not add)
