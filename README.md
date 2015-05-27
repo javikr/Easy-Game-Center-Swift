@@ -9,8 +9,7 @@
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
 <p align="center">
-        
-        <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
+        <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
 </p>
 
 ####Example Game with Easy Game Center
@@ -290,6 +289,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
 ```
 #Achievements Methods
+<p align="center">
+        <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
+</p>
 ##Progress Achievements
 * **Add progress to an Achievement with show banner**
 * **Option :** Report achievement 
