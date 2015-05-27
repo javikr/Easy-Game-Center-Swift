@@ -69,16 +69,19 @@ Setting up Easy Game Center it's really easy. Read the instructions after.
 **2.** Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
 
 **3.** You can initialize Easy Game Center by using the following method call (This is an example, see doc)
-```swift
+```swift 
 // Add Protocol for delegate fonction "EasyGameCenterDelegate"
 class MainViewController: UIViewController,EasyGameCenterDelegate {
+    /**
+        This method is called after the view controller has loaded
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Init Easy Game Center
+        /* Set Delegate UIViewController */
         EasyGameCenter.sharedInstance(self)
         
-        // If you doesn't want see message Easy Game Center, delete this ligne
+        /** If you want not message just delete this ligne **/
         EasyGameCenter.debugMode = true
     }
     /**
@@ -87,7 +90,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Set New view controller delegate, that's when you change UIViewController
+        //Set View Controller delegate, that's when you change UIViewController 
         EasyGameCenter.delegate = self
     }
     /*####################################################################################################*/
