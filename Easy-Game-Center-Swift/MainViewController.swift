@@ -24,6 +24,12 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     /*####################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /* Set Delegate UIViewController */
+        EasyGameCenter.sharedInstance(self)
+        
+        /** If you want not message just delete this ligne **/
+        EasyGameCenter.debugMode = true
         self.navigationItem.title = "Easy Game Center"
         
     }

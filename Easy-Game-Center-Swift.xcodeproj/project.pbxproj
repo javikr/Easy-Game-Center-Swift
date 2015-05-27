@@ -18,6 +18,7 @@
 		8807C7461ABB8B9200D86D3B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */; };
 		8807C7481ABB8B9900D86D3B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7471ABB8B9900D86D3B /* GameKit.framework */; };
 		8815C1FD1ABC7F020054A2CF /* LeaderboardsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */; };
+		8899B0691B1682C600B90FA1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899B0681B1682C600B90FA1 /* File.swift */; };
 		88FECF3C1ADC653E00664F9E /* AchievementsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF3B1ADC653E00664F9E /* AchievementsActions.swift */; };
 		88FECF411ADC65A200664F9E /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF401ADC65A200664F9E /* Packet.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8807C7471ABB8B9900D86D3B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardsActions.swift; sourceTree = "<group>"; };
+		8899B0681B1682C600B90FA1 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		88FECF3B1ADC653E00664F9E /* AchievementsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsActions.swift; sourceTree = "<group>"; };
 		88FECF401ADC65A200664F9E /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +77,7 @@
 		8807C7131ABB8B5900D86D3B = {
 			isa = PBXGroup;
 			children = (
+				8899B0681B1682C600B90FA1 /* File.swift */,
 				8807C7471ABB8B9900D86D3B /* GameKit.framework */,
 				8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */,
 				8807C7411ABB8B7000D86D3B /* EasyGameCenter.swift */,
@@ -281,6 +284,7 @@
 				8815C1FD1ABC7F020054A2CF /* LeaderboardsActions.swift in Sources */,
 				88FECF3C1ADC653E00664F9E /* AchievementsActions.swift in Sources */,
 				88FECF411ADC65A200664F9E /* Packet.swift in Sources */,
+				8899B0691B1682C600B90FA1 /* File.swift in Sources */,
 				8807C7421ABB8B7000D86D3B /* EasyGameCenter.swift in Sources */,
 				88043F5C1ADAD36000156144 /* MultiPlayerActions.swift in Sources */,
 			);
