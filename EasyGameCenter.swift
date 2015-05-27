@@ -220,7 +220,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                             if let delegate = EasyGameCenter.delegate {
                                                 EasyGameCenter.delegate!.easyGameCenterInCache?()
                                             } else {
-                                                EasyGameCenter.debug("\n[Easy Game Center] Delegate not set\n")
+                                                EasyGameCenter.debug(DebugMessage.setTheDelegate)
                                             }
                                     } else {
                                         self.checkupNetAndPlayer()
