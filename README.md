@@ -16,6 +16,7 @@
 ####Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
 #####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
+#####Kicuby : https://goo.gl/BzNXBW By Kicody
 
 # Project Features
 Easy Game Center is a great way to use Game Center in your iOS app.
