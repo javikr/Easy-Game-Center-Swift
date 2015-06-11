@@ -3,7 +3,7 @@
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
-#[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Swift 2.0 : http://bit.ly/1QPd56Y
+#[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
 
 <p align="center">
         <img src="https://img.shields.io/badge/Easy Game Center-3.5-D8B13C.svg" />
