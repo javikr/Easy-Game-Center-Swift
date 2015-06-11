@@ -358,10 +358,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     
     - parameter completion: (Bool) if player login to Game Center
     
+    - TEST
     */
     private func loginPlayerToGameCenter()  {
         
-
+        
         
         let instanceEGC = EasyGameCenter.sharedInstance
         let delegate = EasyGameCenter.delegate
