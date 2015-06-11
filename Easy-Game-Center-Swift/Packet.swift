@@ -26,13 +26,13 @@ struct Packet {
     /**
     Archive Packet
     
-    :returns: NSData
+    - returns: NSData
     */
     func archive() -> NSData {
         
         var archivedPacket = ArchivedPacket(index: Int64(self.index), numberOfPackets: Int64(self.numberOfPackets), nameLength: Int64(self.name.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
         
-        var metadata = NSData(
+        let metadata = NSData(
             bytes: &archivedPacket,
             length: sizeof(ArchivedPacket)
         )
@@ -45,9 +45,9 @@ struct Packet {
     /**
     Unarchive Packet
     
-    :param: data NSData
+    - parameter data: NSData
     
-    :returns: Packet
+    - returns: Packet
     */
     static func unarchive(data: NSData!) -> Packet {
         var archivedPacket = ArchivedPacket(index: 0, numberOfPackets: 0, nameLength: 0) //, dataLength: 0

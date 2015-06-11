@@ -40,7 +40,7 @@ class LeaderboardsActions: UIViewController {
         EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "International_Classement", completion: {
             (result) -> Void in
             if result {
-                println("\n[LeaderboardsActions] You open Game Center Achievements")
+                print("\n[LeaderboardsActions] You open Game Center Achievements")
             }
         })
     }
@@ -48,7 +48,7 @@ class LeaderboardsActions: UIViewController {
     @IBAction func ActionReportScoreLeaderboard(sender: AnyObject) {
         
         EasyGameCenter.reportScoreLeaderboard(leaderboardIdentifier: "International_Classement", score: 100)
-        println("\n[LeaderboardsActions] Score send to Game Center \(EasyGameCenter.isPlayerIdentifiedToGameCenter())")
+        print("\n[LeaderboardsActions] Score send to Game Center \(EasyGameCenter.isPlayerIdentifiedToGameCenter())")
         
     }
     
@@ -59,10 +59,10 @@ class LeaderboardsActions: UIViewController {
             if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard {
                 for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
                     
-                    println("\n[LeaderboardsActions] Get Leaderboards (getGKLeaderboard)\n")
-                    println("ID : \(oneGKLeaderboard.identifier)\n")
-                    println("Title :\(oneGKLeaderboard.title)\n")
-                    println("Loading ? : \(oneGKLeaderboard.loading)\n")
+                    print("\n[LeaderboardsActions] Get Leaderboards (getGKLeaderboard)\n")
+                    print("ID : \(oneGKLeaderboard.identifier)\n")
+                    print("Title :\(oneGKLeaderboard.title)\n")
+                    print("Loading ? : \(oneGKLeaderboard.loading)\n")
                     
                 }
             }
@@ -75,11 +75,11 @@ class LeaderboardsActions: UIViewController {
             (resultGKScore) -> Void in
             if let resultGKScoreIsOK = resultGKScore as GKScore? {
                 
-                println("\n[LeaderboardsActions] Get GKScore Leaderboard (getGKScoreLeaderboard)\n")
-                println("Leaderboard Identifier : \(resultGKScoreIsOK.leaderboardIdentifier)\n")
-                println("Date : \(resultGKScoreIsOK.date)\n")
-                println("Rank :\(resultGKScoreIsOK.rank)\n")
-                println("Hight Score : \(resultGKScoreIsOK.value)\n")
+                print("\n[LeaderboardsActions] Get GKScore Leaderboard (getGKScoreLeaderboard)\n")
+                print("Leaderboard Identifier : \(resultGKScoreIsOK.leaderboardIdentifier)\n")
+                print("Date : \(resultGKScoreIsOK.date)\n")
+                print("Rank :\(resultGKScoreIsOK.rank)\n")
+                print("Hight Score : \(resultGKScoreIsOK.value)\n")
             }
         }
     }
@@ -89,10 +89,10 @@ class LeaderboardsActions: UIViewController {
             (tupleHighScore) -> Void in
             /// tupleHighScore = (playerName:String, score:Int,rank:Int)?
             if let tupleIsOk = tupleHighScore {
-                println("\n[LeaderboardsActions] Get Hight Score (getHighScore)\n")
-                println("Player Name : \(tupleIsOk.playerName)\n")
-                println("Score : \(tupleIsOk.score)\n")
-                println("Rank :\(tupleIsOk.rank)\n")
+                print("\n[LeaderboardsActions] Get Hight Score (getHighScore)\n")
+                print("Player Name : \(tupleIsOk.playerName)\n")
+                print("Score : \(tupleIsOk.score)\n")
+                print("Rank :\(tupleIsOk.rank)\n")
             }
         }
     }   

@@ -12,7 +12,7 @@ import UIKit
 /*####################################################################################################*/
 /*                              Add >>> EasyGameCenterDelegate <<< for delegate                       */
 /*####################################################################################################*/
-class MainViewController: UIViewController,EasyGameCenterDelegate {
+class MainViewController: UIViewController, EasyGameCenterDelegate {
     
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var PlayerID: UILabel!
@@ -58,7 +58,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     */
     func easyGameCenterAuthentified() {
         
-        println("\n[MainViewController] Player Authentified\n")
+        print("\n[MainViewController] Player Authentified\n")
         
         EasyGameCenter.getlocalPlayerInformation {
             (playerInformationTuple) -> () in
@@ -81,14 +81,14 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     Player not connected to Game Center, Delegate Func of Easy Game Center
     */
     func easyGameCenterNotAuthentified() {
-        println("\n[MainViewController] Player not authentified\n")
+        print("\n[MainViewController] Player not authentified\n")
         self.PlayerAuthentified.text = "Player Authentified : False"
     }
     /**
     When GkAchievement & GKAchievementDescription in cache, Delegate Func of Easy Game Center
     */
     func easyGameCenterInCache() {
-        println("\n[MainViewController] GkAchievement & GKAchievementDescription in cache\n")
+        print("\n[MainViewController] GkAchievement & GKAchievementDescription in cache\n")
     }
     /*####################################################################################################*/
     /*                                          Button                                                    */
@@ -96,7 +96,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     @IBAction func ShowGameCenterAchievements(sender: AnyObject) {
         EasyGameCenter.showGameCenterAchievements { (isShow) -> Void in
             if isShow {
-                println("\n[MainViewController] Game Center Achievements Is show\n")
+                print("\n[MainViewController] Game Center Achievements Is show\n")
             }
         }
         
@@ -104,14 +104,14 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     @IBAction func ShowGameCenterLeaderboards(sender: AnyObject) {
         
         EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "International_Classement") { (isShow) -> Void in
-            println("\n[MainViewController] Game Center Leaderboards Is show\n")
+            print("\n[MainViewController] Game Center Leaderboards Is show\n")
         }
     }
     @IBAction func ShowGameCenterChallenges(sender: AnyObject) {
         EasyGameCenter.showGameCenterChallenges {
             (result) -> Void in
             if result {
-                println("\n[MainViewController] Game Center Challenges Is show\n")
+                print("\n[MainViewController] Game Center Challenges Is show\n")
             }
             
         }
@@ -120,16 +120,16 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     @IBAction func ShowCustomBanner(sender: AnyObject) {
         
         EasyGameCenter.showCustomBanner(title: "Title", description: "My Description...") { () -> Void in
-            println("\n[MainViewController] Custom Banner is finish to Show\n")
+            print("\n[MainViewController] Custom Banner is finish to Show\n")
         }
     }
     @IBAction func ActionOpenDialog(sender: AnyObject) {
         EasyGameCenter.openDialogGameCenterAuthentication(title: "Open Game Center", message: "Open Game Center authentification ?", buttonOK: "No", buttonOpenGameCenterLogin: "Yes") {
             (openGameCenterAuthentification) -> Void in
             if openGameCenterAuthentification {
-                println("\n[MainViewController] Open Game Center Authentification\n")
+                print("\n[MainViewController] Open Game Center Authentification\n")
             } else {
-                println("\n[MainViewController] Not open Game Center Authentification\n")
+                print("\n[MainViewController] Not open Game Center Authentification\n")
             }
         }
     }

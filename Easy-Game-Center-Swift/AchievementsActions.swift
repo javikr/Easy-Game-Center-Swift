@@ -45,7 +45,7 @@ class AchievementsActions: UIViewController {
     /*####################################################################################################*/
     @IBAction func openGameCenterAchievement(sender: AnyObject) {
         EasyGameCenter.showGameCenterAchievements { (isShow) -> Void in
-            println("\n[AchievementsActions] You open Game Center Achievements\n")
+            print("\n[AchievementsActions] You open Game Center Achievements\n")
         }
     }
     
@@ -57,15 +57,15 @@ class AchievementsActions: UIViewController {
                 
                 let gkAchievementDescription = tupleInfoAchievement.gkAchievementDescription
                 let gkAchievement = tupleInfoAchievement.gkAchievement
-                println("\n[AchievementsActions] Achievement Description")
+                print("\n[AchievementsActions] Achievement Description")
                 // The title of the achievement.
-                println("Title : \(gkAchievementDescription.title)\n")
+                print("Title : \(gkAchievementDescription.title)\n")
                 // Whether or not the achievement should be listed or displayed if not yet unhidden by the game.
-                println("Hidden? : \(gkAchievement.identifier)\n")
+                print("Hidden? : \(gkAchievement.identifier)\n")
                 // The description for an unachieved achievement.
-                println("Achieved Description : \(gkAchievementDescription.achievedDescription)\n")
+                print("Achieved Description : \(gkAchievementDescription.achievedDescription)\n")
                 // The description for an achieved achievement.
-                println("Unachieved Description : \(gkAchievementDescription.unachievedDescription)\n")
+                print("Unachieved Description : \(gkAchievementDescription.unachievedDescription)\n")
             }
         }
     }
@@ -108,11 +108,11 @@ class AchievementsActions: UIViewController {
         
         if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
             for oneAchievement in achievements  {
-                println("\n[AchievementsActions] Achievement Completed And NotShowing \n")
-                println("\(oneAchievement.identifier)\n")
+                print("\n[AchievementsActions] Achievement Completed And NotShowing \n")
+                print("\(oneAchievement.identifier)\n")
             }
         } else {
-            println("\n[AchievementsActions] NO Achievement with not showing\n")
+            print("\n[AchievementsActions] NO Achievement with not showing\n")
         }
     }
     
@@ -126,16 +126,16 @@ class AchievementsActions: UIViewController {
             (arrayGKAD) -> Void in
             if let arrayAchievementDescription = arrayGKAD {
                 for achievement in arrayAchievementDescription {
-                    println("\n[AchievementsActions] Get All Achievements Description\n")
-                    println("ID : \(achievement.identifier)\n")
+                    print("\n[AchievementsActions] Get All Achievements Description\n")
+                    print("ID : \(achievement.identifier)\n")
                     // The title of the achievement.
-                    println("Title : \(achievement.title)\n")
+                    print("Title : \(achievement.title)\n")
                     // Whether or not the achievement should be listed or displayed if not yet unhidden by the game.
-                    println("Hidden? : \(achievement.hidden)\n")
+                    print("Hidden? : \(achievement.hidden)\n")
                     // The description for an unachieved achievement.
-                    println("Achieved Description : \(achievement.achievedDescription)\n")
+                    print("Achieved Description : \(achievement.achievedDescription)\n")
                     // The description for an achieved achievement.
-                    println("Unachieved Description : \(achievement.unachievedDescription)\n")
+                    print("Unachieved Description : \(achievement.unachievedDescription)\n")
                 }
             }
         }
