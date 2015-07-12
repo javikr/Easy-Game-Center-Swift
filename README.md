@@ -84,7 +84,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         /*** If you want not message just delete this ligne ***/
         EasyGameCenter.debugMode = true
         
-        /** Hidden automatique page for login to Game Center if player not login */
+        /** Hidden automatique page login of Game Center, if player not login */
         //EasyGameCenter.showLoginPage = false
     }
     /**
