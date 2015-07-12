@@ -3,10 +3,10 @@
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
-#[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
+
 
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-3.5-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
@@ -14,8 +14,9 @@
         <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
         
 </p>
+###[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
 
-####Example Game with Easy Game Center
+#Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
 #####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
 #####Kicuby : https://goo.gl/BzNXBW By Kicody
@@ -46,7 +47,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
 
-[![](https://img.shields.io/badge/Easy Game Center-3.1-D8B13C.svg)]()
+[![](https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
@@ -83,6 +84,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         
         /*** If you want not message just delete this ligne ***/
         EasyGameCenter.debugMode = true
+        
+        /** Hidden automatique page login of Game Center, if player not login */
+        //EasyGameCenter.showLoginPage = false
     }
     /**
         Notifies the view controller that its view was added
@@ -570,6 +574,11 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 * **Is Connected to NetWork**
 ```swift
     if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
+```
+#Hidden automatique login of Game Center
+* **Hidden automatique page for login to Game Center, if player not login**
+```swift
+    EasyGameCenter.showLoginPage = false
 ```
 #Debug Mode
 * **If you doesn't want see message of Easy Game Center**
