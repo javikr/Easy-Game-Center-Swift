@@ -574,6 +574,11 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```swift
     if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
 ```
+#Hidden automatique login of Game Center
+* **Hidden automatique page for login to Game Center, if player not login**
+```swift
+    EasyGameCenter.showLoginPage = false
+```
 #Debug Mode
 * **If you doesn't want see message of Easy Game Center**
 ```swift
