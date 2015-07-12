@@ -98,6 +98,18 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             EasyGameCenter.sharedInstance()!.debugModeGetSet = newValue
         }
     }
+    
+    
+    /// Disable automatique login page
+    private var showLoginPageGetSet:Bool = true
+    class var showLoginPage:Bool {
+        get {
+        return EasyGameCenter.sharedInstance()!.showLoginPageGetSet
+        }
+        set {
+            EasyGameCenter.sharedInstance()!.showLoginPageGetSet = newValue
+        }
+    }
     /*####################################################################################################*/
     /*                                    Singleton    Instance                                           */
     /*####################################################################################################*/
@@ -253,7 +265,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                                     
                                     /* Login to game center need Open page */
                                 } else {
-                                    if gameCenterVC != nil {
+                                    if gameCenterVC != nil && self.showLoginPageGetSet {
                                         if let delegateController = delegate as? UIViewController {
                                             dispatch_async(dispatch_get_main_queue()) {
                                                 delegateController.presentViewController(gameCenterVC!, animated: true, completion: nil)

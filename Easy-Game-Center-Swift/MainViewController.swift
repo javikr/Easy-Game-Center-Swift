@@ -32,6 +32,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         EasyGameCenter.debugMode = true
         self.navigationItem.title = "Easy Game Center"
         
+        /** Hidden automatique page for login to Game Center if player not login */
+        //EasyGameCenter.showLoginPage = false
+        
     }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/
