@@ -10,7 +10,7 @@
 //  Copyright (c) 2015 Red Wolf Studio & Yannick Stephan
 //  http://www.redwolfstudio.fr
 //  http://yannickstephan.com
-//  Version 3.1
+//  Version 3.6
 
 import Foundation
 import GameKit
