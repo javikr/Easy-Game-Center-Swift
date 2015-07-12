@@ -6,7 +6,7 @@
 #[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
 
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-3.5-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
@@ -83,6 +83,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         
         /*** If you want not message just delete this ligne ***/
         EasyGameCenter.debugMode = true
+        
+        /** Hidden automatique page for login to Game Center if player not login */
+        //EasyGameCenter.showLoginPage = false
     }
     /**
         Notifies the view controller that its view was added
