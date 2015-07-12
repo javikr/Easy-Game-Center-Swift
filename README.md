@@ -16,7 +16,7 @@
 </p>
 ###[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
 
-####Example Game with Easy Game Center
+#Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
 #####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
 #####Kicuby : https://goo.gl/BzNXBW By Kicody
