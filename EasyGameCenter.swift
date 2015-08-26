@@ -89,10 +89,10 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     private var showLoginPageGetSet:Bool = true
     class var showLoginPage:Bool {
         get {
-        return EasyGameCenter.sharedInstance()!.showLoginPageGetSet
+        return EasyGameCenter.sharedInstance.showLoginPageGetSet
         }
         set {
-            EasyGameCenter.sharedInstance()!.showLoginPageGetSet = newValue
+            EasyGameCenter.sharedInstance.showLoginPageGetSet = newValue
         }
     }
     /*####################################################################################################*/
@@ -722,8 +722,8 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     
     */
     class func reportScoreLeaderboard(leaderboardIdentifier leaderboardIdentifier:String, score: Int) {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+       // let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+       // dispatch_async(dispatch_get_global_queue(priority, 0)) {
             
             guard EasyGameCenter.isConnectedToNetwork() else {
                 EasyGameCenter.errorHandleur(ErrorEGC.NoConnection)
@@ -741,7 +741,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             gkScore.value = Int64(score)
             gkScore.shouldSetDefaultLeaderboard = true
             GKScore.reportScores([gkScore], withCompletionHandler: nil)
-        }
+       // }
     }
     /**
     Get High Score for leaderboard identifier
