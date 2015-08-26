@@ -83,6 +83,18 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             EasyGameCenter.sharedInstance.debugModeGetSet = newValue
         }
     }
+    
+    
+    /// Disable automatique login page
+    private var showLoginPageGetSet:Bool = true
+    class var showLoginPage:Bool {
+        get {
+        return EasyGameCenter.sharedInstance()!.showLoginPageGetSet
+        }
+        set {
+            EasyGameCenter.sharedInstance()!.showLoginPageGetSet = newValue
+        }
+    }
     /*####################################################################################################*/
     /*                                    Singleton    Instance                                           */
     /*####################################################################################################*/

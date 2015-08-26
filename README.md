@@ -1,24 +1,27 @@
-# Easy Game Center [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+# Easy Game Center  [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-9.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 
-### PLEASE WAIT NEW Version is coming in one hour
 
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
+
+
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-3.5-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
 <p align="center">
+        <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
         
-        <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
 </p>
+###[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
 
-####Example Game with Easy Game Center
+#Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
 #####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
+#####Kicuby : https://goo.gl/BzNXBW By Kicody
 
 # Project Features
 Easy Game Center is a great way to use Game Center in your iOS app.
@@ -46,7 +49,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
 
-[![](https://img.shields.io/badge/Easy Game Center-3.1-D8B13C.svg)]()
+[![](https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
@@ -78,11 +81,14 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* Set Delegate UIViewController */
+        /*** Set Delegate UIViewController ***/
         EasyGameCenter.sharedInstance(self)
         
-        /** If you want not message just delete this ligne **/
+        /*** If you want not message just delete this ligne ***/
         EasyGameCenter.debugMode = true
+        
+        /** Hidden automatique page login of Game Center, if player not login */
+        //EasyGameCenter.showLoginPage = false
     }
     /**
         Notifies the view controller that its view was added
@@ -90,7 +96,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Set View Controller delegate, that's when you change UIViewController 
+        /*** Set View Controller delegate, that's when you change UIViewController ***/
         EasyGameCenter.delegate = self
     }
     /*####################################################################################################*/
@@ -293,6 +299,9 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
 ```
 #Achievements Methods
+<p align="center">
+        <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
+</p>
 ##Progress Achievements
 * **Add progress to an Achievement with show banner**
 * **Option :** Report achievement 
@@ -450,6 +459,10 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
 ```
 #MultiPlayer
+<p align="center">
+        <img src="http://g.recordit.co/ApqB4QkOEv.gif" height="500" width="280" />
+</p>
+
 ###Protocol Easy Game Center
 * **Description :** You should add **EasyGameCenterDelegate** protocol if you want use delegate functions (**easyGameCenterMatchStarted,easyGameCenterMatchRecept,easyGameCenterMatchEnded,easyGameCenterMatchCancel**)
 * **Option :** It is optional (if you do not use the functions, do not add)
@@ -540,10 +553,34 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 ```swift
     let localPlayer = EasyGameCenter.getLocalPlayer()
 ```
+##Get information on Local Player
+```swift
+    EasyGameCenter.getlocalPlayerInformation {
+        (playerInformationTuple) -> () in
+        //playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)
+            
+        if let typleInformationPlayer = playerInformationTuple {
+                
+            self.PlayerID.text = "Player ID : \(typleInformationPlayer.playerID)"
+            self.Name.text = "Name : \(typleInformationPlayer.alias)"
+            self.PlayerAuthentified.text = "Player Authentified : True"
+                
+            if let haveProfilPhoto = typleInformationPlayer.profilPhoto {
+                self.PlayerProfil.image = haveProfilPhoto
+            }
+                
+        }
+    }
+```
 #NetWork
 * **Is Connected to NetWork**
 ```swift
     if EasyGameCenter.isConnectedToNetwork() { /* You have network */ } 
+```
+#Hidden automatique login of Game Center
+* **Hidden automatique page for login to Game Center, if player not login**
+```swift
+    EasyGameCenter.showLoginPage = false
 ```
 #Debug Mode
 * **If you doesn't want see message of Easy Game Center**
