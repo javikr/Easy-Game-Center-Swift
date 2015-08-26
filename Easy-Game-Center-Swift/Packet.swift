@@ -14,7 +14,7 @@ struct Packet {
     var name: String
     var index: Int64
     var numberOfPackets: Int64
-
+    
     /**
     *  Struc
     */

@@ -98,7 +98,7 @@ class AchievementsActions: UIViewController {
                 EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_Two", showBannnerIfCompleted: false)
                 AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Achievement is reported, but banner not show", uiViewController: self)
             }
-
+            
         } else {
             AppDelegate.simpleMessage(title: "report Achievements fail", message: "Player not login", uiViewController: self)
         }

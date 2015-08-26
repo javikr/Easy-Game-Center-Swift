@@ -4,13 +4,20 @@
 //  Created by Yannick Stephan DaRk-_-D0G on 19/12/2014.
 //  YannickStephan.com
 //
-//	iOS 7.0+ & iOS 8.0+
+//	iOS 7.0+ & iOS 8.0+ & iOS 9.0+
 //
 //  The MIT License (MIT)
 //  Copyright (c) 2015 Red Wolf Studio & Yannick Stephan
 //  http://www.redwolfstudio.fr
 //  http://yannickstephan.com
-//  Version 3.1
+//  Version 1.0 with Swift 2.0
+
+
+/**
+REMEMBER report plusieur score  pour plusieur leaderboard  en array
+
+
+*/
 import Foundation
 import GameKit
 import SystemConfiguration
@@ -76,17 +83,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
             EasyGameCenter.sharedInstance.debugModeGetSet = newValue
         }
     }
-    
-    /// Disable automatique login page
-    private var showLoginPageGetSet:Bool = true
-    class var showLoginPage:Bool {
-        get {
-        return EasyGameCenter.sharedInstance.showLoginPageGetSet
-        }
-        set {
-            EasyGameCenter.sharedInstance.showLoginPageGetSet = newValue
-        }
-    }
     /*####################################################################################################*/
     /*                                    Singleton    Instance                                           */
     /*####################################################################################################*/
@@ -110,18 +106,15 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         if Static.instance == nil {
             dispatch_once(&Static.onceToken) {
                 Static.instance = EasyGameCenter()
- 
                 if let delegateEGC = delegate  as? EasyGameCenterDelegate {
                     Static.delegate = delegateEGC
                 }
                 
-                dispatch_async(dispatch_get_main_queue()) { Static.instance!.loginPlayerToGameCenter() }
+                Static.instance!.loginPlayerToGameCenter()
             }
-            
         }
         return Static.instance!
     }
-
     /**
     ShareInstance Private
     
@@ -169,15 +162,18 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         
         set {
             
-
+            EasyGameCenter.debug("\n[Easy Game Center] Delegate UIViewController is \(_stdlib_getDemangledTypeName(newValue))\n")
             
             let delegateVC = EasyGameCenter.delegate
             
-            EasyGameCenter.debug("\n[Easy Game Center] Delegate UIViewController is \((delegateVC.description))\n")
+            
             if newValue != delegateVC {
                 if let delegateEGC = newValue  as? EasyGameCenterDelegate {
                     Static.delegate = delegateEGC
                 }
+                //   Static.delegate = newValue
+            } else {
+                EasyGameCenter.errorHandleur(ErrorEGC.NoUIViewController)
             }
         }
     }
@@ -188,7 +184,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     override init() {
         super.init()
     }
-    private enum ErrorEGC : ErrorType,CustomStringConvertible   {
+    private enum ErrorEGC : ErrorType {
         case CantCachingAds
         case CantCachingA
         case CantCachingNoA
@@ -205,20 +201,20 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         var description : String {
             switch self {
             case .CantLoadLeaderboards:
-                return "\n[Easy Game Center] Couldn't load Leaderboards\n"
+                return "[Easy Game Center] Couldn't load Leaderboards"
                 
             case CantCachingAds:
-                return "\n[Easy Game Center]CantCachingAds\n"
+                return "CantCachingAds"
             case CantCachingA:
-                return "\n[Easy Game Center]CantCachingA\n"
+                return "CantCachingA"
             case CantCachingNoA:
-                return "\n[Easy Game Center] Can't caching Achievement they are no create\n"
+                return "[Easy Game Center] Can't caching Achievement they are no create"
             case .CantCachingNoADes:
-                return "\n[Easy Game Center] Can't caching GKAchievement Description no Achievement are no create\n"
+                return "[Easy Game Center] Can't caching GKAchievement Description no Achievement are no create"
             case NoConnection:
-                return "\n[Easy Game Center] No connexion\n"
+                return "[Easy Game Center] No connexion"
             case .NoLogin:
-                return "\n[Easy Game Center] No login\n"
+                return "[Easy Game Center] No login"
             case NoDelegate :
                 return "\n[Easy Game Center] Error delegate UIViewController not set\n"
             case .NoUIViewController:
@@ -239,8 +235,8 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         
         defer {
             if instanceEGC.achievementsCache.count > 0 && instanceEGC.achievementsDescriptionCache.count > 0 {
-                Static.delegate!.easyGameCenterInCache?()
-                instanceEGC.inCacheIsLoading = false
+            Static.delegate!.easyGameCenterInCache?()
+            instanceEGC.inCacheIsLoading = false
             }
         }
         
@@ -371,19 +367,17 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         let instanceEGC = EasyGameCenter.sharedInstance
         let delegate = EasyGameCenter.delegate
         
-        
         /**
         Send Authentified
         */
         func authentified() {
             self.loginIsLoading = false
-            Static.delegate!.easyGameCenterAuthentified?()
-            dispatch_async(dispatch_get_main_queue()) { instanceEGC.cachingAchievements() }
+            dispatch_async(dispatch_get_main_queue()) {
+                Static.delegate!.easyGameCenterAuthentified?()
+                instanceEGC.cachingAchievements()
+            }
             return
         }
-        
-        if instanceEGC.loginIsLoading { return }
-        
         
         guard EasyGameCenter.isConnectedToNetwork() else {
             EasyGameCenter.errorHandleur(ErrorEGC.NoConnection)
@@ -399,7 +393,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         
         if !loginIsLoading {
             self.loginIsLoading = true
-            dispatch_async(dispatch_get_main_queue()) {
+            
             GKLocalPlayer.localPlayer().authenticateHandler = {
                 (gameCenterVC:UIViewController?, error:NSError?) -> Void in
                 /* If got error / Or player not set value for login */
@@ -409,7 +403,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     
                     /* Login to game center need Open page */
                 } else {
-                    if gameCenterVC != nil && self.showLoginPageGetSet {
+                    if gameCenterVC != nil {
                         dispatch_async(dispatch_get_main_queue()) {
                             (delegate as UIViewController).presentViewController(gameCenterVC!, animated: true, completion: nil)
                         }
@@ -421,7 +415,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                         EasyGameCenter.errorHandleur(ErrorEGC.NoLogin)
                     }
                 }
-            }
             }
         }
     }
@@ -1431,7 +1424,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         }
         
         var flags : SCNetworkReachabilityFlags = []
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == 0 {
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == false {
             return false
         }
         

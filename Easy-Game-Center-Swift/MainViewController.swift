@@ -35,6 +35,7 @@ class MainViewController: UIViewController, EasyGameCenterDelegate {
         /** Hidden automatique page for login to Game Center if player not login */
         //EasyGameCenter.showLoginPage = false
         
+        
     }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/

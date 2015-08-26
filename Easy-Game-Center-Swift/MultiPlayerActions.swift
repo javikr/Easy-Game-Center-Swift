@@ -17,7 +17,7 @@ class MultiPlayerActions: UIViewController {
     /*####################################################################################################*/
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
     }
     
@@ -37,12 +37,12 @@ class MultiPlayerActions: UIViewController {
     @IBAction func ActionFindPlayer(sender: AnyObject) {
         EasyGameCenter.findMatchWithMinPlayers(2, maxPlayers: 4)
     }
-
+    
     @IBAction func ActionSendData(sender: AnyObject) {
         
         let myStruct = Packet(name: "My Data to Send !", index: 1234567890, numberOfPackets: 1)
         EasyGameCenter.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable)
-
+        
     }
     @IBAction func ActionGetPlayerInMatch(sender: AnyObject) {
         if let setOfPlayer = EasyGameCenter.getPlayerInMatch() {
@@ -53,7 +53,7 @@ class MultiPlayerActions: UIViewController {
     }
     @IBAction func ActionGetMatch(sender: AnyObject) {
         if let match = EasyGameCenter.getMatch() {
-            print(match, appendNewline: false)
+            print(match, terminator: "")
         }
     }
     @IBAction func ActionDisconnected(sender: AnyObject) {
@@ -100,6 +100,6 @@ class MultiPlayerActions: UIViewController {
     func easyGameCenterMatchCancel() {
         print("\n[MultiPlayerActions] Match cancel")
     }
-
+    
 }
 

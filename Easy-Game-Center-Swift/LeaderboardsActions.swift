@@ -10,7 +10,7 @@ import UIKit
 import GameKit
 
 class LeaderboardsActions: UIViewController {
-
+    
     /*####################################################################################################*/
     /*                                          viewDidLoad                                               */
     /*####################################################################################################*/
@@ -19,7 +19,7 @@ class LeaderboardsActions: UIViewController {
         
         let buttonBarOpenGameCenter :UIBarButtonItem =  UIBarButtonItem(title: "Game Center Leaderboards", style: .Bordered, target: self, action: "openGameCenterLeaderboard:")
         self.navigationItem.rightBarButtonItem = buttonBarOpenGameCenter
-
+        
     }
     
     /*####################################################################################################*/
@@ -95,7 +95,7 @@ class LeaderboardsActions: UIViewController {
                 print("Rank :\(tupleIsOk.rank)\n")
             }
         }
-    }   
+    }
     @IBAction func Test(sender: AnyObject) {
         /*let instance = EasyGameCenter.sharedInstance(self)
         
