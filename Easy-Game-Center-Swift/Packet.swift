@@ -5,6 +5,7 @@
 //  Created by DaRk-_-D0G on 13/04/2015.
 //  Copyright (c) 2015 DaRk-_-D0G. All rights reserved.
 //
+//  Prepare Swift 2.0
 
 import Foundation
 /**
