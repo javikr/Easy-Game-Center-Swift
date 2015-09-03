@@ -11,7 +11,7 @@
 //  http://www.redwolfstudio.fr
 //  http://yannickstephan.com
 //  Version 3.6
-//  Prepare Swift 2.0
+//  => Swift 1.2
 
 import Foundation
 import GameKit

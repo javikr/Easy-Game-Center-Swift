@@ -5,7 +5,6 @@
 //  Created by DaRk-_-D0G on 19/03/2558 E.B..
 //  Copyright (c) 2558 ère b. DaRk-_-D0G. All rights reserved.
 //
-//  Prepare Swift 2.0
 
 import UIKit
 
