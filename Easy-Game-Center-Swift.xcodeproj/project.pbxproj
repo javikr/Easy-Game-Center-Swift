@@ -17,7 +17,7 @@
 		8807C7461ABB8B9200D86D3B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */; };
 		8807C7481ABB8B9900D86D3B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7471ABB8B9900D86D3B /* GameKit.framework */; };
 		8815C1FD1ABC7F020054A2CF /* LeaderboardsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8815C1FC1ABC7F020054A2CF /* LeaderboardsActions.swift */; };
-		8846414B1B8DCA3E003FA41F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8846414A1B8DCA3E003FA41F /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		8846414B1B8DCA3E003FA41F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8846414A1B8DCA3E003FA41F /* Main.storyboard */; };
 		88FECF3C1ADC653E00664F9E /* AchievementsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF3B1ADC653E00664F9E /* AchievementsActions.swift */; };
 		88FECF411ADC65A200664F9E /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF401ADC65A200664F9E /* Packet.swift */; };
 /* End PBXBuildFile section */
