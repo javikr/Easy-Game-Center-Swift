@@ -1,4 +1,4 @@
-# Easy Game Center  [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-9.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+# Easy Game Center  [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 
 
@@ -11,12 +11,13 @@
         <img src="https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
+###[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
+
 
 <p align="center">
         <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
         
 </p>
-###[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
 
 #Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
