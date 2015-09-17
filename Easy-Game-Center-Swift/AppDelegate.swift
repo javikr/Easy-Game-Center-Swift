@@ -43,13 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     :param: message          Message
     :param: uiViewController UIViewController
     */
-    class func simpleMessage(#title:String, message:String, uiViewController:UIViewController) {
-        if ( objc_getClass("UIAlertController") != nil ) {
-            var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    class func simpleMessage(title title:String, message:String, uiViewController:UIViewController) {
+         if #available(iOS 8.0, *) {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             uiViewController.presentViewController(alert, animated: true, completion: nil)
         } else {
-            var alert: UIAlertView = UIAlertView()
+            let alert: UIAlertView = UIAlertView()
             alert.delegate = self
             alert.title = title
             alert.message = message
