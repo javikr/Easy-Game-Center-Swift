@@ -128,14 +128,11 @@ class MainViewController: UIViewController, EasyGameCenterDelegate {
         }
     }
     @IBAction func ActionOpenDialog(sender: AnyObject) {
-        EasyGameCenter.openDialogGameCenterAuthentication(title: "Open Game Center", message: "Open Game Center authentification ?", buttonOK: "No", buttonOpenGameCenterLogin: "Yes") {
-            (openGameCenterAuthentification) -> Void in
-            if openGameCenterAuthentification {
-                print("\n[MainViewController] Open Game Center Authentification\n")
-            } else {
-                print("\n[MainViewController] Not open Game Center Authentification\n")
-            }
-        }
+        EasyGameCenter.showGameCenterAuthentication({
+            (resultOpenGameCenter) -> Void in
+            
+            print("\n[MainViewController] Show Game Center\n")
+        })
     }
 }
 

@@ -77,6 +77,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     private var debugModeGetSet:Bool = false
     class var debugMode:Bool {
         get {
+        
         return EasyGameCenter.sharedInstance.debugModeGetSet
         }
         set {
