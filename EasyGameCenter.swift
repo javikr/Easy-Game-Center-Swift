@@ -10,7 +10,7 @@
 //  Copyright (c) 2015 Red Wolf Studio & Yannick Stephan
 //  http://www.redwolfstudio.fr
 //  http://yannickstephan.com
-//  Version 3.1 for Swift 2.0
+//  Version 1.0 for Swift 2.0
 
 
 /**
