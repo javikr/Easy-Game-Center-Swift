@@ -46,7 +46,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
 
-[![](https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg)]()
+[![](https://img.shields.io/badge/Easy Game Center-1.0-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
