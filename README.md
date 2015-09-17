@@ -1,22 +1,18 @@
-# Easy Game Center  [![](http://img.shields.io/badge/Swift-1.2-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+# Easy Game Center  [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 
-#in progress for updating for swift 2.0 please wait...
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
 </p>
 
 
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-3.6-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-1.0-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
-###[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() Easy Game Center for Swift 2.0 : http://bit.ly/1MMDe5Q
-
 
 <p align="center">
         <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
-        
 </p>
 
 #Example Game with Easy Game Center
@@ -44,7 +40,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 
 ## Requirements
-[![](http://img.shields.io/badge/Swift-1.2-blue.svg)]()
+[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]()
 
 [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() 
 
