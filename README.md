@@ -7,7 +7,7 @@
 
 
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-1.0-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-1.01-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
@@ -46,7 +46,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
 
-[![](https://img.shields.io/badge/Easy Game Center-1.0-D8B13C.svg)]()
+[![](https://img.shields.io/badge/Easy Game Center-1.01-D8B13C.svg)]()
 
 ## Contributions & Share
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
