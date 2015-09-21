@@ -11,7 +11,6 @@
 		8807C7221ABB8B5900D86D3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7211ABB8B5900D86D3B /* AppDelegate.swift */; };
 		8807C7241ABB8B5900D86D3B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7231ABB8B5900D86D3B /* MainViewController.swift */; };
 		8807C7291ABB8B5900D86D3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8807C7281ABB8B5900D86D3B /* Images.xcassets */; };
-		8807C7381ABB8B5900D86D3B /* Easy_Game_Center_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7371ABB8B5900D86D3B /* Easy_Game_Center_SwiftTests.swift */; };
 		8807C7421ABB8B7000D86D3B /* EasyGameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8807C7411ABB8B7000D86D3B /* EasyGameCenter.swift */; };
 		8807C7441ABB8B7500D86D3B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8807C7431ABB8B7500D86D3B /* LaunchScreen.xib */; };
 		8807C7461ABB8B9200D86D3B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */; };
@@ -22,16 +21,6 @@
 		88FECF411ADC65A200664F9E /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FECF401ADC65A200664F9E /* Packet.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8807C7321ABB8B5900D86D3B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8807C7141ABB8B5900D86D3B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8807C71B1ABB8B5900D86D3B;
-			remoteInfo = "Easy-Game-Center-Swift";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		88043F5B1ADAD36000156144 /* MultiPlayerActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPlayerActions.swift; sourceTree = "<group>"; };
 		8807C71C1ABB8B5900D86D3B /* Easy-Game-Center-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy-Game-Center-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,9 +28,6 @@
 		8807C7211ABB8B5900D86D3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8807C7231ABB8B5900D86D3B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8807C7281ABB8B5900D86D3B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8807C7311ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy-Game-Center-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8807C7361ABB8B5900D86D3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8807C7371ABB8B5900D86D3B /* Easy_Game_Center_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easy_Game_Center_SwiftTests.swift; sourceTree = "<group>"; };
 		8807C7411ABB8B7000D86D3B /* EasyGameCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyGameCenter.swift; sourceTree = "<group>"; };
 		8807C7431ABB8B7500D86D3B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -62,13 +48,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8807C72E1ABB8B5900D86D3B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -79,7 +58,6 @@
 				8807C7451ABB8B9200D86D3B /* SystemConfiguration.framework */,
 				8807C7411ABB8B7000D86D3B /* EasyGameCenter.swift */,
 				8807C71E1ABB8B5900D86D3B /* Easy-Game-Center-Swift */,
-				8807C7341ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests */,
 				8807C71D1ABB8B5900D86D3B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				8807C71C1ABB8B5900D86D3B /* Easy-Game-Center-Swift.app */,
-				8807C7311ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,23 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				8807C7201ABB8B5900D86D3B /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8807C7341ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests */ = {
-			isa = PBXGroup;
-			children = (
-				8807C7371ABB8B5900D86D3B /* Easy_Game_Center_SwiftTests.swift */,
-				8807C7351ABB8B5900D86D3B /* Supporting Files */,
-			);
-			path = "Easy-Game-Center-SwiftTests";
-			sourceTree = "<group>";
-		};
-		8807C7351ABB8B5900D86D3B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8807C7361ABB8B5900D86D3B /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -195,24 +155,6 @@
 			productReference = 8807C71C1ABB8B5900D86D3B /* Easy-Game-Center-Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8807C7301ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8807C73E1ABB8B5900D86D3B /* Build configuration list for PBXNativeTarget "Easy-Game-Center-SwiftTests" */;
-			buildPhases = (
-				8807C72D1ABB8B5900D86D3B /* Sources */,
-				8807C72E1ABB8B5900D86D3B /* Frameworks */,
-				8807C72F1ABB8B5900D86D3B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8807C7331ABB8B5900D86D3B /* PBXTargetDependency */,
-			);
-			name = "Easy-Game-Center-SwiftTests";
-			productName = "Easy-Game-Center-SwiftTests";
-			productReference = 8807C7311ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -226,10 +168,6 @@
 					8807C71B1ABB8B5900D86D3B = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 35AB7NVN6H;
-					};
-					8807C7301ABB8B5900D86D3B = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 8807C71B1ABB8B5900D86D3B;
 					};
 				};
 			};
@@ -247,7 +185,6 @@
 			projectRoot = "";
 			targets = (
 				8807C71B1ABB8B5900D86D3B /* Easy-Game-Center-Swift */,
-				8807C7301ABB8B5900D86D3B /* Easy-Game-Center-SwiftTests */,
 			);
 		};
 /* End PBXProject section */
@@ -260,13 +197,6 @@
 				8846414B1B8DCA3E003FA41F /* Main.storyboard in Resources */,
 				8807C7441ABB8B7500D86D3B /* LaunchScreen.xib in Resources */,
 				8807C7291ABB8B5900D86D3B /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8807C72F1ABB8B5900D86D3B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,23 +217,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8807C72D1ABB8B5900D86D3B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8807C7381ABB8B5900D86D3B /* Easy_Game_Center_SwiftTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8807C7331ABB8B5900D86D3B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8807C71B1ABB8B5900D86D3B /* Easy-Game-Center-Swift */;
-			targetProxy = 8807C7321ABB8B5900D86D3B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8807C7391ABB8B5900D86D3B /* Debug */ = {
@@ -414,42 +328,6 @@
 			};
 			name = Release;
 		};
-		8807C73F1ABB8B5900D86D3B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Easy-Game-Center-SwiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "RedWolfStudio.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Easy-Game-Center-Swift.app/Easy-Game-Center-Swift";
-			};
-			name = Debug;
-		};
-		8807C7401ABB8B5900D86D3B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Easy-Game-Center-SwiftTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "RedWolfStudio.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Easy-Game-Center-Swift.app/Easy-Game-Center-Swift";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -467,15 +345,6 @@
 			buildConfigurations = (
 				8807C73C1ABB8B5900D86D3B /* Debug */,
 				8807C73D1ABB8B5900D86D3B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8807C73E1ABB8B5900D86D3B /* Build configuration list for PBXNativeTarget "Easy-Game-Center-SwiftTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8807C73F1ABB8B5900D86D3B /* Debug */,
-				8807C7401ABB8B5900D86D3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
