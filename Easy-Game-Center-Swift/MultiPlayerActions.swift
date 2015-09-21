@@ -9,7 +9,7 @@
 import UIKit
 import GameKit
 
-class MultiPlayerActions: UIViewController {
+class MultiPlayerActions: UIViewController,EasyGameCenterDelegate {
     
     @IBOutlet weak var TextLabel: UILabel!
     /*####################################################################################################*/

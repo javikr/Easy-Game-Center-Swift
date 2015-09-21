@@ -10,9 +10,10 @@ import UIKit
 
 
 /*####################################################################################################*/
-/*                              Add >>> EasyGameCenterDelegate <<< for delegate                       */
+/*              for have delegate func Add >>> EasyGameCenterDelegate <<< for delegate                */
+/*                       If you not use do not add                                                    */
 /*####################################################################################################*/
-class MainViewController: UIViewController, EasyGameCenterDelegate {
+class MainViewController: UIViewController, EasyGameCenterDelegate  {
     
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var PlayerID: UILabel!
