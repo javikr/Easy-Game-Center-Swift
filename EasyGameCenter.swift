@@ -10,7 +10,7 @@
 //  Copyright (c) 2015 Red Wolf Studio & Yannick Stephan
 //  http://www.redwolfstudio.fr
 //  http://yannickstephan.com
-//  Version 1.0 for Swift 2.0
+//  Version 1.01 for Swift 2.0
 
 
 /**
@@ -173,9 +173,9 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     Static.delegate = delegateEGC
                 }
                 //   Static.delegate = newValue
-            } else {
+            } /*else {
                 EasyGameCenter.errorHandleur(ErrorEGC.NoUIViewController)
-            }
+            }*/
         }
     }
     
@@ -232,13 +232,15 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     private static func completionCachingAchievements(achievementsType :[AnyObject]?) {
         // if let allAchievementHave = achievementsType {
         
+
         let instanceEGC = EasyGameCenter.sharedInstance
         
-        defer {
+        func finish() {
             if instanceEGC.achievementsCache.count > 0 && instanceEGC.achievementsDescriptionCache.count > 0 {
-            Static.delegate!.easyGameCenterInCache?()
-            instanceEGC.inCacheIsLoading = false
+                Static.delegate!.easyGameCenterInCache?()
+                
             }
+            instanceEGC.inCacheIsLoading = false
         }
         
         // Type GKAchievement
@@ -248,16 +250,18 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
               
                 for anAchievement in arrayGKAchievement where  anAchievement.identifier != nil {
                     
-                    if instanceEGC.achievementsCache.indexForKey(anAchievement.identifier!) == nil {
+                    //if instanceEGC.achievementsCache.indexForKey(anAchievement.identifier!) != nil {
                        instanceEGC.achievementsCache[anAchievement.identifier!] = anAchievement
-                    }
+                    //}
                     
                 }
+                
             } else {
                 /* Error */
                 EasyGameCenter.errorHandleur(ErrorEGC.CantCachingNoA)
             }
             
+            finish()
             // Type GKAchievementDescription
         } else if achievementsType is [GKAchievementDescription] {
             if let arrayGKAchievementDes = achievementsType as? [GKAchievementDescription] where arrayGKAchievementDes.count > 0 {
@@ -266,10 +270,26 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     
                   
                     if instanceEGC.achievementsCache.indexForKey(anAchievementDes.identifier!) == nil {
+                        // Load GKAchievement
                         instanceEGC.achievementsCache[anAchievementDes.identifier!] = GKAchievement(identifier: anAchievementDes.identifier!)
+
                     }
                     instanceEGC.achievementsDescriptionCache[anAchievementDes.identifier!] = anAchievementDes
                 }
+                
+                GKAchievement.loadAchievementsWithCompletionHandler({
+                    ( allAchievements:[GKAchievement]?, error:NSError?) -> Void in
+                    
+                    guard (error == nil) && allAchievements!.count != 0  else {
+                        finish()
+                        return
+                    }
+                    
+                    EasyGameCenter.completionCachingAchievements(allAchievements)
+                    
+                })
+                
+
             } else {
                 /* Error */
                 EasyGameCenter.errorHandleur(ErrorEGC.CantCachingNoADes)
@@ -281,7 +301,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     private static func errorHandleur(errorEgc:ErrorEGC) {
         
         
-        print(errorEgc)
         
         
         
@@ -334,24 +353,6 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                 return
             }
             
-            // Load GKAchievement
-            GKAchievement.loadAchievementsWithCompletionHandler({
-                ( allAchievements:[GKAchievement]?, error:NSError?) -> Void in
-                
-                guard (error == nil)  else {
-                    self.inCacheIsLoading = false
-                    EasyGameCenter.errorHandleur(ErrorEGC.CantCachingA)
-                    return
-                }
-                
-                guard allAchievements!.count != 0  else {
-                    return
-                }
-
-                EasyGameCenter.completionCachingAchievements(allAchievements)
-
-            })
-            
             // Load GKAchievementDescription
             GKAchievementDescription.loadAchievementDescriptionsWithCompletionHandler({
                 ( achievementsDescription:[GKAchievementDescription]?, error:NSError?) -> Void in
@@ -362,6 +363,7 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                     EasyGameCenter.completionCachingAchievements(achievementsDescription)
                 }
             })
+
         }
         
         
@@ -422,7 +424,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
                 } else {
                     if gameCenterVC != nil {
                         dispatch_async(dispatch_get_main_queue()) {
-                            (delegate as UIViewController).presentViewController(gameCenterVC!, animated: true, completion: nil)
+                            var delegeteParent:UIViewController? = delegate.parentViewController
+                            if delegeteParent == nil {
+                                delegeteParent = delegate
+                            }
+                            delegeteParent!.presentViewController(gameCenterVC!, animated: true, completion: nil)
                         }
                     } else if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
                         authentified()
@@ -485,7 +491,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         gc.gameCenterDelegate = Static.instance!
         gc.viewState = GKGameCenterViewControllerState.Achievements
         
-        delegate.presentViewController(gc, animated: true, completion: {
+        var delegeteParent:UIViewController? = delegate.parentViewController
+        if delegeteParent == nil {
+            delegeteParent = delegate
+        }
+        delegeteParent!.presentViewController(gc, animated: true, completion: {
             () -> Void in
             if completion != nil { completion!(isShow:true) }
         })
@@ -498,38 +508,47 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     */
     class func showGameCenterLeaderboard(leaderboardIdentifier leaderboardIdentifier :String, completion: ((isShow:Bool) -> Void)? = nil) {
         
-        guard leaderboardIdentifier != "" else {
-            if completion != nil { completion!(isShow:false) }
-            EasyGameCenter.errorHandleur(ErrorEGC.Empty)
-            // TODO break loginPlayerToGameCenter ont le coupe
-            return
-        }
-        
+
+
         
         let delegate = EasyGameCenter.delegate as UIViewController
         let instanceEGC = EasyGameCenter.sharedInstance
         
+        var validation:Bool = true
+        guard leaderboardIdentifier != "" else {
+            EasyGameCenter.errorHandleur(ErrorEGC.Empty)
+            validation = false
+            // TODO break loginPlayerToGameCenter ont le coupe
+            return
+        }
+        
         guard EasyGameCenter.isConnectedToNetwork() else {
-            if completion != nil { completion!(isShow:false) }
             EasyGameCenter.errorHandleur(ErrorEGC.NoConnection)
+            validation = false
             // TODO break loginPlayerToGameCenter ont le coupe
             return
         }
         
         guard EasyGameCenter.isPlayerIdentifiedToGameCenter() else {
-            if completion != nil { completion!(isShow:false) }
             EasyGameCenter.errorHandleur(ErrorEGC.NoLogin)
+            validation = false
             // TODO break loginPlayerToGameCenter ont le coupe
             return
         }
-        
+        defer {
+            if completion != nil && !validation { completion!(isShow:false) }
+        }
         
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = instanceEGC
         gc.leaderboardIdentifier = leaderboardIdentifier
         gc.viewState = GKGameCenterViewControllerState.Leaderboards
         
-        delegate.presentViewController(gc, animated: true, completion: {
+        var delegeteParent:UIViewController? = delegate.parentViewController
+        if delegeteParent == nil {
+            delegeteParent = delegate
+        }
+        delegeteParent!.presentViewController(gc, animated: true, completion: {
             () -> Void in
             
             if completion != nil { completion!(isShow:true) }
@@ -567,7 +586,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         gc.gameCenterDelegate =  instanceEGC
         gc.viewState = GKGameCenterViewControllerState.Challenges
         
-        delegate.presentViewController(gc, animated: true, completion: {
+        var delegeteParent:UIViewController? = delegate.parentViewController
+        if delegeteParent == nil {
+            delegeteParent = delegate
+        }
+        delegeteParent!.presentViewController(gc, animated: true, completion: {
             () -> Void in
             
             if completion != nil { completion!(isShow:true) }
@@ -1156,7 +1179,11 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         
         let controlllerGKMatch = GKMatchmakerViewController(matchRequest: request)
         controlllerGKMatch!.matchmakerDelegate = instanceEGC
-        delegate.presentViewController(controlllerGKMatch!, animated: true, completion: nil)
+        var delegeteParent:UIViewController? = delegate.parentViewController
+        if delegeteParent == nil {
+            delegeteParent = delegate
+        }
+        delegeteParent!.presentViewController(controlllerGKMatch!, animated: true, completion: nil)
     }
     /**
     Get Player in match
@@ -1370,8 +1397,13 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
         let gkmv = GKMatchmakerViewController(invite: inviteToAccept)
         gkmv!.matchmakerDelegate = self
         
-        let delegatUI = EasyGameCenter.delegate as UIViewController
-        delegatUI.presentViewController(gkmv!, animated: true, completion: nil)
+        let delegate = EasyGameCenter.delegate
+        
+        var delegeteParent:UIViewController? = delegate.parentViewController
+        if delegeteParent == nil {
+            delegeteParent = delegate
+        }
+        delegeteParent!.presentViewController(gkmv!, animated: true, completion: nil)
         
         
     }
@@ -1461,13 +1493,17 @@ class EasyGameCenter: NSObject, GKGameCenterControllerDelegate, GKMatchmakerView
     */
     class func openDialogGameCenterAuthentication(title title:String, message:String,buttonOK:String,buttonOpenGameCenterLogin:String, completion: ((openGameCenterAuthentification:Bool) -> Void)?) {
         
-        let delegateUIVC = EasyGameCenter.delegate
+        let delegate = EasyGameCenter.delegate
         
         
         if #available(iOS 8.0, *) {
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
-            delegateUIVC.presentViewController(alert, animated: true, completion: nil)
+            var delegeteParent:UIViewController? = delegate.parentViewController
+            if delegeteParent == nil {
+                delegeteParent = delegate
+            }
+            delegeteParent!.presentViewController(alert, animated: true, completion: nil)
             alert.addAction(UIAlertAction(title: buttonOK, style: .Default, handler: {
                 action in
                 
