@@ -25,7 +25,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Game_Center" translatesAutoresizingMaskIntoConstraints="NO" id="0uK-c2-xZj">
-                    <rect key="frame" x="86" y="162" width="240" height="128"/>
+                    <rect key="frame" x="140" y="159" width="154" height="128"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="LCa-PR-tat"/>
                         <constraint firstAttribute="width" constant="200" id="lNC-0A-GAr"/>
