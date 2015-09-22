@@ -70,7 +70,7 @@ Setting up Easy Game Center it's really easy. Read the instructions after.
 
 **3.** You can initialize Easy Game Center by using the following method call (This is an example, see doc)
 ```swift 
-// Add Protocol for delegate fonction "EasyGameCenterDelegate"
+// Add Protocol for delegate function "EasyGameCenterDelegate" for access to function ( connexion, multiplayer ), it's optional
 class MainViewController: UIViewController,EasyGameCenterDelegate {
     /**
         This method is called after the view controller has loaded
@@ -99,6 +99,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     /*####################################################################################################*/
     /*                           Authentification Delegate Function                                       */
     /*####################################################################################################*/
+    // Add to your UIViewController EasyGameCenterDelegate for access to this function
     /**
         Player conected to Game Center, Delegate Func of Easy Game Center
     */
@@ -119,7 +120,8 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
     /*####################################################################################################*/
     /*                           MultiPlayer Delegate Function                                            */
-    /*####################################################################################################*/
+    /*####################################################################################################*/  
+    // Add to your UIViewController EasyGameCenterDelegate for access to this function
     /**
         Match Start, Delegate Func of Easy Game Center
     */
