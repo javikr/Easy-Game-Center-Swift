@@ -60,10 +60,12 @@ pod 'EasyGameCenter', :git => 'https://github.com/DaRkD0G/Easy-Game-Center-Swift
 #### Install manual
 Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
 
-# Install in your projet Xcode
+# Installation example in your project
 You can initialize Easy Game Center by using the following method call (This is an example, see doc)
+
+### Initialize
+You can add protocol "EasyGameCenterDelegate" for access to functions ( connexion, multiplayer ), it's optional
 ```swift 
-// Add Protocol for delegate function "EasyGameCenterDelegate" for access to function ( connexion, multiplayer ), it's optional
 class MainViewController: UIViewController,EasyGameCenterDelegate {
     /**
         This method is called after the view controller has loaded
@@ -89,10 +91,10 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         /*** Set View Controller delegate, that's when you change UIViewController ***/
         EasyGameCenter.delegate = self
     }
-    /*####################################################################################################*/
-    /*                           Authentification Delegate Function                                       */
-    /*####################################################################################################*/
-    // Add to your UIViewController EasyGameCenterDelegate for access to this function
+``` 
+### Authentification Delegate Function
+Add to your UIViewController EasyGameCenterDelegate for access to this function ( it's optional )
+```swift 
     /**
         Player conected to Game Center, Delegate Func of Easy Game Center
     */
@@ -111,10 +113,10 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     func easyGameCenterInCache() {
         println("\n[AuthenticationActions] GkAchievement & GKAchievementDescription in cache\n")
     }
-    /*####################################################################################################*/
-    /*                           MultiPlayer Delegate Function                                            */
-    /*####################################################################################################*/  
-    // Add to your UIViewController EasyGameCenterDelegate for access to this function
+```
+### MultiPlayer Delegate Function
+Add to your UIViewController EasyGameCenterDelegate for access to this function ( it's optional )
+```swift 
     /**
         Match Start, Delegate Func of Easy Game Center
     */
