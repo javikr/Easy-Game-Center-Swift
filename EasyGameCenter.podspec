@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "EasyGameCenter"
-  s.version      = "1.5.0"
+  s.version      = "0.0.1"
   s.summary      = "Easy Game Center helps to manage Game Center in iOS."
 
   s.description  = <<-DESC
@@ -29,7 +29,8 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/DaRkD0G/Easy-Game-Center-Swift"
-  s.screenshots  = "http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png"
+  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -64,7 +65,7 @@ Pod::Spec.new do |s|
   #
 
     s.platform     = :ios
-    s.platform     = :ios, "7.0"
+  #  s.platform     = :ios, "7.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -78,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/DaRkD0G/Easy-Game-Center-Swift.git", :tag => "1.5.0" }
+  s.source       = { :git => "https://github.com/DaRkD0G/Easy-Game-Center-Swift", :tag => "0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
