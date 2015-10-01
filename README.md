@@ -15,6 +15,12 @@
         <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
 </p>
 
+### Install
+#### CocoaPods
+```ruby
+pod 'EasyGameCenter', :git => 'https://github.com/DaRkD0G/Easy-Game-Center-Swift.git'
+```
+
 #Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
 #####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
