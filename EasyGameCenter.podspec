@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "EasyGameCenter"
   s.version      = "0.0.1"
-  s.summary      = "Easy Game Center helps to manage Game Center in iOS."
+  s.summary      = "A short description of EasyGameCenter."
 
   s.description  = <<-DESC
                    A longer description of EasyGameCenter in Markdown format.
@@ -64,11 +64,11 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-    s.platform     = :ios
-  #  s.platform     = :ios, "7.0"
+  # s.platform     = :ios
+  # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
+    s.ios.deployment_target = "7.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
 
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/DaRkD0G/Easy-Game-Center-Swift", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/DaRkD0G/Easy-Game-Center-Swift.git", :tag => "0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
