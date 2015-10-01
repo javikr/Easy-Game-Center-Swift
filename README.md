@@ -15,12 +15,6 @@
         <img src="http://g.recordit.co/aEYan5qPW3.gif" height="500" width="280" />
 </p>
 
-### Install
-#### CocoaPods
-```ruby
-pod 'EasyGameCenter', :git => 'https://github.com/DaRkD0G/Easy-Game-Center-Swift.git'
-```
-
 #Example Game with Easy Game Center
 #####Hipster Moustache : http://bit.ly/1zGJMNG  By Stephan Yannick
 #####Dyslexia : http://apple.co/1L3D6xS By Nicolas Morelli
@@ -44,37 +38,30 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * **Example project**
 * Easily contribute to the project :)
 
-
-## Requirements
-[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]()
-
-[![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() 
-
-[![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()
-
-[![](https://img.shields.io/badge/Easy Game Center-1.5-D8B13C.svg)]()
-
-## Contributions & Share
+## Contributions & Support
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
-* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) 
+* Send me your application's link, if you use Easy Game center, I will add on the cover page and for support 
 [@YannickSteph](https://twitter.com/YannickSteph)
+* Contact for support [Issues](https://github.com/DaRkD0G/Easy-Game-Center-Swift/issues) [@YannickSteph](https://twitter.com/YannickSteph)
 
-## Support
-* Contact for support [Issues](https://github.com/DaRkD0G/Easy-Game-Center-Swift/issues)
-* [@RedWolfStudioFR](https://twitter.com/RedWolfStudioFR) // [@YannickSteph](https://twitter.com/YannickSteph)
-
-# Documentation
-## Setup
+# Install
 Setting up Easy Game Center it's really easy. Read the instructions after.
 
-**1.** Add the `GameKit`, `SystemConfiguration` frameworks to your Xcode project
+Add the `GameKit`, `SystemConfiguration` frameworks to your Xcode project
 <p align="center">
         <img src="http://s27.postimg.org/45wds3jub/Capture_d_cran_2558_03_20_19_56_34.png" height="100" width="500" />
 </p>
 
-**2.** Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
+#### CocoaPods
+```ruby
+pod 'EasyGameCenter', :git => 'https://github.com/DaRkD0G/Easy-Game-Center-Swift.git'
+```
 
-**3.** You can initialize Easy Game Center by using the following method call (This is an example, see doc)
+#### Install manual
+Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
+
+# Install in your projet Xcode
+You can initialize Easy Game Center by using the following method call (This is an example, see doc)
 ```swift 
 // Add Protocol for delegate function "EasyGameCenterDelegate" for access to function ( connexion, multiplayer ), it's optional
 class MainViewController: UIViewController,EasyGameCenterDelegate {
@@ -154,7 +141,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     }
 }
 ```
-
+# Documentation
 ## Initialize
 ###Protocol Easy Game Center
 * **Description :** You should add **EasyGameCenterDelegate** protocol if you want use delegate functions (**easyGameCenterAuthentified,easyGameCenterNotAuthentified,easyGameCenterInCache**)
