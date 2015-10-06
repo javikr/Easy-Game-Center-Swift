@@ -1,4 +1,6 @@
-# Easy Game Center  [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]() [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]() [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+# Easy Game Center
+
+[![](http://img.shields.io/badge/Swift-2.0-blue.svg)]()  [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]()  [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()  [![Pod Version](http://img.shields.io/cocoapods/v/EasyGameCenter.svg?style=flat)](http://cocoadocs.org/docsets/EasyGameCenter/)  [![Pod Platform](http://img.shields.io/cocoapods/p/EasyGameCenter.svg?style=flat)](http://cocoadocs.org/docsets/EasyGameCenter/)  [![Pod License](http://img.shields.io/cocoapods/l/EasyGameCenter.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 <p align="center">
         <img src="http://s2.postimg.org/jr6rlurax/easy_Game_Center_Swift.png" height="200" width="200" />
