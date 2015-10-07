@@ -96,7 +96,7 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
 Add to your UIViewController EasyGameCenterDelegate for access to this function ( it's optional )
 ```swift 
     /**
-        Player conected to Game Center, Delegate Func of Easy Game Center
+        Player connected to Game Center, Delegate Func of Easy Game Center
     */
     func easyGameCenterAuthentified() {
         println("\n[AuthenticationActions] Player Authentified\n")
