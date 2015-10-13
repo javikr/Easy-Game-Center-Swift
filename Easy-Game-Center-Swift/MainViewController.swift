@@ -61,11 +61,11 @@ class MainViewController: UIViewController, EGCDelegate  {
     /**
     Player conected to Game Center, Delegate Func of Easy Game Center
     */
-    func EGCAuthentified(authentied:Bool) {
+    func EGCAuthentified(authentified:Bool) {
         
-        print("\n[MainViewController] Player Authentified\n")
+        print("\n[MainViewController] Player Authentified = \(authentified)\n")
         
-        if authentied {
+        if authentified {
             EGC.getlocalPlayerInformation {
                 (playerInformationTuple) -> () in
                 //playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)
@@ -83,6 +83,11 @@ class MainViewController: UIViewController, EGCDelegate  {
                 }
             }
             
+        } else {
+            self.PlayerID.text = "Player ID :"
+            self.Name.text = "Name :"
+            self.PlayerProfil.image = nil
+            self.PlayerAuthentified.text = "Player Authentified : False"
         }
 
     }

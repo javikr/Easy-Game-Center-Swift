@@ -10,7 +10,7 @@
 //  Copyright (c) 2015 Red Wolf Studio & Yannick Stephan
 //  http://www.redwolfstudio.fr
 //  http://yannickstephan.com
-//  Version 1.5 for Swift 2.0
+//  Version 2.0 for Swift 2.0
 
 import Foundation
 import GameKit
@@ -104,12 +104,6 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     /// Save for report late when network working
     private var achievementsCacheShowAfter = [String:String]()
     
-    /// When is load
-  //  private var loginIsLoading: Bool = false
-    
-    /// When is caching
-    private var inCacheIsLoading: Bool = false
-    
     /// Checkup net and login to GameCenter when have Network
     private var timerNetAndPlayer:NSTimer?
     
@@ -117,8 +111,8 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     private var debugModeGetSet:Bool = false
     
     /// The match object provided by GameKit.
-    public var match: GKMatch?
-    public var playersInMatch = Set<GKPlayer>()
+    private var match: GKMatch?
+    private var playersInMatch = Set<GKPlayer>()
     public var invitedPlayer: GKPlayer?
     public var invite: GKInvite?
     
@@ -201,10 +195,10 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     static var isPlayerIdentified: Bool {
         get {
-             return GKLocalPlayer.localPlayer().authenticated
+            return GKLocalPlayer.localPlayer().authenticated
         }
     }
-  //  class func isPlayerIdentified -> Bool { }
+    //  class func isPlayerIdentified -> Bool { }
     /**
     Get local player (GKLocalPlayer)
     
@@ -216,7 +210,7 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
             return GKLocalPlayer.localPlayer()
         }
     }
- //   class func getLocalPlayer() -> GKLocalPlayer {  }
+    //   class func getLocalPlayer() -> GKLocalPlayer {  }
     /**
     Get local player Information (playerID,alias,profilPhoto)
     
@@ -225,34 +219,29 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     class func getlocalPlayerInformation(completion completionTuple: (playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)?) -> ()) {
         
-        
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            
-            guard EGC.isConnectedToNetwork else {
-                completionTuple(playerInformationTuple: nil)
-                EGCError.NoConnection.errorCall()
-                return
-            }
-            
-            guard EGC.isPlayerIdentified else {
-                completionTuple(playerInformationTuple: nil)
-                EGCError.NoLogin.errorCall()
-                return
-            }
-            
-            EGC.localPayer.loadPhotoForSize(GKPhotoSizeNormal, withCompletionHandler: {
-                (image, error) -> Void in
-                
-                var playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)
-                playerInformationTuple.profilPhoto = nil
-                
-                playerInformationTuple.playerID = EGC.localPayer.playerID!
-                playerInformationTuple.alias = EGC.localPayer.alias!
-                if error == nil { playerInformationTuple.profilPhoto = image }
-                completionTuple(playerInformationTuple: playerInformationTuple)
-            })
+        guard EGC.isConnectedToNetwork else {
+            completionTuple(playerInformationTuple: nil)
+            EGCError.NoConnection.errorCall()
+            return
         }
+        
+        guard EGC.isPlayerIdentified else {
+            completionTuple(playerInformationTuple: nil)
+            EGCError.NoLogin.errorCall()
+            return
+        }
+        
+        EGC.localPayer.loadPhotoForSize(GKPhotoSizeNormal, withCompletionHandler: {
+            (image, error) in
+            
+            var playerInformationTuple:(playerID:String,alias:String,profilPhoto:UIImage?)
+            playerInformationTuple.profilPhoto = nil
+            
+            playerInformationTuple.playerID = EGC.localPayer.playerID!
+            playerInformationTuple.alias = EGC.localPayer.alias!
+            if error == nil { playerInformationTuple.profilPhoto = image }
+            completionTuple(playerInformationTuple: playerInformationTuple)
+        })
     }
     /*####################################################################################################*/
     /*                                      Public Func Show                                              */
@@ -265,8 +254,6 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     public class func showGameCenterAchievements(completion: ((isShow:Bool) -> Void)? = nil) {
         
-        let delegate = EGC.delegate as UIViewController
-        
         guard EGC.isConnectedToNetwork else {
             if completion != nil { completion!(isShow:false) }
             EGCError.NoConnection.errorCall()
@@ -280,15 +267,14 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
         }
         
         let gc = GKGameCenterViewController()
-        gc.gameCenterDelegate = Static.instance!
+        gc.gameCenterDelegate = Static.instance
         gc.viewState = GKGameCenterViewControllerState.Achievements
         
-        var delegeteParent:UIViewController? = delegate.parentViewController
+        var delegeteParent:UIViewController? = EGC.delegate.parentViewController
         if delegeteParent == nil {
-            delegeteParent = delegate
+            delegeteParent = EGC.delegate
         }
         delegeteParent!.presentViewController(gc, animated: true, completion: {
-            () -> Void in
             if completion != nil { completion!(isShow:true) }
         })
     }
@@ -300,44 +286,34 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     public class func showGameCenterLeaderboard(leaderboardIdentifier leaderboardIdentifier :String, completion: ((isShow:Bool) -> Void)? = nil) {
         
-        let delegate = EGC.delegate as UIViewController
-        let instanceEGC = EGC.sharedInstance
-        
-        var validation:Bool = true
         guard leaderboardIdentifier != "" else {
             EGCError.Empty.errorCall()
-            validation = false
-            // TODO break loginPlayerToGameCenter ont le coupe
+            if completion != nil { completion!(isShow:false) }
             return
         }
         
         guard EGC.isConnectedToNetwork else {
             EGCError.NoConnection.errorCall()
-            validation = false
+            if completion != nil { completion!(isShow:false) }
             return
         }
         
         guard EGC.isPlayerIdentified else {
             EGCError.NoLogin.errorCall()
-            validation = false
+            if completion != nil { completion!(isShow:false) }
             return
-        }
-        defer {
-            if completion != nil && !validation { completion!(isShow:false) }
         }
         
         let gc = GKGameCenterViewController()
-        gc.gameCenterDelegate = instanceEGC
+        gc.gameCenterDelegate = Static.instance
         gc.leaderboardIdentifier = leaderboardIdentifier
         gc.viewState = GKGameCenterViewControllerState.Leaderboards
         
-        var delegeteParent:UIViewController? = delegate.parentViewController
+        var delegeteParent:UIViewController? = EGC.delegate.parentViewController
         if delegeteParent == nil {
-            delegeteParent = delegate
+            delegeteParent = EGC.delegate
         }
         delegeteParent!.presentViewController(gc, animated: true, completion: {
-            () -> Void in
-            
             if completion != nil { completion!(isShow:true) }
         })
         
@@ -350,9 +326,6 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     public class func showGameCenterChallenges(completion: ((isShow:Bool) -> Void)? = nil) {
         
-        let delegate = EGC.delegate as UIViewController
-        let instanceEGC = EGC.sharedInstance
-        
         guard EGC.isConnectedToNetwork else {
             if completion != nil { completion!(isShow:false) }
             EGCError.NoConnection.errorCall()
@@ -366,12 +339,12 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
         }
         
         let gc = GKGameCenterViewController()
-        gc.gameCenterDelegate =  instanceEGC
+        gc.gameCenterDelegate =  Static.instance
         gc.viewState = GKGameCenterViewControllerState.Challenges
         
-        var delegeteParent:UIViewController? = delegate.parentViewController
+        var delegeteParent:UIViewController? =  EGC.delegate.parentViewController
         if delegeteParent == nil {
-            delegeteParent = delegate
+            delegeteParent =  EGC.delegate
         }
         delegeteParent!.presentViewController(gc, animated: true, completion: {
             () -> Void in
@@ -394,13 +367,7 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
             return
         }
         
-        dispatch_async(dispatch_get_main_queue()) {
-            GKNotificationBanner.showBannerWithTitle(title, message: description, completionHandler: {
-                () -> Void in
-                if completion != nil { completion!() }
-            })
-        }
-        
+        GKNotificationBanner.showBannerWithTitle(title, message: description, completionHandler: completion)
     }
     /**
     Show page Authentication Game Center
@@ -425,40 +392,36 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func getGKLeaderboard(completion completion: ((resultArrayGKLeaderboard:Set<GKLeaderboard>?) -> Void)) {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            
-            guard EGC.isConnectedToNetwork else {
-                completion(resultArrayGKLeaderboard: nil)
-                EGCError.NoConnection.errorCall()
-                return
-            }
+        
+        guard EGC.isConnectedToNetwork else {
+            completion(resultArrayGKLeaderboard: nil)
+            EGCError.NoConnection.errorCall()
+            return
+        }
+        
+        guard EGC.isPlayerIdentified else {
+            completion(resultArrayGKLeaderboard: nil)
+            EGCError.NoLogin.errorCall()
+            return
+        }
+        
+        GKLeaderboard.loadLeaderboardsWithCompletionHandler {
+            (leaderboards, error) in
             
             guard EGC.isPlayerIdentified else {
                 completion(resultArrayGKLeaderboard: nil)
-                EGCError.NoLogin.errorCall()
+                EGCError.CantLoadLeaderboards.errorCall()
                 return
             }
             
-            GKLeaderboard.loadLeaderboardsWithCompletionHandler {
-                (leaderboards:[GKLeaderboard]?, error:NSError?) ->
-                Void in
-                
-                guard EGC.isPlayerIdentified else {
-                    completion(resultArrayGKLeaderboard: nil)
-                    EGCError.CantLoadLeaderboards.errorCall()
-                    return
-                }
-                
-                guard let leaderboardsIsArrayGKLeaderboard = leaderboards as [GKLeaderboard]? else {
-                    completion(resultArrayGKLeaderboard: nil)
-                    EGCError.CantLoadLeaderboards.errorCall()
-                    return
-                }
-                
-                completion(resultArrayGKLeaderboard: Set(leaderboardsIsArrayGKLeaderboard))
-                
+            guard let leaderboardsIsArrayGKLeaderboard = leaderboards as [GKLeaderboard]? else {
+                completion(resultArrayGKLeaderboard: nil)
+                EGCError.CantLoadLeaderboards.errorCall()
+                return
             }
+            
+            completion(resultArrayGKLeaderboard: Set(leaderboardsIsArrayGKLeaderboard))
+            
         }
     }
     /**
@@ -471,26 +434,20 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func reportScoreLeaderboard(leaderboardIdentifier leaderboardIdentifier:String, score: Int) {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            
-            guard EGC.isConnectedToNetwork else {
-                EGCError.NoConnection.errorCall()
-                // TODO break loginPlayerToGameCenter ont le coupe
-                return
-            }
-            
-            guard EGC.isPlayerIdentified else {
-                EGCError.NoLogin.errorCall()
-                // TODO break loginPlayerToGameCenter ont le coupe
-                return
-            }
-            
-            let gkScore = GKScore(leaderboardIdentifier: leaderboardIdentifier)
-            gkScore.value = Int64(score)
-            gkScore.shouldSetDefaultLeaderboard = true
-            GKScore.reportScores([gkScore], withCompletionHandler: nil)
+        guard EGC.isConnectedToNetwork else {
+            EGCError.NoConnection.errorCall()
+            return
         }
+        
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            return
+        }
+        
+        let gkScore = GKScore(leaderboardIdentifier: leaderboardIdentifier)
+        gkScore.value = Int64(score)
+        gkScore.shouldSetDefaultLeaderboard = true
+        GKScore.reportScores([gkScore], withCompletionHandler: nil)
     }
     /**
     Get High Score for leaderboard identifier
@@ -499,21 +456,24 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     - parameter completion:            Tuple (playerName: String, score: Int, rank: Int)
     
     */
-    public class func getHighScore(leaderboardIdentifier leaderboardIdentifier:String, completion:((playerName:String, score:Int,rank:Int)? -> Void)) {
-        EGC.getGKScoreLeaderboard(leaderboardIdentifier: leaderboardIdentifier, completion: {
-            (resultGKScore) -> Void in
-            
-            guard let valGkscore = resultGKScore else {
-                completion(nil)
-                return
-            }
-            
-            let rankVal = valGkscore.rank
-            let nameVal  = EGC.localPayer.alias!
-            let scoreVal  = Int(valGkscore.value)
-            completion((playerName: nameVal, score: scoreVal, rank: rankVal))
-            
-        })
+    public class func getHighScore(
+        leaderboardIdentifier leaderboardIdentifier:String,
+        completion:((playerName:String, score:Int,rank:Int)? -> Void)
+        ) {
+            EGC.getGKScoreLeaderboard(leaderboardIdentifier: leaderboardIdentifier, completion: {
+                (resultGKScore) in
+                
+                guard let valGkscore = resultGKScore else {
+                    completion(nil)
+                    return
+                }
+                
+                let rankVal = valGkscore.rank
+                let nameVal  = EGC.localPayer.alias!
+                let scoreVal  = Int(valGkscore.value)
+                completion((playerName: nameVal, score: scoreVal, rank: rankVal))
+                
+            })
     }
     /**
     Get GKScoreOfLeaderboard
@@ -522,34 +482,38 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func  getGKScoreLeaderboard(leaderboardIdentifier leaderboardIdentifier:String, completion:((resultGKScore:GKScore?) -> Void)) {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        
+        guard leaderboardIdentifier != "" else {
+            EGCError.Empty.errorCall()
+            completion(resultGKScore:nil)
+            return
+        }
+        
+        guard EGC.isConnectedToNetwork else {
+            EGCError.NoConnection.errorCall()
+            completion(resultGKScore: nil)
+            return
+        }
+        
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            completion(resultGKScore: nil)
+            return
+        }
+        
+        let leaderBoardRequest = GKLeaderboard()
+        leaderBoardRequest.identifier = leaderboardIdentifier
+        
+        leaderBoardRequest.loadScoresWithCompletionHandler {
+            (resultGKScore, error) in
             
-            guard EGC.isConnectedToNetwork else {
-                EGCError.NoConnection.errorCall()
+            guard error == nil && resultGKScore != nil else {
                 completion(resultGKScore: nil)
                 return
             }
             
-            guard EGC.isPlayerIdentified else {
-                EGCError.NoLogin.errorCall()
-                completion(resultGKScore: nil)
-                return
-            }
+            completion(resultGKScore: leaderBoardRequest.localPlayerScore)
             
-            let leaderBoardRequest = GKLeaderboard()
-            leaderBoardRequest.identifier = leaderboardIdentifier
-            
-            leaderBoardRequest.loadScoresWithCompletionHandler {
-                (resultGKScore, error) ->Void in
-                
-                if error != nil || resultGKScore == nil {
-                    completion(resultGKScore: nil)
-                    
-                } else  {
-                    completion(resultGKScore: leaderBoardRequest.localPlayerScore)
-                }
-            }
         }
     }
     /*####################################################################################################*/
@@ -565,30 +529,22 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     public class func getTupleGKAchievementAndDescription(achievementIdentifier achievementIdentifier:String,completion completionTuple: ((tupleGKAchievementAndDescription:(gkAchievement:GKAchievement,gkAchievementDescription:GKAchievementDescription)?) -> Void)) {
         
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            let instanceEGC = EGC.sharedInstance
-            
-            guard EGC.isPlayerIdentified else {
-                EGCError.NoLogin.errorCall()
-                completionTuple(tupleGKAchievementAndDescription: nil)
-                return
-            }
-            
-            let achievementGKScore = instanceEGC.achievementsCache[achievementIdentifier]
-            let achievementGKDes =  instanceEGC.achievementsDescriptionCache[achievementIdentifier]
-            
-            if achievementGKScore != nil && achievementGKDes != nil {
-                completionTuple(tupleGKAchievementAndDescription: (achievementGKScore!,achievementGKDes!))
-            } else {
-                if instanceEGC.achievementsCache.count > 0 {
-                    EGC.debug("\n[EGC] Achievements ID not real\n")
-                } else {
-                    EGC.debug("\n[EGC] Haven't load cache\n")
-                }
-                completionTuple(tupleGKAchievementAndDescription: nil)
-            }
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            completionTuple(tupleGKAchievementAndDescription: nil)
+            return
         }
+        
+        let achievementGKScore = EGC.sharedInstance.achievementsCache[achievementIdentifier]
+        let achievementGKDes =  EGC.sharedInstance.achievementsDescriptionCache[achievementIdentifier]
+        
+        guard let aGKS = achievementGKScore, let aGKD = achievementGKDes else {
+            completionTuple(tupleGKAchievementAndDescription: nil)
+            return
+        }
+        
+        completionTuple(tupleGKAchievementAndDescription: (aGKS,aGKD))
+        
     }
     /**
     Get Achievement
@@ -599,25 +555,24 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func getAchievementForIndentifier(identifierAchievement identifierAchievement : NSString) -> GKAchievement? {
-        if identifierAchievement != "" {
-            let instanceEGC = EGC.sharedInstance
-            guard EGC.isPlayerIdentified else {
-                EGCError.NoLogin.errorCall()
-                return nil
-            }
-            
-            if let achievementFind = instanceEGC.achievementsCache[identifierAchievement as String] {
-                return achievementFind
-            } else {
-                if instanceEGC.achievementsCache.count == 0 {
-                    EGC.debug("\n[Easy Game Center] Not have cache\n")
-                } else {
-                    EGC.debug("\n[Easy Game Center] Achievement ID \(identifierAchievement) is not real \n")
-                }
-            }
-            
+        
+        guard identifierAchievement != "" else {
+            EGCError.Empty.errorCall()
+            return nil
         }
-        return nil
+        
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            return nil
+        }
+        
+        guard let achievementFind = EGC.sharedInstance.achievementsCache[identifierAchievement as String] else {
+            return nil
+        }
+        return achievementFind
+        
+        
+        
     }
     /**
     Add progress to an achievement
@@ -629,51 +584,57 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func reportAchievement( progress progress : Double, achievementIdentifier : String, showBannnerIfCompleted : Bool = true ,addToExisting: Bool = false) {
-        if achievementIdentifier != "" {
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                
-                if !EGC.isAchievementCompleted(achievementIdentifier: achievementIdentifier) {
-                    let instanceEGC = EGC.sharedInstance
+        guard achievementIdentifier != "" else {
+            EGCError.Empty.errorCall()
+            return
+        }
+        guard !EGC.isAchievementCompleted(achievementIdentifier: achievementIdentifier) else {
+            EGC.debug("[Easy Game Center] Achievement is already completed")
+            return
+        }
+        
+        guard let achievement = EGC.getAchievementForIndentifier(identifierAchievement: achievementIdentifier) else {
+            EGC.debug("[Easy Game Center] No Achievement for identifier")
+            return
+        }
+        
+        
+        
+        
+        let currentValue = achievement.percentComplete
+        let newProgress: Double = !addToExisting ? progress : progress + currentValue
+        
+        achievement.percentComplete = newProgress
+        
+        /* show banner only if achievement is fully granted (progress is 100%) */
+        if achievement.completed && showBannnerIfCompleted {
+            EGC.debug("[Easy Game Center] Achievement \(achievementIdentifier) completed")
+            
+            if EGC.isConnectedToNetwork {
+                achievement.showsCompletionBanner = true
+            } else {
+                //oneAchievement.showsCompletionBanner = true << Bug For not show two banner
+                // Force show Banner when player not have network
+                EGC.getTupleGKAchievementAndDescription(achievementIdentifier: achievementIdentifier, completion: {
+                    (tupleGKAchievementAndDescription) -> Void in
                     
-                    if let achievement = EGC.getAchievementForIndentifier(identifierAchievement: achievementIdentifier) {
+                    if let tupleIsOK = tupleGKAchievementAndDescription {
+                        let title = tupleIsOK.gkAchievementDescription.title
+                        let description = tupleIsOK.gkAchievementDescription.achievedDescription
                         
-                        let currentValue = achievement.percentComplete
-                        let newProgress: Double = !addToExisting ? progress : progress + currentValue
-                        
-                        achievement.percentComplete = newProgress
-                        
-                        /* show banner only if achievement is fully granted (progress is 100%) */
-                        if achievement.completed && showBannnerIfCompleted {
-                            EGC.debug("[Easy Game Center] Achievement \(achievementIdentifier) completed")
-                            
-                            if EGC.isConnectedToNetwork {
-                                achievement.showsCompletionBanner = true
-                            } else {
-                                //oneAchievement.showsCompletionBanner = true << Bug For not show two banner
-                                // Force show Banner when player not have network
-                                EGC.getTupleGKAchievementAndDescription(achievementIdentifier: achievementIdentifier, completion: {
-                                    (tupleGKAchievementAndDescription) -> Void in
-                                    
-                                    if let tupleIsOK = tupleGKAchievementAndDescription {
-                                        let title = tupleIsOK.gkAchievementDescription.title
-                                        let description = tupleIsOK.gkAchievementDescription.achievedDescription
-                                        
-                                        EGC.showCustomBanner(title: title!, description: description!)
-                                    }
-                                })
-                            }
-                        }
-                        if  achievement.completed && !showBannnerIfCompleted {
-                            instanceEGC.achievementsCacheShowAfter[achievementIdentifier] = achievementIdentifier
-                        }
-                        instanceEGC.reportAchievementToGameCenter(achievement: achievement)
+                        EGC.showCustomBanner(title: title!, description: description!)
                     }
-                } else {
-                    EGC.debug("[Easy Game Center] Achievement is already completed")
-                }
+                })
             }
         }
+        if  achievement.completed && !showBannnerIfCompleted {
+            EGC.sharedInstance.achievementsCacheShowAfter[achievementIdentifier] = achievementIdentifier
+        }
+        EGC.sharedInstance.reportAchievementToGameCenter(achievement: achievement)
+        
+        
+        
+        
     }
     /**
     Get GKAchievementDescription
@@ -682,21 +643,25 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func getGKAllAchievementDescription(completion completion: ((arrayGKAD:Set<GKAchievementDescription>?) -> Void)){
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            let instanceEGC = EGC.sharedInstance
-            if EGC.isPlayerIdentified {
-                if instanceEGC.achievementsDescriptionCache.count > 0 {
-                    var tempsEnvoi = Set<GKAchievementDescription>()
-                    for achievementDes in instanceEGC.achievementsDescriptionCache {
-                        tempsEnvoi.insert(achievementDes.1)
-                    }
-                    completion(arrayGKAD: tempsEnvoi)
-                } else {
-                    EGC.debug("\n[Easy Game Center] Not have cache\n")
-                }
-            }
+        
+        
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            return
         }
+        
+        guard EGC.sharedInstance.achievementsDescriptionCache.count > 0 else {
+            EGCError.NoCache.printError()
+            return
+        }
+        
+        var tempsEnvoi = Set<GKAchievementDescription>()
+        for achievementDes in EGC.sharedInstance.achievementsDescriptionCache {
+            tempsEnvoi.insert(achievementDes.1)
+        }
+        completion(arrayGKAD: tempsEnvoi)
+        
+        
     }
     /**
     If achievement is Completed
@@ -706,12 +671,12 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func isAchievementCompleted(achievementIdentifier achievementIdentifier: String) -> Bool{
-        if let achievement = EGC.getAchievementForIndentifier(identifierAchievement: achievementIdentifier) {
-            if achievement.completed || achievement.percentComplete == 100.00 {
-                return true
-            }
+        
+        guard let achievement = EGC.getAchievementForIndentifier(identifierAchievement: achievementIdentifier)
+            where achievement.completed || achievement.percentComplete == 100.00 else {
+            return false
         }
-        return false
+        return true
     }
     /**
     Get Achievements Completes during the game and banner was not showing
@@ -720,9 +685,8 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func getAchievementCompleteAndBannerNotShowing() -> [GKAchievement]? {
-        let instanceEGC = EGC.sharedInstance
         
-        let achievements : [String:String] = instanceEGC.achievementsCacheShowAfter
+        let achievements : [String:String] = EGC.sharedInstance.achievementsCacheShowAfter
         var achievementsTemps = [GKAchievement]()
         
         if achievements.count > 0 {
@@ -746,39 +710,44 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func showAllBannerAchievementCompleteForBannerNotShowing(completion: ((achievementShow:GKAchievement?) -> Void)? = nil) {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            let instanceEGC = EGC.sharedInstance
-            
-            if !EGC.isPlayerIdentified {
-                EGC.debug("\n[Easy Game Center] Player not identified\n")
+        
+            guard EGC.isPlayerIdentified else {
+                EGCError.NoLogin.errorCall()
                 if completion != nil { completion!(achievementShow: nil) }
-            } else {
-                if let achievementNotShow: [GKAchievement] = EGC.getAchievementCompleteAndBannerNotShowing() {
+                return
+            }
+        guard let achievementNotShow: [GKAchievement] = EGC.getAchievementCompleteAndBannerNotShowing()  else {
+
+            if completion != nil { completion!(achievementShow: nil) }
+            return
+        }
+
+        
                     for achievement in achievementNotShow  {
                         
                         EGC.getTupleGKAchievementAndDescription(achievementIdentifier: achievement.identifier!, completion: {
-                            (tupleGKAchievementAndDescription) -> Void in
+                            (tupleGKAchievementAndDescription) in
                             
-                            if let tupleOK = tupleGKAchievementAndDescription {
+                            guard let tupleOK = tupleGKAchievementAndDescription   else {
+                                
+                                if completion != nil { completion!(achievementShow: nil) }
+                                return
+                            }
+                            
                                 //oneAchievement.showsCompletionBanner = true
                                 let title = tupleOK.gkAchievementDescription.title
                                 let description = tupleOK.gkAchievementDescription.achievedDescription
                                 
-                                EGC.showCustomBanner(title: title!, description: description!, completion: { () -> Void in
+                                EGC.showCustomBanner(title: title!, description: description!, completion: {
+                                    
                                     if completion != nil { completion!(achievementShow: achievement) }
                                 })
-                            } else {
-                                if completion != nil { completion!(achievementShow: nil) }
-                            }
+
                         })
                     }
-                    instanceEGC.achievementsCacheShowAfter.removeAll(keepCapacity: false)
-                } else {
-                    if completion != nil { completion!(achievementShow: nil) }
-                }
-            }
-        }
+                    EGC.sharedInstance.achievementsCacheShowAfter.removeAll(keepCapacity: false)
+
+        
     }
     /**
     Get progress to an achievement
@@ -789,17 +758,19 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     public class func getProgressForAchievement(achievementIdentifier achievementIdentifier:String) -> Double? {
-        let instanceEGC = EGC.sharedInstance
-        if EGC.isPlayerIdentified {
-            if let achievementInArrayInt = instanceEGC.achievementsCache[achievementIdentifier]?.percentComplete {
-                return achievementInArrayInt
-            } else {
-                EGC.debug("\n[EGC] Haven't cache\n")
-            }
-        } else {
-            EGC.debug("\n[EGC] Player not identified\n")
+
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            return nil
         }
-        return nil
+        
+        if let achievementInArrayInt = EGC.sharedInstance.achievementsCache[achievementIdentifier]?.percentComplete {
+            return achievementInArrayInt
+        } else {
+            EGC.debug("\n[EGC] Haven't cache\n")
+            return nil
+        }
+        
     }
     /**
     Remove All Achievements
@@ -808,16 +779,22 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     sdsds
     */
     public class func resetAllAchievements( completion:  ((achievementReset:GKAchievement?) -> Void)? = nil)  {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            if EGC.isPlayerIdentified {
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+             if completion != nil { completion!(achievementReset: nil) }
+            return
+        }
+        
+
                 GKAchievement.resetAchievementsWithCompletionHandler({
-                    (error:NSError?) -> Void in
-                    if error != nil {
-                        EGC.debug("\n[Easy Game Center] Couldn't Reset achievement (Send data error) \n")
-                    } else {
-                        let gameCenter = EGC.Static.instance!
-                        for lookupAchievement in gameCenter.achievementsCache {
+                    (error:NSError?) in
+                    guard error == nil else {
+                         EGC.debug("\n[Easy Game Center] Couldn't Reset achievement (Send data error) \n")
+                            return
+                    }
+
+
+                        for lookupAchievement in Static.instance!.achievementsCache {
                             let achievementID = lookupAchievement.0
                             let achievementGK = lookupAchievement.1
                             achievementGK.percentComplete = 0
@@ -825,13 +802,8 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
                             if completion != nil { completion!(achievementReset:achievementGK) }
                             EGC.debug("\n[Easy Game Center] Reset achievement (\(achievementID))\n")
                         }
-                    }
+                    
                 })
-            } else {
-                EGC.debug("\n[Easy Game Center] Player not identified\n")
-                if completion != nil { completion!(achievementReset: nil) }
-            }
-        }
     }
     
     /*####################################################################################################*/
@@ -845,11 +817,9 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     public class func findMatchWithMinPlayers(minPlayers: Int, maxPlayers: Int) {
         
-        let instance = EGC.sharedInstance
-        
         do {
-            let delegateUI = try instance.getDelegate()
-            try instance.getDelegateEGC()
+            let delegateUI = try EGC.sharedInstance.getDelegate()
+            //  try instance.getDelegateEGC()
             
             EGC.disconnectMatch()
             
@@ -883,32 +853,27 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     - returns: Set<GKPlayer>
     */
     public class func getPlayerInMatch() -> Set<GKPlayer>? {
-        let instanceEGC = EGC.sharedInstance
         
-        if instanceEGC.match == nil {
+        guard EGC.sharedInstance.match != nil && EGC.sharedInstance.playersInMatch.count > 0  else {
             EGC.debug("\n[Easy Game Center] No Match\n")
-        } else {
-            if instanceEGC.playersInMatch.count > 0 {
-                return instanceEGC.playersInMatch
-            }
+            return nil
         }
-        return nil
+
+        return EGC.sharedInstance.playersInMatch
     }
     /**
     Deconnect the Match
     */
     public class func disconnectMatch() {
-        let instanceEGC = EGC.sharedInstance
-        
-        if instanceEGC.match != nil {
-            EGC.debug("\n[Easy Game Center] Disconnect from match \n")
-            instanceEGC.match!.disconnect()
-            instanceEGC.match = nil
-            guard let delegateEGC = self.delegate  as? EGCDelegate else {
-                return
-            }
-            delegateEGC.EGCMatchEnded?()
+        guard let match = EGC.sharedInstance.match else {
+            return
         }
+
+        EGC.debug("\n[Easy Game Center] Disconnect from match \n")
+        match.disconnect()
+        EGC.sharedInstance.match = nil
+        (self.delegate as? EGCDelegate)?.EGCMatchEnded?()
+
     }
     /**
     Get match
@@ -916,56 +881,50 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     - returns: GKMatch or nil if haven't match
     */
     public class func getMatch() -> GKMatch? {
-        let instanceEGC = EGC.sharedInstance
-        if instanceEGC.match == nil {
+        guard let match = EGC.sharedInstance.match else {
             EGC.debug("\n[Easy Game Center] No Match\n")
-        } else {
-            return instanceEGC.match!
+            return nil
         }
-        return nil
+        
+        return match
     }
     /**
     player in net
     */
     @available(iOS 8.0, *)
     private func lookupPlayers() {
-        let instance = EGC.sharedInstance
+
+        guard let match =  EGC.sharedInstance.match else {
+            EGC.debug("\n[Easy Game Center] No Match\n")
+            return
+        }
         
-        do {
-            let delegateEGC = try instance.getDelegateEGC()
+        let playerIDs = match.players.map { $0 .playerID } as! [String]
+        
+        /* Load an array of player */
+        GKPlayer.loadPlayersForIdentifiers(playerIDs) {
+            (players, error) in
             
-            guard instance.match != nil else {
-                EGC.debug("\n[Easy Game Center] No Match\n")
+            guard error == nil else {
+                EGC.debug("[Easy Game Center] Error retrieving player info: \(error!.localizedDescription)")
+                EGC.disconnectMatch()
                 return
             }
             
-            let playerIDs = match!.players.map { ($0 as GKPlayer).playerID! }
-            
-            /* Load an array of player */
-            GKPlayer.loadPlayersForIdentifiers(playerIDs) {
-                (players, error) -> Void in
-                
-                guard error == nil else {
-                    EGC.debug("[Easy Game Center] Error retrieving player info: \(error!.localizedDescription)")
-                    EGC.disconnectMatch()
-                    return
-                }
-                
-                if let arrayPlayers = players as [GKPlayer]? { self.playersInMatch = Set(arrayPlayers) }
-                
-                GKMatchmaker.sharedMatchmaker().finishMatchmakingForMatch(self.match!)
-                delegateEGC.EGCMatchStarted?()
-                
+            guard let players = players else {
+                EGC.debug("[Easy Game Center] Error retrieving players; returned nil")
+                return
             }
-        } catch EGCError.DelegateNotHaveProtocolEGCDelegate {
-            EGCError.DelegateNotHaveProtocolEGCDelegate.errorCall()
+            if EGC.debugMode {
+                for player in players {
+                    EGC.debug("[Easy Game Center] Found player: \(player.alias)")
+                }
+            }
             
+            if let arrayPlayers = players as [GKPlayer]? { self.playersInMatch = Set(arrayPlayers) }
             
-        } catch EGCError.NoInstance {
-            EGCError.NoInstance.errorCall()
-            
-        } catch {
-            fatalError("Dont work\(error)")
+            GKMatchmaker.sharedMatchmaker().finishMatchmakingForMatch(match)
+            (Static.delegate as? EGCDelegate)?.EGCMatchStarted?()
             
         }
     }
@@ -981,28 +940,18 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     public class func sendDataToAllPlayers(data: NSData!, modeSend:GKMatchSendDataMode) {
         
-        let instance = EGC.sharedInstance
+        guard let match = EGC.sharedInstance.match else {
+            EGC.debug("\n[Easy Game Center] No Match\n")
+            return
+        }
         
         do {
-            let delegateEGC = try instance.getDelegateEGC()
-            
-            guard instance.match != nil else {
-                EGC.debug("\n[Easy Game Center] No Match\n")
-                return
-            }
-            
-            
-            do {
-                try instance.match!.sendDataToAllPlayers(data, withDataMode: modeSend)
-                EGC.debug("\n[Easy Game Center] Succes sending data all Player \n")
-            } catch  {
-                EGC.disconnectMatch()
-                delegateEGC.EGCMatchEnded?()
-                EGC.debug("\n[Easy Game Center] Fail sending data all Player\n")
-            }
-            
-        } catch {
-            EGCError.DelegateNotHaveProtocolEGCDelegate.errorCall()
+            try match.sendDataToAllPlayers(data, withDataMode: modeSend)
+            EGC.debug("\n[Easy Game Center] Succes sending data all Player \n")
+        } catch  {
+            EGC.disconnectMatch()
+            (Static.delegate as? EGCDelegate)?.EGCMatchEnded?()
+            EGC.debug("\n[Easy Game Center] Fail sending data all Player\n")
         }
     }
     
@@ -1051,19 +1000,6 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
         }
         return delegate
     }
-    /**
-    Delegate UIViewController repect protocol EGCDelegate
-    
-    - throws: .DelegateNotHaveProtocolEGCDelegate
-    
-    - returns: Instance of EGC Delegate Protocol
-    */
-    private func getDelegateEGC() throws -> EGCDelegate {
-        guard let delegateEGC = Static.delegate as? EGCDelegate else {
-            throw EGCError.DelegateNotHaveProtocolEGCDelegate
-        }
-        return delegateEGC
-    }
     
     /*####################################################################################################*/
     /*                                            private Start                                           */
@@ -1082,15 +1018,17 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     */
     private static func completionCachingAchievements(achievementsType :[AnyObject]?) {
         
-        let instance = EGC.sharedInstance
-        
         func finish() {
-            if instance.achievementsCache.count > 0 && instance.achievementsDescriptionCache.count > 0 {
-                do {
-                    let _ = try? instance.getDelegateEGC().EGCInCache?()
-                }
+            if EGC.sharedInstance.achievementsCache.count > 0 &&
+                EGC.sharedInstance.achievementsDescriptionCache.count > 0 {
+                    
+                    /*  guard let delegateEGC = try? EGC.sharedInstance.getDelegateEGC() else {
+                    EGC.debug(EGCError.DelegateNotHaveProtocolEGCDelegate)
+                    return
+                    }*/
+                    (Static.delegate as? EGCDelegate)?.EGCInCache?()
+                    
             }
-            instance.inCacheIsLoading = false
         }
         
         
@@ -1102,7 +1040,7 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
             }
             
             for anAchievement in arrayGKAchievement where  anAchievement.identifier != nil {
-                instance.achievementsCache[anAchievement.identifier!] = anAchievement
+                EGC.sharedInstance.achievementsCache[anAchievement.identifier!] = anAchievement
             }
             finish()
             
@@ -1117,12 +1055,12 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
             for anAchievementDes in arrayGKAchievementDes where  anAchievementDes.identifier != nil {
                 
                 // Add GKAchievement
-                if instance.achievementsCache.indexForKey(anAchievementDes.identifier!) == nil {
-                    instance.achievementsCache[anAchievementDes.identifier!] = GKAchievement(identifier: anAchievementDes.identifier!)
+                if EGC.sharedInstance.achievementsCache.indexForKey(anAchievementDes.identifier!) == nil {
+                    EGC.sharedInstance.achievementsCache[anAchievementDes.identifier!] = GKAchievement(identifier: anAchievementDes.identifier!)
                     
                 }
                 // Add CGAchievementDescription
-                instance.achievementsDescriptionCache[anAchievementDes.identifier!] = anAchievementDes
+                EGC.sharedInstance.achievementsDescriptionCache[anAchievementDes.identifier!] = anAchievementDes
             }
             
             GKAchievement.loadAchievementsWithCompletionHandler({
@@ -1148,31 +1086,23 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     
     */
     private func cachingAchievements() {
-        if !self.inCacheIsLoading {
-            self.inCacheIsLoading = true
-            
-            guard EGC.isConnectedToNetwork else {
-                self.inCacheIsLoading = false
-                EGCError.NoConnection.errorCall()
-                return
-            }
-            guard EGC.isPlayerIdentified else {
-                self.inCacheIsLoading = false
-                EGCError.NoLogin.errorCall()
-                return
-            }
-            
-            // Load GKAchievementDescription
-            GKAchievementDescription.loadAchievementDescriptionsWithCompletionHandler({
-                ( achievementsDescription:[GKAchievementDescription]?, error:NSError?) -> Void in
-                if  (error != nil) {
-                    self.inCacheIsLoading = false
-                    EGCError.CantCachingA.errorCall()
-                } else {
-                    EGC.completionCachingAchievements(achievementsDescription)
-                }
-            })
+        guard EGC.isConnectedToNetwork else {
+            EGCError.NoConnection.errorCall()
+            return
         }
+        guard EGC.isPlayerIdentified else {
+            EGCError.NoLogin.errorCall()
+            return
+        }
+        // Load GKAchievementDescription
+        GKAchievementDescription.loadAchievementDescriptionsWithCompletionHandler({
+            (achievementsDescription, error) in
+            guard error == nil else {
+                EGCError.CantCachingA.errorCall()
+                return
+            }
+            EGC.completionCachingAchievements(achievementsDescription)
+        })
     }
     /**
     Login player to GameCenter With Handler Authentification
@@ -1181,35 +1111,28 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
     - parameter completion: (Bool) if player login to Game Center
     */
     /// Authenticates the user with their Game Center account if possible
-
+    
     // MARK: Internal functions
     
     internal func authenticationChanged() {
-        
-        guard let delegateEGC = try? self.getDelegateEGC() else {
-            EGCError.NoDelegate.errorCall()
+        guard let delegateEGC = Static.delegate as? EGCDelegate else {
             return
         }
-        
         if EGC.isPlayerIdentified {
             delegateEGC.EGCAuthentified?(true)
-            print("Authentication changed: player authenticated")
             EGC.sharedInstance.cachingAchievements()
         } else {
             delegateEGC.EGCAuthentified?(false)
-            print("Authentication changed: player not authenticated")
-
         }
     }
     
     private func loginPlayerToGameCenter()  {
         
         guard !EGC.isPlayerIdentified else {
-            //    authentified()
             return
         }
         
-        guard let delegateEGC = try? self.getDelegateEGC(), delegateVC = delegateEGC as? UIViewController  else {
+        guard let delegateVC = Static.delegate  else {
             EGCError.NoDelegate.errorCall()
             return
         }
@@ -1218,93 +1141,25 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
             EGCError.NoConnection.errorCall()
             return
         }
-
-        /**
-        Send Authentified
-
-        func authentified() {
-          //  self.loginIsLoading = false
-            dispatch_async(dispatch_get_main_queue()) {
-                 delegateEGC.EGCAuthentified?(true)
-                
-            }
-        }  */
         
-
-      /*  if EGC.isPlayerIdentified {
+        GKLocalPlayer.localPlayer().authenticateHandler = {
+            (gameCenterVC, error) in
             
-            return
-        }*/
-        
-        /*
-print("Authenticating local user...")
-if GKLocalPlayer.localPlayer().authenticated == false {
-GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
-if error == nil {
-self.authenticated = true
-} else {
-print("\(error?.localizedDescription)")
-}
-}
-} else {
-print("Already authenticated")
-}
-*/
-        //if !loginIsLoading {
-       //     self.loginIsLoading = true
-
-            GKLocalPlayer.localPlayer().authenticateHandler = {
-
-                (gameCenterVC, error) in
-                /* If got error / Or player not set value for login */
-                guard error == nil else {
-                  //  self.loginIsLoading = false
-                    EGCError.Error(error!.localizedDescription).errorCall()
-                    return
-                }
-                guard let gcVC = gameCenterVC else {
-                   // EGCError.NoLogin.errorCall()
-                    return
-                  /*  guard !EGC.isPlayerIdentified else {
-                       // authentified()
-                        return
-                    }*/
-                   /* if EGC.isPlayerIdentified {
-                        
-                        
-                    } else  {
-                        //  self.loginIsLoading = false
-                        
-                    }*/
-                    
-                   // EGCError.Error(error!.localizedDescription).errorCall()
-                  //  return
-                }
-              //  if error != nil {
-
-                    
-                    /* Login to game center need Open page */
-                //} else {
-                    //if gameCenterVC != nil {
-                        dispatch_async(dispatch_get_main_queue()) {
-                           /* do {
-                                let delegate = try self.getDelegate()*/
-                                delegateVC.presentViewController(gcVC, animated: true, completion: nil)
-                            /*} catch {
-                                //EGCError
-                                EGC.debug(error)
-                            }*/
-                            /*var delegeteParent:UIViewController? = EGC.delegate.parentViewController
-                            if delegeteParent == nil {
-                                delegeteParent = EGC.delegate
-                            }*/
-                           // delegeteParent!.presentViewController(gameCenterVC!, animated: true, completion: nil)
-                        }
-                    //}
-               // }
+            guard error == nil else {
+                EGCError.Error(error!.localizedDescription).errorCall()
+                return
             }
+            guard let gcVC = gameCenterVC else {
+                return
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                delegateVC.presentViewController(gcVC, animated: true, completion: nil)
+            }
+            
         }
-  //  }
+    }
+
     /*####################################################################################################*/
     /*                              Private Timer checkup                                                 */
     /*####################################################################################################*/
@@ -1367,20 +1222,11 @@ print("Already authenticated")
     - parameter playerID: String
     */
     public func match(theMatch: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
-        
-        let instance = EGC.sharedInstance
-        
-        do {
-            let delegateEGC = try instance.getDelegateEGC()
-            
-            guard instance.match == theMatch else {
-                return
-            }
-            
-            delegateEGC.EGCMatchRecept?(theMatch, didReceiveData: data, fromPlayer: playerID)
-        } catch {
-            EGCError.DelegateNotHaveProtocolEGCDelegate.errorCall()
+        guard EGC.sharedInstance.match == theMatch else {
+            return
         }
+        (Static.delegate as? EGCDelegate)?.EGCMatchRecept?(theMatch, didReceiveData: data, fromPlayer: playerID)
+
     }
     /**
     Called when a player connects to or disconnects from the match.
@@ -1391,22 +1237,20 @@ print("Already authenticated")
     - parameter playerID: String
     - parameter state:    GKPlayerConnectionState
     */
+   
     public func match(theMatch: GKMatch, player playerID: String, didChangeState state: GKPlayerConnectionState) {
         /* recall when is desconnect match = nil */
-        guard self.match == theMatch else { return }
+        guard self.match == theMatch else {
+            return
+        }
         
         switch state {
-            /* Connected */
-        case .StateConnected:
-            if theMatch.expectedPlayerCount == 0 {
-                if #available(iOS 8.0, *) {
-                    self.lookupPlayers()
-                } else {
-                    // Fallback on earlier versions
-                }
+        /* Connected */
+        case .StateConnected where self.match != nil && theMatch.expectedPlayerCount == 0:
+            if #available(iOS 8.0, *) {
+                self.lookupPlayers()
             }
-            
-            /* Lost deconnection */
+        /* Lost deconnection */
         case .StateDisconnected:
             EGC.disconnectMatch()
         default:
@@ -1421,11 +1265,14 @@ print("Already authenticated")
     
     */
     public func match(theMatch: GKMatch, didFailWithError error: NSError?) {
-        guard self.match == theMatch else { return }
+        guard self.match == theMatch else {
+            return
+        }
         
-        if error != nil {
+        guard error == nil else {
             EGC.debug("[Easy Game Center] Match failed with error: \(error!.localizedDescription)")
             EGC.disconnectMatch()
+            return
         }
     }
     
@@ -1445,8 +1292,6 @@ print("Already authenticated")
         if match!.expectedPlayerCount == 0 {
             if #available(iOS 8.0, *) {
                 self.lookupPlayers()
-            } else {
-                // Fallback on earlier versions
             }
         }
     }
@@ -1462,16 +1307,17 @@ print("Already authenticated")
     - parameter inviteToAccept: GKPlayer
     */
     public func player(player: GKPlayer, didAcceptInvite inviteToAccept: GKInvite) {
-        let gkmv = GKMatchmakerViewController(invite: inviteToAccept)
-        gkmv!.matchmakerDelegate = self
-        
-        let delegate = EGC.delegate
-        
-        var delegeteParent:UIViewController? = delegate.parentViewController
-        if delegeteParent == nil {
-            delegeteParent = delegate
+        guard let gkmv = GKMatchmakerViewController(invite: inviteToAccept) else {
+            EGCError.Error(" GKMatchmakerViewController invite to accept nil")
+            return
         }
-        delegeteParent!.presentViewController(gkmv!, animated: true, completion: nil)
+        gkmv.matchmakerDelegate = self
+        
+        var delegeteParent:UIViewController? = EGC.delegate.parentViewController
+        if delegeteParent == nil {
+            delegeteParent = EGC.delegate
+        }
+        delegeteParent!.presentViewController(gkmv, animated: true, completion: nil)
     }
     /**
     Initiates a match from Game Center with the requested players
@@ -1500,14 +1346,10 @@ print("Already authenticated")
     public func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController) {
         
         viewController.dismissViewControllerAnimated(true, completion: nil)
-        
-        do {
-            let delegateEGC = try EGC.sharedInstance.getDelegateEGC()
-            delegateEGC.EGCMatchCancel?()
-            EGC.debug("\n[Easy Game Center] Player cancels the matchmaking request \n")
-        } catch {
-            EGCError.DelegateNotHaveProtocolEGCDelegate.errorCall()
-        }
+
+        (Static.delegate as? EGCDelegate)?.EGCMatchCancel?()
+        EGC.debug("\n[Easy Game Center] Player cancels the matchmaking request \n")
+
     }
     /**
     Called when the view controller encounters an unrecoverable error.
@@ -1518,15 +1360,9 @@ print("Already authenticated")
     public func matchmakerViewController(viewController: GKMatchmakerViewController, didFailWithError error: NSError) {
         
         viewController.dismissViewControllerAnimated(true, completion: nil)
-        
-        do {
-            let delegateEGC = try EGC.sharedInstance.getDelegateEGC()
-            delegateEGC.EGCMatchCancel?()
-            EGC.debug("\n[Easy Game Center] Error finding match: \(error.localizedDescription)\n")
-            
-        } catch {
-            EGCError.DelegateNotHaveProtocolEGCDelegate.errorCall()
-        }
+        (Static.delegate as? EGCDelegate)?.EGCMatchCancel?()
+        EGC.debug("\n[Easy Game Center] Error finding match: \(error.localizedDescription)\n")
+
     }
 }
 
@@ -1548,7 +1384,7 @@ extension EGC {
 }
 // MARK: - Debug  /  Error Func
 extension EGC {
-
+    
     /**
     Init Implemented by subclasses to initialize a new object
     
@@ -1559,16 +1395,17 @@ extension EGC {
         case CantCachingAds
         case CantCachingA
         case CantCachingNoA
+        case NoCache
         case CantCachingNoAchievements
         case Empty
         case IndexOut
         case NoConnection
+        
         case NoLogin
         case NoDelegate
         case DelegateNotHaveProtocolEGCDelegate
         case NoInstance
         case NoUIViewController
-        case ParamEmpty
         case CantLoadLeaderboards
         
         /// Description
@@ -1597,6 +1434,9 @@ extension EGC {
                 return "\n[Easy Game Center] Error delegate UIViewController not set\n"
             case .NoUIViewController:
                 return "\n[Easy Game Center] Error delegate is not UIViewController\n"
+                
+            case .Empty:
+                return "\n[Easy Game Center] Param empty\n"
             default:
                 return ""
             }
@@ -1610,13 +1450,10 @@ extension EGC {
             
             switch self {
             case .NoLogin:
-                guard let delegateEGC = EGC.delegate  as? EGCDelegate else {
-                    return
-                }
-                delegateEGC.EGCAuthentified?(false)
+                (EGC.delegate  as? EGCDelegate)?.EGCAuthentified?(false)
                 break
             case .CantCachingNoA:
-                EGC.sharedInstance.inCacheIsLoading = false
+                //EGC.sharedInstance.inCacheIsLoading = false
                 EGC.sharedInstance.checkupNetAndPlayer()
                 break
             case .CantCachingA:
