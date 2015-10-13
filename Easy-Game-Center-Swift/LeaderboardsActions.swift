@@ -29,7 +29,7 @@ class LeaderboardsActions: UIViewController {
         super.viewDidAppear(animated)
         
         /* Set New view controller delegate */
-        EasyGameCenter.delegate = self
+        EGC.delegate = self
     }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/
@@ -37,7 +37,7 @@ class LeaderboardsActions: UIViewController {
     /*####################################################################################################*/
     @IBAction func openGameCenterLeaderboard(sender: AnyObject) {
         
-        EasyGameCenter.showGameCenterLeaderboard(leaderboardIdentifier: "International_Classement", completion: {
+        EGC.showGameCenterLeaderboard(leaderboardIdentifier: "International_Classement", completion: {
             (result) -> Void in
             if result {
                 print("\n[LeaderboardsActions] You open Game Center Achievements")
@@ -47,14 +47,14 @@ class LeaderboardsActions: UIViewController {
     
     @IBAction func ActionReportScoreLeaderboard(sender: AnyObject) {
         
-        EasyGameCenter.reportScoreLeaderboard(leaderboardIdentifier: "International_Classement", score: 100)
-        print("\n[LeaderboardsActions] Score send to Game Center \(EasyGameCenter.isPlayerIdentifiedToGameCenter())")
+        EGC.reportScoreLeaderboard(leaderboardIdentifier: "International_Classement", score: 100)
+        print("\n[LeaderboardsActions] Score send to Game Center \(EGC.isPlayerIdentified)")
         
     }
     
     @IBAction func ActionGetLeaderboards(sender: AnyObject) {
         
-        EasyGameCenter.getGKLeaderboard {
+        EGC.getGKLeaderboard {
             (resultArrayGKLeaderboard) -> Void in
             if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard {
                 for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
@@ -71,7 +71,7 @@ class LeaderboardsActions: UIViewController {
     
     @IBAction func ActionGetGKScoreLeaderboard(sender: AnyObject) {
         
-        EasyGameCenter.getGKScoreLeaderboard(leaderboardIdentifier: "International_Classement") {
+        EGC.getGKScoreLeaderboard(leaderboardIdentifier: "International_Classement") {
             (resultGKScore) -> Void in
             if let resultGKScoreIsOK = resultGKScore as GKScore? {
                 
@@ -85,7 +85,7 @@ class LeaderboardsActions: UIViewController {
     }
     
     @IBAction func GetHighScore(sender: AnyObject) {
-        EasyGameCenter.getHighScore(leaderboardIdentifier: "International_Classement") {
+        EGC.getHighScore(leaderboardIdentifier: "International_Classement") {
             (tupleHighScore) -> Void in
             /// tupleHighScore = (playerName:String, score:Int,rank:Int)?
             if let tupleIsOk = tupleHighScore {
@@ -97,7 +97,7 @@ class LeaderboardsActions: UIViewController {
         }
     }
     @IBAction func Test(sender: AnyObject) {
-        /*let instance = EasyGameCenter.sharedInstance(self)
+        /*let instance = EGC.sharedInstance(self)
         
         instance.findMatchWithMinPlayers(2, maxPlayers: 4)*/
     }

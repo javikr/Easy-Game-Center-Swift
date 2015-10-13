@@ -9,7 +9,7 @@
 import UIKit
 import GameKit
 
-class MultiPlayerActions: UIViewController,EasyGameCenterDelegate {
+class MultiPlayerActions: UIViewController,EGCDelegate {
     
     @IBOutlet weak var TextLabel: UILabel!
     /*####################################################################################################*/
@@ -28,36 +28,36 @@ class MultiPlayerActions: UIViewController,EasyGameCenterDelegate {
         super.viewDidAppear(animated)
         
         /* Set New view controller delegate */
-        EasyGameCenter.delegate = self
+        EGC.delegate = self
     }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/
     /*                                          Button                                                    */
     /*####################################################################################################*/
     @IBAction func ActionFindPlayer(sender: AnyObject) {
-        EasyGameCenter.findMatchWithMinPlayers(2, maxPlayers: 4)
+        EGC.findMatchWithMinPlayers(2, maxPlayers: 4)
     }
     
     @IBAction func ActionSendData(sender: AnyObject) {
         
         let myStruct = Packet(name: "My Data to Send !", index: 1234567890, numberOfPackets: 1)
-        EasyGameCenter.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable)
+        EGC.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable)
         
     }
     @IBAction func ActionGetPlayerInMatch(sender: AnyObject) {
-        if let setOfPlayer = EasyGameCenter.getPlayerInMatch() {
+        if let setOfPlayer = EGC.getPlayerInMatch() {
             for player in setOfPlayer{
                 print(player.alias)
             }
         }
     }
     @IBAction func ActionGetMatch(sender: AnyObject) {
-        if let match = EasyGameCenter.getMatch() {
+        if let match = EGC.getMatch() {
             print(match, terminator: "")
         }
     }
     @IBAction func ActionDisconnected(sender: AnyObject) {
-        EasyGameCenter.disconnectMatch()
+        EGC.disconnectMatch()
     }
     /*####################################################################################################*/
     /*                         Delegate Mutliplayer Easy Game Center                                      */
@@ -65,9 +65,9 @@ class MultiPlayerActions: UIViewController,EasyGameCenterDelegate {
     /**
     Match Start, Delegate Func of Easy Game Center
     */
-    func easyGameCenterMatchStarted() {
+    func EGCMatchStarted() {
         print("\n[MultiPlayerActions] MatchStarted")
-        if let players = EasyGameCenter.getPlayerInMatch() {
+        if let players = EGC.getPlayerInMatch() {
             for player in players{
                 print(player.alias)
             }
@@ -77,7 +77,7 @@ class MultiPlayerActions: UIViewController,EasyGameCenterDelegate {
     /**
     Match Recept Data (When you send Data this function is call in the same time), Delegate Func of Easy Game Center
     */
-    func easyGameCenterMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
+    func EGCMatchRecept(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String) {
         
         // See Packet
         let autre =  Packet.unarchive(data)
@@ -90,14 +90,14 @@ class MultiPlayerActions: UIViewController,EasyGameCenterDelegate {
     /**
     Match End / Error (No NetWork example), Delegate Func of Easy Game Center
     */
-    func easyGameCenterMatchEnded() {
+    func EGCMatchEnded() {
         print("\n[MultiPlayerActions] MatchEnded")
         self.TextLabel.text = "Match Ended !"
     }
     /**
     Match Cancel, Delegate Func of Easy Game Center
     */
-    func easyGameCenterMatchCancel() {
+    func EGCMatchCancel() {
         print("\n[MultiPlayerActions] Match cancel")
     }
     

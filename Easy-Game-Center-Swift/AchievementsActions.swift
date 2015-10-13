@@ -22,7 +22,7 @@ class AchievementsActions: UIViewController {
         self.navigationItem.rightBarButtonItem = buttonBarOpenGameCenter
         
         
-        EasyGameCenter.getGKAllAchievementDescription {
+        EGC.getGKAllAchievementDescription {
             (arrayGKAD) -> Void in
             
             if let arrayAchievementDescription = arrayGKAD {
@@ -37,21 +37,21 @@ class AchievementsActions: UIViewController {
         super.viewDidAppear(animated)
         
         /* Set New view controller delegate */
-        EasyGameCenter.delegate = self
+        EGC.delegate = self
     }
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     /*####################################################################################################*/
     /*                                          Button                                                    */
     /*####################################################################################################*/
     @IBAction func openGameCenterAchievement(sender: AnyObject) {
-        EasyGameCenter.showGameCenterAchievements { (isShow) -> Void in
+        EGC.showGameCenterAchievements { (isShow) -> Void in
             print("\n[AchievementsActions] You open Game Center Achievements\n")
         }
     }
     
     @IBAction func ActionGetAchievementsDescription(sender: AnyObject) {
         
-        EasyGameCenter.getTupleGKAchievementAndDescription(achievementIdentifier: "Achievement_One") { (tupleGKAchievementAndDescription) -> Void in
+        EGC.getTupleGKAchievementAndDescription(achievementIdentifier: "Achievement_One") { (tupleGKAchievementAndDescription) -> Void in
             
             if let tupleInfoAchievement = tupleGKAchievementAndDescription {
                 
@@ -71,16 +71,16 @@ class AchievementsActions: UIViewController {
     }
     
     @IBAction func ReportAchievementOne(sender: AnyObject) {
-        EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_One")
+        EGC.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_One")
     }
     
     @IBAction func IfAchievementIsFinished(sender: AnyObject) {
         
-        let achievementOneCompleted = EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Achievement_One")
+        let achievementOneCompleted = EGC.isAchievementCompleted(achievementIdentifier: "Achievement_One")
         if achievementOneCompleted {
             AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Yes", uiViewController: self)
         } else {
-            if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
+            if EGC.isPlayerIdentified {
                 AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "No", uiViewController: self)
             } else {
                 AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Player not identified", uiViewController: self)
@@ -90,12 +90,12 @@ class AchievementsActions: UIViewController {
     
     @IBAction func ReportAchievementTwo(sender: AnyObject) {
         
-        if EasyGameCenter.isPlayerIdentifiedToGameCenter() {
-            if EasyGameCenter.isAchievementCompleted(achievementIdentifier: "Achievement_Two") {
+        if EGC.isPlayerIdentified {
+            if EGC.isAchievementCompleted(achievementIdentifier: "Achievement_Two") {
                 AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Achievement is already report", uiViewController: self)
                 
             } else {
-                EasyGameCenter.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_Two", showBannnerIfCompleted: false)
+                EGC.reportAchievement(progress: 100.00, achievementIdentifier: "Achievement_Two", showBannnerIfCompleted: false)
                 AppDelegate.simpleMessage(title: "isAchievementCompleted", message: "Achievement is reported, but banner not show", uiViewController: self)
             }
             
@@ -106,7 +106,7 @@ class AchievementsActions: UIViewController {
     
     @IBAction func AchievementCompletedAndNotShowing(sender: AnyObject) {
         
-        if let achievements : [GKAchievement] = EasyGameCenter.getAchievementCompleteAndBannerNotShowing() {
+        if let achievements : [GKAchievement] = EGC.getAchievementCompleteAndBannerNotShowing() {
             for oneAchievement in achievements  {
                 print("\n[AchievementsActions] Achievement Completed And NotShowing \n")
                 print("\(oneAchievement.identifier)\n")
@@ -117,12 +117,12 @@ class AchievementsActions: UIViewController {
     }
     
     @IBAction func ShowAchievementCompletedAndNotShowing(sender: AnyObject) {
-        EasyGameCenter.showAllBannerAchievementCompleteForBannerNotShowing()
+        EGC.showAllBannerAchievementCompleteForBannerNotShowing()
     }
     
     @IBAction func GetAllChievementsDescription(sender: AnyObject) {
         
-        EasyGameCenter.getGKAllAchievementDescription {
+        EGC.getGKAllAchievementDescription {
             (arrayGKAD) -> Void in
             if let arrayAchievementDescription = arrayGKAD {
                 for achievement in arrayAchievementDescription {
@@ -142,7 +142,7 @@ class AchievementsActions: UIViewController {
     }
     
     @IBAction func ResetAllAchievements(sender: AnyObject) {
-        EasyGameCenter.resetAllAchievements()
+        EGC.resetAllAchievements()
     }
 }
 
