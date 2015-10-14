@@ -42,9 +42,17 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub. :D
 * Send me your application's link, if you use Easy Game center, I will add on the cover page and for support 
 [@YannickSteph](https://twitter.com/YannickSteph)
-* Contact for support [Issues](https://github.com/DaRkD0G/Easy-Game-Center-Swift/issues) [@YannickSteph](https://twitter.com/YannickSteph)
+* Contact for support [Issues](https://github.com/DaRkD0G/Easy-Game-Center-Swift/issues) 
 
 # Install
+
+#### CocoaPods
+
+```ruby
+pod 'EasyGameCenter', :git => 'https://github.com/DaRkD0G/Easy-Game-Center-Swift.git'
+```
+#### Install manual
+
 Setting up Easy Game Center it's really easy. Read the instructions after.
 
 Add the `GameKit`, `SystemConfiguration` frameworks to your Xcode project
@@ -52,12 +60,6 @@ Add the `GameKit`, `SystemConfiguration` frameworks to your Xcode project
         <img src="http://s27.postimg.org/45wds3jub/Capture_d_cran_2558_03_20_19_56_34.png" height="100" width="500" />
 </p>
 
-#### CocoaPods
-```ruby
-pod 'EasyGameCenter', :git => 'https://github.com/DaRkD0G/Easy-Game-Center-Swift.git'
-```
-
-#### Install manual
 Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
 
 # Installation example in your project
@@ -73,23 +75,14 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*** Set Delegate UIViewController ***/
-        EasyGameCenter.sharedInstance(self)
+        /// Init EGC and set delegate UIViewController 
+        EGC.sharedInstance(self)
         
-        /*** If you want not message just delete this ligne ***/
+        /// If you want not message just delete this ligne
         EasyGameCenter.debugMode = true
         
-        /** Hidden automatique page login of Game Center, if player not login */
+        /// Hidden automatique page login of Game Center, if player not login 
         //EasyGameCenter.showLoginPage = false
-    }
-    /**
-        Notifies the view controller that its view was added
-    */
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        /*** Set View Controller delegate, that's when you change UIViewController ***/
-        EasyGameCenter.delegate = self
     }
 ``` 
 ### Authentification Delegate Function
@@ -98,14 +91,16 @@ Add to your UIViewController EasyGameCenterDelegate for access to this function 
     /**
         Player connected to Game Center, Delegate Func of Easy Game Center
     */
-    func easyGameCenterAuthentified() {
-        println("\n[AuthenticationActions] Player Authentified\n")
-    }
-    /**
-        Player not connected to Game Center, Delegate Func of Easy Game Center
-    */
-    func easyGameCenterNotAuthentified() {
-        println("\n[AuthenticationActions] Player not authentified\n")
+    func EGCAuthentified(authentified:Bool) {
+        
+        print("\n[MainViewController] Player Authentified = \(authentified)\n")
+        
+        if authentified {
+            /// The user is identified in the game center 
+        } else {
+            /// The user is NOT identified in the game center 
+        }
+
     }
     /**
         When GkAchievement & GKAchievementDescription in cache, Delegate Func of Easy Game Center
