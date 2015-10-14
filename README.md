@@ -1,4 +1,5 @@
-# Easy Game Center
+<h1 align="center"> Easy Game Center </h1>
+
 [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]()  [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]()  [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()  [![Pod Version](http://img.shields.io/cocoapods/v/EasyGameCenter.svg?style=flat)](http://cocoadocs.org/docsets/EasyGameCenter/)  [![Pod Platform](http://img.shields.io/cocoapods/p/EasyGameCenter.svg?style=flat)](http://cocoadocs.org/docsets/EasyGameCenter/)  [![Pod License](http://img.shields.io/cocoapods/l/EasyGameCenter.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 <p align="center">
@@ -51,8 +52,8 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 	* [Init](#UIView-Init)
 
 		
-####Installation <a id="Installation"></a>
-
+###Installation <a id="Installation"></a>
+--------
 ###### CocoaPods
 
 ```ruby
@@ -70,7 +71,8 @@ Add the `GameKit`, `SystemConfiguration` frameworks to your Xcode project
 Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
 
 
-### Initialize <a id="Initialize"></a>
+### Example
+--------
 #####You can add protocol "EGCDelegate" for access to functions ( connexion, multiplayer ), it's optional
 ```swift 
 class MainViewController: UIViewController,EGCDelegate {
@@ -90,7 +92,7 @@ class MainViewController: UIViewController,EGCDelegate {
         //EGC.showLoginPage = false
     }
 ``` 
-### Authentification Delegate Function
+#### Authentification Delegate Function
 #####Add to your UIViewController EGCDelegate for access to this function ( it's optional )
 ```swift 
     /**
@@ -111,7 +113,7 @@ class MainViewController: UIViewController,EGCDelegate {
         /// GkAchievement & GKAchievementDescription in cache
     }
 ```
-### MultiPlayer Delegate Function
+#### MultiPlayer Delegate Function
 #####Add to your UIViewController EGCDelegate for access to this function ( it's optional )
 ```swift 
     /**
@@ -140,7 +142,9 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 }
 ```
-#Documentation <a id="Documentation"></a>
+
+###Documentation <a id="Documentation"></a>
+--------
 ###Initialize <a id="Initialize"></a>
 #####Protocol Easy Game Center
 * **Description :** You should add **EGCDelegate** protocol if you want use delegate functions (**EGCAuthentified,EGCNotAuthentified,EGCInCache**)
@@ -148,6 +152,7 @@ class MainViewController: UIViewController,EGCDelegate {
 ```swift
     class ExampleViewController: UIViewController,EGCDelegate { }
 ```
+
 #####Initialize Easy Game Center
 * **Description :** You should setup Easy Game Center when your app is launched. I advise you to **viewDidLoad()** method
 ```swift
@@ -158,6 +163,7 @@ class MainViewController: UIViewController,EGCDelegate {
         EGC.sharedInstance(self)
     }
 ```
+
 #####Set new delegate when you change UIViewController
 * **Description :** If you have several UIViewController just add this in your UIViewController for set new Delegate
 * **Option :** It is optional 
@@ -169,7 +175,9 @@ class MainViewController: UIViewController,EGCDelegate {
         EGC.delegate = self
     }
 ```
-##Delegate function for listen
+
+###Delegate function for listen
+--------
 #####Listener Player is authentified
 * **Description :** This function is call when player is authentified to Game Center
 * **Option :** It is optional 
@@ -178,6 +186,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("Player Authentified = \(authentified)")
     }
 ```
+
 #####Listener when Achievement is in cache
 * **Description :** This function is call when GKachievements GKachievementsDescription is in cache
 * **Option :** It is optional 
@@ -186,7 +195,9 @@ class MainViewController: UIViewController,EGCDelegate {
         /// Call when GkAchievement & GKAchievementDescription in cache
     }
 ```
-##Show Methods
+
+###Show Methods
+--------
 #####Show Achievements
 * **Show Game Center Achievements with completion**
 * **Option :** Without completion 
@@ -202,6 +213,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Show Leaderboard
 * **Show Game Center Leaderboard  with completion**
 * **Option :** Without completion 
@@ -217,6 +229,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Show Challenges
 * **Show Game Center Challenges  with completion**
 * **Option :** Without completion 
@@ -232,6 +245,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Show authentification page Game Center
 * **Show Game Center authentification page with completion**
 * **Option :** Without completion 
@@ -247,6 +261,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Show custom banner
 * **Show custom banner Game Center with completion**
 * **Option :** Without completion 
@@ -260,7 +275,8 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-##Achievements Methods
+###Achievements Methods
+--------
 <p align="center">
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
 </p>
@@ -282,6 +298,7 @@ class MainViewController: UIViewController,EGCDelegate {
 ```swift
     EGC.reportAchievement(progress: 42.00, achievementIdentifier: "Identifier", showBannnerIfCompleted: false ,addToExisting: true)
 ```
+
 #####If Achievement completed 
 * **Is completed Achievement**
 ```swift
@@ -291,6 +308,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[Easy Game Center] No\n")
     }
 ```
+
 #####Get All Achievements completed for banner not show
 * **Get All Achievements completed and banner not show with completion**
 ```swift
@@ -302,6 +320,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[Easy Game Center] No Achievements with banner not showing\n")
     }
 ```
+
 #####Show all Achievements completed for banner not show
 * **Show All Achievements completed and banner not show with completion**
 * **Option :** Without completion 
@@ -319,6 +338,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Get all Achievements GKAchievementDescription
 * **Get all achievements descriptions (GKAchievementDescription) with completion**
 ```swift
@@ -334,6 +354,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Get Achievements GKAchievement
 * **Get One Achievement (GKAchievement)**
 ```swift
@@ -341,6 +362,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[Easy Game Center] ID : \(achievement.identifier)\n")
     }
 ```
+
 #####Get Achievements GKAchievement GKAchievementDescription (Tuple)
 * **Get Tuple ( GKAchievement , GKAchievementDescription) for identifier Achievement**
 ```swift
@@ -357,11 +379,13 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Achievement progress
 * **Get Progress to an achievement**
 ```swift
     let progressAchievement = EGC.getProgressForAchievement(achievementIdentifier: "AchievementIdentifier")
 ```
+
 #####Reset all Achievements
 * **Reset all Achievement**
 * **Option :** Without completion 
@@ -374,12 +398,15 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[Easy Game Center] ID : \(achievementReset.identifier)\n")
     }
 ```
-##Leaderboards
+
+###Leaderboards
+--------
 #####Report
 * **Report Score Leaderboard**
 ```swift
     EGC.reportScoreLeaderboard(leaderboardIdentifier: "LeaderboardIdentifier", score: 100)
 ```
+
 #####Get GKLeaderboard
 * **Get GKLeaderboard with completion**
 ```swift
@@ -394,6 +421,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Get GKScore
 * **Get GKScore Leaderboard with completion**
 ```swift
@@ -407,6 +435,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Get Hight Score (Tuple)
 * **Get Hight Score Leaderboard with completion, (Tuple of name,score,rank)**
 ```swift
@@ -420,7 +449,9 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
-##MultiPlayer
+
+###MultiPlayer
+--------
 <p align="center">
         <img src="http://g.recordit.co/ApqB4QkOEv.gif" height="500" width="280" />
 </p>
@@ -431,7 +462,9 @@ class MainViewController: UIViewController,EGCDelegate {
 ```swift
     class ExampleViewController: UIViewController,EGCDelegate { }
 ```
-##Delegate function for listen MultiPlayer
+
+###Delegate function for listen MultiPlayer
+--------
 #####Listener When Match Started 
 * **Description :** This function is call when the match Started
 * **Option :** It is optional 
@@ -440,6 +473,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[MultiPlayerActions] MatchStarted")
     }
 ```
+
 #####Listener When Match Recept Data
 * **Description :** This function is call when player send data to all player
 * **Option :** It is optional 
@@ -452,6 +486,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[MultiPlayerActions] Recept Packet.index = \(autre.index)")
     }
 ```
+
 #####Listener When Match End
 * **Description :** This function is call when the match is Ended
 * **Option :** It is optional 
@@ -460,6 +495,7 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[MultiPlayerActions] MatchEnded")
     }
 ```
+
 #####Listener When Match Cancel
 * **Description :** This function is call when the match is cancel by the local Player
 * **Option :** It is optional 
@@ -468,12 +504,14 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[MultiPlayerActions] Match cancel")
     }
 ```
+
 ##MultiPlayer method
 #####Find player By number of player
 * **Find Player By min and max player**
 ```swift
     EGC.findMatchWithMinPlayers(2, maxPlayers: 4)
 ```
+
 #####Send Data to all Player
 * **Send Data to all Player (NSData)**
 ```swift
@@ -483,6 +521,7 @@ class MainViewController: UIViewController,EGCDelegate {
     //Send Data
     EGC.sendDataToAllPlayers(myStruct.archive(), modeSend: .Reliable): 4)
 ```
+
 #####Get Player in match
 * **Get Player in match return Set**
 ```swift
@@ -492,6 +531,7 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
+
 #####Get match
 * **Get current match**
 ```swift
@@ -499,22 +539,27 @@ class MainViewController: UIViewController,EGCDelegate {
         print(match)
     }
 ```
+
 #####Disconnect Match / Stop
 * **Disconnect Match or Stop for send data to all player in match**
 ```swift
     EGC.disconnectMatch()
 ```
-##Other methods Game Center
+
+###Other methods Game Center
+--------
 #####Player identified to Game Center
 * **Is player identified to gameCenter**
 ```swift
     if EGC.isPlayerIdentifiedToGameCenter() { /* Player identified */ } 
 ```
+
 #####Get Local Player
 * **Get local Player (GKLocalPlayer)**
 ```swift
     let localPlayer = EGC.getLocalPlayer()
 ```
+
 #####Get information on Local Player
 ```swift
     EGC.getlocalPlayerInformation {
@@ -534,22 +579,29 @@ class MainViewController: UIViewController,EGCDelegate {
         }
     }
 ```
-##NetWork
+
+###NetWork
+--------
 * **Is Connected to NetWork**
 ```swift
     if EGC.isConnectedToNetwork { /* You have network */ } 
 ```
-##Hidden automatique login of Game Center
+
+###Hidden automatique login of Game Center
+--------
 * **Hidden automatique page for login to Game Center, if player not login**
 ```swift
     EGC.showLoginPage = false
 ```
-##Debug Mode
+
+###Debug Mode
+--------
 * **If you doesn't want see message of Easy Game Center**
 ```swift
     // If you doesn't want see message Easy Game Center, delete this ligne
     // EGC.debugMode = true
 ```
+
 ######Legacy support
 For support of iOS 7+ & iOS 8+ 
 
