@@ -48,15 +48,14 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * [Example](#Example)
 * [Documentation](#Documentation)
 	* [Initialize](#Initialize)
-	* [Delegate function](#Delegate-function-for-listen)
+	* [Delegate function EGC](#Delegate-function-for-listen)
 	* [Show](#Show-Methods)
 	* [Achievements](#Achievements-Methods)
 	* [Leaderboards](#Leaderboards)
-	* [MultiPlayer](#MultiPlayer) 
 	* [MultiPlayer delegate function](#Delegate-function-for-listen-MultiPlayer)
-	* [Other methods](#other)
+	* [MultiPlayer](#MultiPlayer-Methods) 
+	* [Other Methods](#other-methods)
 	
-
 		
 ###Installation <a id="Installation"></a>
 --------
@@ -281,7 +280,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###Achievements <a id="Achievements-Methods"></a>
+###Achievements Methods<a id="Achievements-Methods"></a>
 --------
 <p align="center">
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
@@ -405,7 +404,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###Leaderboards <a id="Leaderboards"></a>
+###Leaderboards Methods<a id="Leaderboards"></a>
 --------
 #####Report
 * **Report Score Leaderboard**
@@ -509,8 +508,8 @@ class MainViewController: UIViewController,EGCDelegate {
         print("\n[MultiPlayerActions] Match cancel")
     }
 ```
-
-##MultiPlayer method
+###MultiPlayer Methods <a id="MultiPlayer-Methods"></a>
+--------
 #####Find player By number of player
 * **Find Player By min and max player**
 ```swift
@@ -551,7 +550,7 @@ class MainViewController: UIViewController,EGCDelegate {
     EGC.disconnectMatch()
 ```
 
-###Other methods Game Center <a id="Other"></a>
+###Other methods Game Center <a id="other-methods"></a>
 --------
 #####Player identified to Game Center
 * **Is player identified to gameCenter**
