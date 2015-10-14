@@ -46,7 +46,6 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 
 * [Installation](#Installation)
 * [Example](#Example)
-* 
 * [Documentation](#Documentation)
 	* [Initialize](#Initialize)
 	* [Delegate function](#Delegate-function-for-listen)
@@ -55,7 +54,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 	* [Leaderboards](#Leaderboards)
 	* [MultiPlayer](#MultiPlayer) 
 	* [MultiPlayer delegate function](#Delegate-function-for-listen-MultiPlayer)
-	* [Other methods](#orther)
+	* [Other methods](#other)
 	
 
 		
