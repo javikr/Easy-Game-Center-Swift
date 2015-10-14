@@ -31,8 +31,7 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * GKachievements & GKachievementsDescription are save in cache and automatically refreshed
 * Delegate function when player is connected, not connected, multiplayer etc...
 * Most of the functions callBack (Handler, completion)
-* Useful methods and properties by use Singleton (EasyGameCenter.exampleFunction)
-* Just drag and drop the files into your project (EasyGameCenter.swift)
+* Useful methods and properties by use Singleton (EGC.exampleFunction)
 * Easy Game Center is asynchronous
 * **Frequent updates** to the project based on user issues and requests.
 * **Example project**
@@ -68,7 +67,7 @@ You can initialize Easy Game Center by using the following method call (This is 
 ### Initialize
 You can add protocol "EGCDelegate" for access to functions ( connexion, multiplayer ), it's optional
 ```swift 
-class MainViewController: UIViewController,EasyGameCenterDelegate {
+class MainViewController: UIViewController,EGCDelegate {
     /**
         This method is called after the view controller has loaded
     */
@@ -79,10 +78,10 @@ class MainViewController: UIViewController,EasyGameCenterDelegate {
         EGC.sharedInstance(self)
         
         /// If you want not message just delete this ligne
-        EasyGameCenter.debugMode = true
+        EGC.debugMode = true
         
         /// Hidden automatique page login of Game Center, if player not login 
-        //EasyGameCenter.showLoginPage = false
+        //EGC.showLoginPage = false
     }
 ``` 
 ### Authentification Delegate Function
@@ -105,7 +104,7 @@ Add to your UIViewController EGCDelegate for access to this function ( it's opti
     /**
         When GkAchievement & GKAchievementDescription in cache, Delegate Func of Easy Game Center
     */
-    func easyGameCenterInCache() {
+    func EGCInCache() {
         print("\n[AuthenticationActions] GkAchievement & GKAchievementDescription in cache\n")
     }
 ```
@@ -141,10 +140,10 @@ Add to your UIViewController EGCDelegate for access to this function ( it's opti
 # Documentation
 ## Initialize
 ###Protocol Easy Game Center
-* **Description :** You should add **EGCDelegate** protocol if you want use delegate functions (**easyGameCenterAuthentified,easyGameCenterNotAuthentified,easyGameCenterInCache**)
+* **Description :** You should add **EGCDelegate** protocol if you want use delegate functions (**EGCAuthentified,EGCNotAuthentified,EGCInCache**)
 * **Option :** It is optional (if you do not use the functions, do not add)
 ```swift
-    class ExampleViewController: UIViewController,EasyGameCenterDelegate { }
+    class ExampleViewController: UIViewController,EGCDelegate { }
 ```
 ###Initialize Easy Game Center
 * **Description :** You should setup Easy Game Center when your app is launched. I advise you to **viewDidLoad()** method
@@ -381,7 +380,7 @@ Add to your UIViewController EGCDelegate for access to this function ( it's opti
 ##Get GKLeaderboard
 * **Get GKLeaderboard with completion**
 ```swift
-    EasyGameCenter.getGKLeaderboard { 
+    EGC.getGKLeaderboard { 
         (resultArrayGKLeaderboard) -> Void in
         if let resultArrayGKLeaderboardIsOK = resultArrayGKLeaderboard {
             for oneGKLeaderboard in resultArrayGKLeaderboardIsOK  {
@@ -408,7 +407,7 @@ Add to your UIViewController EGCDelegate for access to this function ( it's opti
 ##Get Hight Score (Tuple)
 * **Get Hight Score Leaderboard with completion, (Tuple of name,score,rank)**
 ```swift
-    EasyGameCenter.getHighScore(leaderboardIdentifier: "LeaderboardIdentifier") {
+    EGC.getHighScore(leaderboardIdentifier: "LeaderboardIdentifier") {
         (tupleHighScore) -> Void in
         //(playerName:String, score:Int,rank:Int)?
         if let tupleIsOk = tupleHighScore {
