@@ -49,11 +49,6 @@ class MainViewController: UIViewController, EGCDelegate  {
         Set New view controller delegate, when you change UIViewController
         */
         EGC.delegate = self
-        
-        /* Recall if you change page and activate network for refresh text
-        if EGC.isPlayerIdentified {
-            EGCAuthentified()
-        }*/
     }
     /*####################################################################################################*/
     /*                               Delegate Func Easy Game Center                                       */
