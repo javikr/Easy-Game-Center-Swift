@@ -42,8 +42,8 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 * Send me your application's link, if you use Easy Game center, I will add on the cover page and for support 
 [@YannickSteph](https://twitter.com/YannickSteph)
 * Contact for support [Issues](https://github.com/DaRkD0G/Easy-Game-Center-Swift/issues) 
-####Table of Contents
 
+###Table of Contents
 * [Installation](#Installation)
 * [Example](#Example)
 * [Documentation](#Documentation)
