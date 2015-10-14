@@ -1,4 +1,4 @@
-<h1 align="center"> Easy Game Center </h1>
+<h1 align="center"> Easy Game Center \ EGC</h1>
 
 [![](http://img.shields.io/badge/Swift-2.0-blue.svg)]()  [![](http://img.shields.io/badge/iOS-7.0%2B-blue.svg)]()  [![](http://img.shields.io/badge/iOS-8.0%2B-blue.svg)]()  [![](https://img.shields.io/packagist/l/doctrine/orm.svg)]()  [![Pod Version](http://img.shields.io/cocoapods/v/EasyGameCenter.svg?style=flat)](http://cocoadocs.org/docsets/EasyGameCenter/)  [![Pod Platform](http://img.shields.io/cocoapods/p/EasyGameCenter.svg?style=flat)](http://cocoadocs.org/docsets/EasyGameCenter/)  [![Pod License](http://img.shields.io/cocoapods/l/EasyGameCenter.svg?style=flat)](http://opensource.org/licenses/MIT)
 
@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-        <img src="https://img.shields.io/badge/Easy Game Center-1.5-D8B13C.svg" />
+        <img src="https://img.shields.io/badge/Easy Game Center-2.0-D8B13C.svg" />
 </p>
 **Easy Game Center** helps to manage Game Center in iOS. Report and track **high scores**, **achievements** and **Multiplayer**. Easy Game Center falicite management of Game Center.  
 
@@ -45,11 +45,18 @@ Easy Game Center is a great way to use Game Center in your iOS app.
 ####Table of Contents
 
 * [Installation](#Installation)
-
+* [Example](#Example)
 * 
 * [Documentation](#Documentation)
 	* [Initialize](#Initialize)
-	* [Init](#UIView-Init)
+	* [Delegate function](#Delegate-function-for-listen)
+	* [Show](#Show-Methods)
+	* [Achievements](#Achievements-Methods)
+	* [Leaderboards](#Leaderboards)
+	* [MultiPlayer](#MultiPlayer) 
+	* [MultiPlayer delegate function](#Delegate-function-for-listen-MultiPlayer)
+	* [Other methods](#orther)
+	
 
 		
 ###Installation <a id="Installation"></a>
@@ -71,7 +78,7 @@ Add the `GameKit`, `SystemConfiguration` frameworks to your Xcode project
 Add the following classes (GameCenter.swift) to your Xcode project (make sure to select Copy Items in the dialog)
 
 
-### Example
+###Example <a id="Example"></a>
 --------
 #####You can add protocol "EGCDelegate" for access to functions ( connexion, multiplayer ), it's optional
 ```swift 
@@ -176,7 +183,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###Delegate function for listen
+###Delegate function for listen <a id="Delegate-function-for-listen"></a>
 --------
 #####Listener Player is authentified
 * **Description :** This function is call when player is authentified to Game Center
@@ -196,7 +203,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###Show Methods
+###Show Methods <a id="Show-Methods"></a>
 --------
 #####Show Achievements
 * **Show Game Center Achievements with completion**
@@ -275,7 +282,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###Achievements Methods
+###Achievements <a id="Achievements-Methods"></a>
 --------
 <p align="center">
         <img src="http://g.recordit.co/K1I3O6BEXq.gif" height="500" width="280" />
@@ -399,7 +406,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###Leaderboards
+###Leaderboards <a id="Leaderboards"></a>
 --------
 #####Report
 * **Report Score Leaderboard**
@@ -450,7 +457,7 @@ class MainViewController: UIViewController,EGCDelegate {
     }
 ```
 
-###MultiPlayer
+###MultiPlayer <a id="MultiPlayer"></a>
 --------
 <p align="center">
         <img src="http://g.recordit.co/ApqB4QkOEv.gif" height="500" width="280" />
@@ -462,8 +469,7 @@ class MainViewController: UIViewController,EGCDelegate {
 ```swift
     class ExampleViewController: UIViewController,EGCDelegate { }
 ```
-
-###Delegate function for listen MultiPlayer
+###Delegate function for listen MultiPlayer <a id="Delegate-function-for-listen-MultiPlayer"></a>
 --------
 #####Listener When Match Started 
 * **Description :** This function is call when the match Started
@@ -546,7 +552,7 @@ class MainViewController: UIViewController,EGCDelegate {
     EGC.disconnectMatch()
 ```
 
-###Other methods Game Center
+###Other methods Game Center <a id="Other"></a>
 --------
 #####Player identified to Game Center
 * **Is player identified to gameCenter**
