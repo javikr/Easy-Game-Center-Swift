@@ -268,8 +268,9 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
         
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = Static.instance
+        #if os(iOS)
         gc.viewState = GKGameCenterViewControllerState.Achievements
-        
+        #endif
         var delegeteParent:UIViewController? = EGC.delegate.parentViewController
         if delegeteParent == nil {
             delegeteParent = EGC.delegate
@@ -306,8 +307,10 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
         
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = Static.instance
+        #if os(iOS)
         gc.leaderboardIdentifier = leaderboardIdentifier
         gc.viewState = GKGameCenterViewControllerState.Leaderboards
+        #endif
         
         var delegeteParent:UIViewController? = EGC.delegate.parentViewController
         if delegeteParent == nil {
@@ -340,7 +343,9 @@ public class EGC: NSObject, GKGameCenterControllerDelegate, GKMatchmakerViewCont
         
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate =  Static.instance
+        #if os(iOS)
         gc.viewState = GKGameCenterViewControllerState.Challenges
+        #endif
         
         var delegeteParent:UIViewController? =  EGC.delegate.parentViewController
         if delegeteParent == nil {
